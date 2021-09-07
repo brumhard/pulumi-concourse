@@ -1,4 +1,4 @@
-module github.com/pulumi/pulumi-concourse/sdk/v3
+module github.com/brumhard/pulumi-concourse/sdk/v3
 
 go 1.16
 

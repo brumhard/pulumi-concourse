@@ -15,8 +15,8 @@
 package main
 
 import (
-	"github.com/pulumi/pulumi-concourse/provider/pkg/provider"
-	"github.com/pulumi/pulumi-concourse/provider/pkg/version"
+	"github.com/brumhard/pulumi-concourse/provider/pkg/provider"
+	"github.com/brumhard/pulumi-concourse/provider/pkg/version"
 )
 
 var providerName = "concourse"

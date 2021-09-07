@@ -1,4 +1,4 @@
-module github.com/pulumi/pulumi-concourse/provider
+module github.com/brumhard/pulumi-concourse/provider
 
 go 1.16
 

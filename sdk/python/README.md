@@ -16,6 +16,9 @@ Install the `pulumictl` cli from the [releases](https://github.com/pulumi/pulumi
 
 > NB: Usage of `pulumictl` is optional. If not using it, hard code the version in the [Makefile](Makefile) of when building explicitly pass version as `VERSION=0.0.1 make build`
 
+- install dotnet: `brew install --cask dotnet-sdk`
+- install yarn: `npm install --global yarn`
+
 ## Build and Test
 
 ```bash
