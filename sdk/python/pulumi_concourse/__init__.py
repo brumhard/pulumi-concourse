@@ -11,11 +11,11 @@ _utilities.register(
     resource_modules="""
 [
  {
-  "pkg": "xyz",
+  "pkg": "concourse",
   "mod": "index",
-  "fqn": "pulumi_xyz",
+  "fqn": "pulumi_concourse",
   "classes": {
-   "xyz:index:Random": "Random"
+   "concourse:index:Random": "Random"
   }
  }
 ]
@@ -23,9 +23,9 @@ _utilities.register(
     resource_packages="""
 [
  {
-  "pkg": "xyz",
-  "token": "pulumi:providers:xyz",
-  "fqn": "pulumi_xyz",
+  "pkg": "concourse",
+  "token": "pulumi:providers:concourse",
+  "fqn": "pulumi_concourse",
   "class": "Provider"
  }
 ]
