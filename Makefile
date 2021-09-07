@@ -2,7 +2,7 @@ PROJECT_NAME := Pulumi Concourse Resource Provider
 
 PACK             := concourse
 PACKDIR          := sdk
-PROJECT          := github.com/pulumi/pulumi-concourse
+PROJECT          := github.com/brumhard/pulumi-concourse
 NODE_MODULE_NAME := @pulumi/concourse
 NUGET_PKG_NAME   := Pulumi.Concourse
 

@@ -33,7 +33,7 @@
         },
         "go": {
             "generateResourceContainerTypes": true,
-            "importBasePath": "github.com/pulumi/pulumi-concourse/sdk/go/concourse"
+            "importBasePath": "github.com/brumhard/pulumi-concourse/sdk/go/concourse"
         },
         "nodejs": {
             "dependencies": {
