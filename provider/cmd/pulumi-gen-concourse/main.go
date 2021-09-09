@@ -96,6 +96,10 @@ func readSchema(schemaPath string, version string) *schema.Package {
 		panic(err)
 	}
 
+	// TODO: THIS is where the packagespec is read from schema.json (schemaPath)
+	// schema could be generated from the concourse structs like shown here: https://github.com/kubernetes/kube-openapi/tree/master/cmd/openapi-gen
+	// https://stackoverflow.com/questions/46592085/go-structs-to-openapi-to-jsonschema-generation-automatically
+	// look at "emitSchema" in https://github.com/pulumi/pulumi-google-native/blob/master/provider/pkg/gen/schema.go
 	var pkgSpec schema.PackageSpec
 	if err = json.Unmarshal(schemaBytes, &pkgSpec); err != nil {
 		panic(err)

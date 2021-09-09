@@ -100,6 +100,8 @@ func (k *concourseProvider) Check(ctx context.Context, req *pulumirpc.CheckReque
 }
 
 // Diff checks what impacts a hypothetical update will have on the resource's properties.
+// TODO: apparently there is a diff function in the pipeline config struct
+// https://github.com/concourse/concourse/blob/master/atc/config_diff.go#L277
 func (k *concourseProvider) Diff(ctx context.Context, req *pulumirpc.DiffRequest) (*pulumirpc.DiffResponse, error) {
 	urn := resource.URN(req.GetUrn())
 	ty := urn.Type()
@@ -130,10 +132,11 @@ func (k *concourseProvider) Diff(ctx context.Context, req *pulumirpc.DiffRequest
 }
 
 // Create allocates a new instance of the provided resource and returns its unique ID afterwards.
+// TODO: could be somewhat equal to https://github.com/concourse/concourse/blob/91bc30439da46c104c223d7530e9ffcbff285bba/fly/commands/internal/setpipelinehelpers/atc_config.go#L48
 func (k *concourseProvider) Create(ctx context.Context, req *pulumirpc.CreateRequest) (*pulumirpc.CreateResponse, error) {
 	urn := resource.URN(req.GetUrn())
 	ty := urn.Type()
-	if ty != "concourse:index:Random" {
+	if ty != "concourse:index:Pipeline" {
 		return nil, fmt.Errorf("Unknown resource type '%s'", ty)
 	}
 
