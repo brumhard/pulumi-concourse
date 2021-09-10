@@ -4,44 +4,44 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
-export class Random extends pulumi.CustomResource {
+export class Pipeline extends pulumi.CustomResource {
     /**
-     * Get an existing Random resource's state with the given name, ID, and optional extra
+     * Get an existing Pipeline resource's state with the given name, ID, and optional extra
      * properties used to qualify the lookup.
      *
      * @param name The _unique_ name of the resulting resource.
      * @param id The _unique_ provider ID of the resource to lookup.
      * @param opts Optional settings to control the behavior of the CustomResource.
      */
-    public static get(name: string, id: pulumi.Input<pulumi.ID>, opts?: pulumi.CustomResourceOptions): Random {
-        return new Random(name, undefined as any, { ...opts, id: id });
+    public static get(name: string, id: pulumi.Input<pulumi.ID>, opts?: pulumi.CustomResourceOptions): Pipeline {
+        return new Pipeline(name, undefined as any, { ...opts, id: id });
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'concourse:index:Random';
+    public static readonly __pulumiType = 'concourse:index:Pipeline';
 
     /**
-     * Returns true if the given object is an instance of Random.  This is designed to work even
+     * Returns true if the given object is an instance of Pipeline.  This is designed to work even
      * when multiple copies of the Pulumi SDK have been loaded into the same process.
      */
-    public static isInstance(obj: any): obj is Random {
+    public static isInstance(obj: any): obj is Pipeline {
         if (obj === undefined || obj === null) {
             return false;
         }
-        return obj['__pulumiType'] === Random.__pulumiType;
+        return obj['__pulumiType'] === Pipeline.__pulumiType;
     }
 
     public readonly length!: pulumi.Output<number>;
     public /*out*/ readonly result!: pulumi.Output<string>;
 
     /**
-     * Create a Random resource with the given unique name, arguments, and options.
+     * Create a Pipeline resource with the given unique name, arguments, and options.
      *
      * @param name The _unique_ name of the resource.
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: RandomArgs, opts?: pulumi.CustomResourceOptions) {
+    constructor(name: string, args: PipelineArgs, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
         opts = opts || {};
         if (!opts.id) {
@@ -57,13 +57,13 @@ export class Random extends pulumi.CustomResource {
         if (!opts.version) {
             opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
         }
-        super(Random.__pulumiType, name, inputs, opts);
+        super(Pipeline.__pulumiType, name, inputs, opts);
     }
 }
 
 /**
- * The set of arguments for constructing a Random resource.
+ * The set of arguments for constructing a Pipeline resource.
  */
-export interface RandomArgs {
+export interface PipelineArgs {
     length: pulumi.Input<number>;
 }

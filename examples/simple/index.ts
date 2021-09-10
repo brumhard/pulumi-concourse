@@ -1,5 +1,7 @@
 import * as concourse from "@pulumi/concourse";
 
-const random = new concourse.Random("my-random", { length: 24 });
+const pipeline = new concourse.Pipeline("my-random", { length: 24 });
 
-export const output = random.result;
+const provider = new concourse.Provider("concourse", {url: "http://localhost:8080", username: "test", password: "test"})
+
+export const output = pipeline.result;

@@ -12,11 +12,64 @@ __all__ = ['ProviderArgs', 'Provider']
 
 @pulumi.input_type
 class ProviderArgs:
-    def __init__(__self__):
+    def __init__(__self__, *,
+                 password: Optional[pulumi.Input[str]] = None,
+                 url: Optional[pulumi.Input[str]] = None,
+                 username: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Provider resource.
+        :param pulumi.Input[str] password: Password for basic auth.
+        :param pulumi.Input[str] url: URL of your concourse instance.
+        :param pulumi.Input[str] username: Username for basic auth.
         """
-        pass
+        if password is None:
+            password = _utilities.get_env('CONCOURSE_PASSWORD')
+        if password is not None:
+            pulumi.set(__self__, "password", password)
+        if url is None:
+            url = _utilities.get_env('CONCOURSE_URL')
+        if url is not None:
+            pulumi.set(__self__, "url", url)
+        if username is None:
+            username = _utilities.get_env('CONCOURSE_USERNAME')
+        if username is not None:
+            pulumi.set(__self__, "username", username)
+
+    @property
+    @pulumi.getter
+    def password(self) -> Optional[pulumi.Input[str]]:
+        """
+        Password for basic auth.
+        """
+        return pulumi.get(self, "password")
+
+    @password.setter
+    def password(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "password", value)
+
+    @property
+    @pulumi.getter
+    def url(self) -> Optional[pulumi.Input[str]]:
+        """
+        URL of your concourse instance.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "url", value)
+
+    @property
+    @pulumi.getter
+    def username(self) -> Optional[pulumi.Input[str]]:
+        """
+        Username for basic auth.
+        """
+        return pulumi.get(self, "username")
+
+    @username.setter
+    def username(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "username", value)
 
 
 class Provider(pulumi.ProviderResource):
@@ -24,11 +77,18 @@ class Provider(pulumi.ProviderResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 password: Optional[pulumi.Input[str]] = None,
+                 url: Optional[pulumi.Input[str]] = None,
+                 username: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Concourse resource with the given unique name, props, and options.
+        The provider type for the concourse package.
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] password: Password for basic auth.
+        :param pulumi.Input[str] url: URL of your concourse instance.
+        :param pulumi.Input[str] username: Username for basic auth.
         """
         ...
     @overload
@@ -37,7 +97,8 @@ class Provider(pulumi.ProviderResource):
                  args: Optional[ProviderArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Concourse resource with the given unique name, props, and options.
+        The provider type for the concourse package.
+
         :param str resource_name: The name of the resource.
         :param ProviderArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -53,6 +114,9 @@ class Provider(pulumi.ProviderResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 password: Optional[pulumi.Input[str]] = None,
+                 url: Optional[pulumi.Input[str]] = None,
+                 username: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -65,6 +129,15 @@ class Provider(pulumi.ProviderResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ProviderArgs.__new__(ProviderArgs)
 
+            if password is None:
+                password = _utilities.get_env('CONCOURSE_PASSWORD')
+            __props__.__dict__["password"] = password
+            if url is None:
+                url = _utilities.get_env('CONCOURSE_URL')
+            __props__.__dict__["url"] = url
+            if username is None:
+                username = _utilities.get_env('CONCOURSE_USERNAME')
+            __props__.__dict__["username"] = username
         super(Provider, __self__).__init__(
             'concourse',
             resource_name,

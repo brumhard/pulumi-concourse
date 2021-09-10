@@ -4,6 +4,9 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The provider type for the concourse package.
+ */
 export class Provider extends pulumi.ProviderResource {
     /** @internal */
     public static readonly __pulumiType = 'concourse';
@@ -31,6 +34,9 @@ export class Provider extends pulumi.ProviderResource {
         let inputs: pulumi.Inputs = {};
         opts = opts || {};
         {
+            inputs["password"] = (args ? args.password : undefined) ?? utilities.getEnv("CONCOURSE_PASSWORD");
+            inputs["url"] = (args ? args.url : undefined) ?? utilities.getEnv("CONCOURSE_URL");
+            inputs["username"] = (args ? args.username : undefined) ?? utilities.getEnv("CONCOURSE_USERNAME");
         }
         if (!opts.version) {
             opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
@@ -43,4 +49,16 @@ export class Provider extends pulumi.ProviderResource {
  * The set of arguments for constructing a Provider resource.
  */
 export interface ProviderArgs {
+    /**
+     * Password for basic auth.
+     */
+    password?: pulumi.Input<string>;
+    /**
+     * URL of your concourse instance.
+     */
+    url?: pulumi.Input<string>;
+    /**
+     * Username for basic auth.
+     */
+    username?: pulumi.Input<string>;
 }
