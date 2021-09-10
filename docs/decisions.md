@@ -13,6 +13,8 @@
         - nice basic auth client: https://github.com/concourse/concourse/blob/91bc30439da46c104c223d7530e9ffcbff285bba/fly/rc/target.go#L577
         - also look here: https://github.com/concourse/concourse/blob/91bc30439da46c104c223d7530e9ffcbff285bba/fly/commands/login.go#L180
         
+    - testing: 
+        - currently against local concourse docker-compose instance: https://github.com/concourse/concourse-docker
 
     - what to use:
         - custom provider
