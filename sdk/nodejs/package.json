@@ -1,6 +1,12 @@
 {
     "name": "@pulumi/concourse",
     "version": "${VERSION}",
+    "keywords": [
+        "pulumi",
+        "concourse"
+    ],
+    "repository": "https://github.com/brumhard/pulumi-concourse",
+    "license": "Apache-2.0",
     "scripts": {
         "build": "tsc"
     },

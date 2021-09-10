@@ -9,6 +9,9 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Concourse
 {
+    /// <summary>
+    /// The provider type for the concourse package.
+    /// </summary>
     [ConcourseResourceType("pulumi:providers:concourse")]
     public partial class Provider : Pulumi.ProviderResource
     {
@@ -39,8 +42,29 @@ namespace Pulumi.Concourse
 
     public sealed class ProviderArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Password for basic auth.
+        /// </summary>
+        [Input("password")]
+        public Input<string>? Password { get; set; }
+
+        /// <summary>
+        /// URL of your concourse instance.
+        /// </summary>
+        [Input("url")]
+        public Input<string>? Url { get; set; }
+
+        /// <summary>
+        /// Username for basic auth.
+        /// </summary>
+        [Input("username")]
+        public Input<string>? Username { get; set; }
+
         public ProviderArgs()
         {
+            Password = Utilities.GetEnv("CONCOURSE_PASSWORD");
+            Url = Utilities.GetEnv("CONCOURSE_URL");
+            Username = Utilities.GetEnv("CONCOURSE_USERNAME");
         }
     }
 }

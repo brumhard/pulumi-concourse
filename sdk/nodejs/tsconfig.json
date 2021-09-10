@@ -13,9 +13,11 @@
         "strict": true
     },
     "files": [
+        "config/index.ts",
+        "config/vars.ts",
         "index.ts",
+        "pipeline.ts",
         "provider.ts",
-        "random.ts",
         "utilities.ts"
     ]
 }

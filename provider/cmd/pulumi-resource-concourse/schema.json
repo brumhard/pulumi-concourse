@@ -21,18 +21,44 @@
             "username": {
                 "type": "string",
                 "description": "Username for basic auth."
-            },
-            "team": {
-                "type": "string",
-                "description": "Team to authenticate with."
             }
         }
     },
-    // TODO: add same options from config also to provider, to set them from environment also
-    // look here: https://github.com/pulumi/pulumi-google-native/blob/master/provider/cmd/pulumi-resource-google-native/schema.json
+    "provider": {
+        "description": "The provider type for the concourse package.",
+        "type": "object",
+        "inputProperties": {
+            "url": {
+                "type": "string",
+                "description": "URL of your concourse instance.",
+                "defaultInfo": {
+                    "environment": [
+                        "CONCOURSE_URL"
+                    ]
+                }
+            },
+            "password": {
+                "type": "string",
+                "description": "Password for basic auth.",
+                "defaultInfo": {
+                    "environment": [
+                        "CONCOURSE_PASSWORD"
+                    ]
+                }
+            },
+            "username": {
+                "type": "string",
+                "description": "Username for basic auth.",
+                "defaultInfo": {
+                    "environment": [
+                        "CONCOURSE_USERNAME"
+                    ]
+                }
+            }
+        }
+    },
     "resources": {
         "concourse:index:Pipeline": {
-            // TODO: implement
             "properties": {
                 "length": {
                     "type": "integer"

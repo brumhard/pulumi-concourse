@@ -10,6 +10,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The provider type for the concourse package.
 type Provider struct {
 	pulumi.ProviderResourceState
 }
@@ -21,6 +22,15 @@ func NewProvider(ctx *pulumi.Context,
 		args = &ProviderArgs{}
 	}
 
+	if args.Password == nil {
+		args.Password = pulumi.StringPtr(getEnvOrDefault("", nil, "CONCOURSE_PASSWORD").(string))
+	}
+	if args.Url == nil {
+		args.Url = pulumi.StringPtr(getEnvOrDefault("", nil, "CONCOURSE_URL").(string))
+	}
+	if args.Username == nil {
+		args.Username = pulumi.StringPtr(getEnvOrDefault("", nil, "CONCOURSE_USERNAME").(string))
+	}
 	var resource Provider
 	err := ctx.RegisterResource("pulumi:providers:concourse", name, args, &resource, opts...)
 	if err != nil {
@@ -30,10 +40,22 @@ func NewProvider(ctx *pulumi.Context,
 }
 
 type providerArgs struct {
+	// Password for basic auth.
+	Password *string `pulumi:"password"`
+	// URL of your concourse instance.
+	Url *string `pulumi:"url"`
+	// Username for basic auth.
+	Username *string `pulumi:"username"`
 }
 
 // The set of arguments for constructing a Provider resource.
 type ProviderArgs struct {
+	// Password for basic auth.
+	Password pulumi.StringPtrInput
+	// URL of your concourse instance.
+	Url pulumi.StringPtrInput
+	// Username for basic auth.
+	Username pulumi.StringPtrInput
 }
 
 func (ProviderArgs) ElementType() reflect.Type {

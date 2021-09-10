@@ -5,8 +5,15 @@
 from . import _utilities
 import typing
 # Export this package's modules as members:
+from .pipeline import *
 from .provider import *
-from .random import *
+
+# Make subpackages available:
+if typing.TYPE_CHECKING:
+    import pulumi_concourse.config as config
+else:
+    config = _utilities.lazy_import('pulumi_concourse.config')
+
 _utilities.register(
     resource_modules="""
 [
@@ -15,7 +22,7 @@ _utilities.register(
   "mod": "index",
   "fqn": "pulumi_concourse",
   "classes": {
-   "concourse:index:Random": "Random"
+   "concourse:index:Pipeline": "Pipeline"
   }
  }
 ]

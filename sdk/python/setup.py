@@ -39,11 +39,17 @@ def readme():
 
 setup(name='pulumi_concourse',
       version=VERSION,
+      description="A native Pulumi package for creating and managing Concourse resources.",
       long_description=readme(),
       long_description_content_type='text/markdown',
       cmdclass={
           'install': InstallPluginCommand,
       },
+      keywords='pulumi concourse',
+      project_urls={
+          'Repository': 'https://github.com/brumhard/pulumi-concourse'
+      },
+      license='Apache-2.0',
       packages=find_packages(),
       package_data={
           'pulumi_concourse': [

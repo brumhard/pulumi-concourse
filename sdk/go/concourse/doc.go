@@ -1,3 +1,3 @@
-// Package concourse exports types, functions, subpackages for provisioning concourse resources.
+// A native Pulumi package for creating and managing Concourse resources.
 //
 package concourse
