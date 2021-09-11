@@ -19,7 +19,9 @@ import (
 	"compress/gzip"
 	"context"
 	"fmt"
-	"github.com/concourse/go-concourse/concourse"
+	"github.com/concourse/concourse/atc"
+	"github.com/concourse/concourse/go-concourse/concourse"
+	"github.com/mitchellh/mapstructure"
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v3/resource/provider"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
@@ -122,7 +124,7 @@ func (k *concourseProvider) getConfig(configName, envName string) string {
 func (k *concourseProvider) Check(ctx context.Context, req *pulumirpc.CheckRequest) (*pulumirpc.CheckResponse, error) {
 	urn := resource.URN(req.GetUrn())
 	ty := urn.Type()
-	if ty != "concourse:index:Random" {
+	if ty != "concourse:index:Pipeline" {
 		return nil, fmt.Errorf("Unknown resource type '%s'", ty)
 	}
 
@@ -135,7 +137,7 @@ func (k *concourseProvider) Check(ctx context.Context, req *pulumirpc.CheckReque
 func (k *concourseProvider) Diff(ctx context.Context, req *pulumirpc.DiffRequest) (*pulumirpc.DiffResponse, error) {
 	urn := resource.URN(req.GetUrn())
 	ty := urn.Type()
-	if ty != "concourse:index:Random" {
+	if ty != "concourse:index:Pipeline" {
 		return nil, fmt.Errorf("Unknown resource type '%s'", ty)
 	}
 
@@ -180,8 +182,15 @@ func (k *concourseProvider) Create(ctx context.Context, req *pulumirpc.CreateReq
 		name = autoName(ty.Name().String())
 	}
 
+	inputMap := inputs.Mappable()
+	var config atc.Config
+	if err := mapstructure.Decode(inputMap, &config); err != nil {
+		return nil, err
+	}
+
 	// Actually "create" the pipeline
-	if err := k.makePipeline(name); err != nil {
+	// TODO: check if you could also just use a map here
+	if err := k.makePipeline(name, config); err != nil {
 		return nil, err
 	}
 
@@ -221,22 +230,22 @@ func (k *concourseProvider) teamResourceID(name string) string {
 func (k *concourseProvider) Read(ctx context.Context, req *pulumirpc.ReadRequest) (*pulumirpc.ReadResponse, error) {
 	urn := resource.URN(req.GetUrn())
 	ty := urn.Type()
-	if ty != "concourse:index:Random" {
+	if ty != "concourse:index:Pipeline" {
 		return nil, fmt.Errorf("Unknown resource type '%s'", ty)
 	}
-	return nil, status.Error(codes.Unimplemented, "Read is not yet implemented for 'concourse:index:Random'")
+	return nil, status.Error(codes.Unimplemented, "Read is not yet implemented for 'concourse:index:Pipeline'")
 }
 
 // Update updates an existing resource with new values.
 func (k *concourseProvider) Update(ctx context.Context, req *pulumirpc.UpdateRequest) (*pulumirpc.UpdateResponse, error) {
 	urn := resource.URN(req.GetUrn())
 	ty := urn.Type()
-	if ty != "concourse:index:Random" {
+	if ty != "concourse:index:Pipeline" {
 		return nil, fmt.Errorf("Unknown resource type '%s'", ty)
 	}
 
 	// Our Random resource will never be updated - if there is a diff, it will be a replacement.
-	return nil, status.Error(codes.Unimplemented, "Update is not yet implemented for 'concourse:index:Random'")
+	return nil, status.Error(codes.Unimplemented, "Update is not yet implemented for 'concourse:index:Pipeline'")
 }
 
 // Delete tears down an existing resource with the given ID.  If it fails, the resource is assumed
@@ -244,7 +253,7 @@ func (k *concourseProvider) Update(ctx context.Context, req *pulumirpc.UpdateReq
 func (k *concourseProvider) Delete(ctx context.Context, req *pulumirpc.DeleteRequest) (*pbempty.Empty, error) {
 	urn := resource.URN(req.GetUrn())
 	ty := urn.Type()
-	if ty != "concourse:index:Random" {
+	if ty != "concourse:index:Pipeline" {
 		return nil, fmt.Errorf("Unknown resource type '%s'", ty)
 	}
 
@@ -274,6 +283,7 @@ func (k *concourseProvider) GetPluginInfo(context.Context, *pbempty.Empty) (*pul
 	}, nil
 }
 
+// TODO: define the schema in go code to get away the oneOf repeats
 // GetSchema returns the JSON-serialized schema for the provider.
 func (k *concourseProvider) GetSchema(ctx context.Context, req *pulumirpc.GetSchemaRequest) (*pulumirpc.GetSchemaResponse, error) {
 	// NOTE: same as in azure-native provider

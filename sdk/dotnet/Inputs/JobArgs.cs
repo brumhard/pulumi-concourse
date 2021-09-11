@@ -55,10 +55,10 @@ namespace Pulumi.Concourse.Inputs
         public Input<Inputs.StepArgs>? OnSuccess { get; set; }
 
         [Input("plan", required: true)]
-        private InputList<Inputs.StepArgs>? _plan;
-        public InputList<Inputs.StepArgs> Plan
+        private InputList<Union<Inputs.TaskStepArgs, Inputs.GetStepArgs>>? _plan;
+        public InputList<Union<Inputs.TaskStepArgs, Inputs.GetStepArgs>> Plan
         {
-            get => _plan ?? (_plan = new InputList<Inputs.StepArgs>());
+            get => _plan ?? (_plan = new InputList<Union<Inputs.TaskStepArgs, Inputs.GetStepArgs>>());
             set => _plan = value;
         }
 

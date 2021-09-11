@@ -71,22 +71,121 @@
         }
     },
     "types": {
-        "concourse:index:Task": {
+        "concourse:index:AnonymousResource": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "object"
+                },
+                "params": {
+                    "type": "object"
+                }
+            },
+            "required": [
+                "type",
+                "source"
+            ]
+        },
+        "concourse:index:RunArgs": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "string"
+                },
+                "args": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "dir": {
+                    "type": "string"
+                },
+                "user": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "path"
+            ]
+        },
+        "concourse:index:TaskConfig": {
+            "type": "object",
+            "properties": {
+                "platform": {
+                    "type": "string"
+                },
+                "imageResource": {
+                    "type": "object",
+                    "$ref": "#/types/concourse:index:AnonymousResource"
+                },
+                "run": {
+                    "type": "object",
+                    "$ref": "#/types/concourse:index:RunArgs"
+                }
+            },
+            "required": [
+                "platform",
+                "imageResource",
+                "run"
+            ]
+        },
+        "concourse:index:TaskStep": {
             "type": "object",
             "properties": {
                 "task": {
                     "type": "string"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "config": {
+                    "type": "object",
+                    "$ref": "#/types/concourse:index:TaskConfig"
                 }
             },
             "required": [
                 "task"
             ]
         },
+        "concourse:index:GetStep": {
+            "type": "object",
+            "properties": {
+                "get": {
+                    "type": "string"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "passed": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "params": {
+                    "type": "object"
+                },
+                "trigger": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "get"
+            ]
+        },
         "concourse:index:Step": {
             "type": "object",
             "oneOf": [
                 {
-                    "$ref": "#/types/concourse:index:Task"
+                    "type": "object",
+                    "$ref": "#/types/concourse:index:TaskStep"
+                },
+                {
+                    "$ref": "#/types/concourse:index:GetStep"
                 }
             ]
         },
@@ -204,7 +303,14 @@
                 "plan": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/types/concourse:index:Step"
+                        "oneOf": [
+                            {
+                                "$ref": "#/types/concourse:index:TaskStep"
+                            },
+                            {
+                                "$ref": "#/types/concourse:index:GetStep"
+                            }
+                        ]
                     }
                 },
                 "serial": {
@@ -244,6 +350,15 @@
                 "name",
                 "plan"
             ]
+        },
+        "concourse:index:DisplayOptions": {
+            "type": "object",
+            "properties": {
+                "backgroundImage": {
+                    "type": "string",
+                    "description": "Allows users to specify a custom background image which is put at 30% opacity, grayscaled and blended into existing background. Must be an http, https, or relative URL."
+                }
+            }
         }
     },
     "resources": {
@@ -297,12 +412,7 @@
                 },
                 "display": {
                     "type": "object",
-                    "properties": {
-                        "backgroundImage": {
-                            "type": "string",
-                            "description": "Allows users to specify a custom background image which is put at 30% opacity, grayscaled and blended into existing background. Must be an http, https, or relative URL."
-                        }
-                    },
+                    "$ref": "#/types/concourse:index:DisplayOptions",
                     "description": "Visual configurations for personalizing your pipeline."
                 }
             },
