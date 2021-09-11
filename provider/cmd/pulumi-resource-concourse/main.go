@@ -15,12 +15,17 @@
 package main
 
 import (
+	_ "embed"
+
 	"github.com/brumhard/pulumi-concourse/provider/pkg/provider"
 	"github.com/brumhard/pulumi-concourse/provider/pkg/version"
 )
 
 var providerName = "concourse"
 
+//go:embed schema.json
+var schemaBytes []byte
+
 func main() {
-	provider.Serve(providerName, version.Version)
+	provider.Serve(providerName, version.Version, schemaBytes)
 }
