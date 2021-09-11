@@ -42,6 +42,16 @@ namespace Pulumi.Concourse
             set => _password.Set(value);
         }
 
+        private static readonly __Value<string?> _team = new __Value<string?>(() => __config.Get("team"));
+        /// <summary>
+        /// Team to authenticate with.
+        /// </summary>
+        public static string? Team
+        {
+            get => _team.Get();
+            set => _team.Set(value);
+        }
+
         private static readonly __Value<string?> _url = new __Value<string?>(() => __config.Get("url"));
         /// <summary>
         /// URL of your concourse instance.

@@ -14,8 +14,8 @@ import (
 type Pipeline struct {
 	pulumi.CustomResourceState
 
-	Length pulumi.IntOutput    `pulumi:"length"`
-	Result pulumi.StringOutput `pulumi:"result"`
+	// The name of the pipeline.
+	Name pulumi.StringOutput `pulumi:"name"`
 }
 
 // NewPipeline registers a new resource with the given unique name, arguments, and options.
@@ -25,8 +25,8 @@ func NewPipeline(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.Length == nil {
-		return nil, errors.New("invalid value for required argument 'Length'")
+	if args.Jobs == nil {
+		return nil, errors.New("invalid value for required argument 'Jobs'")
 	}
 	var resource Pipeline
 	err := ctx.RegisterResource("concourse:index:Pipeline", name, args, &resource, opts...)
@@ -60,12 +60,34 @@ func (PipelineState) ElementType() reflect.Type {
 }
 
 type pipelineArgs struct {
-	Length int `pulumi:"length"`
+	// Visual configurations for personalizing your pipeline.
+	Display map[string]string `pulumi:"display"`
+	// A list of job groups to use for organizing jobs in the web UI. Groups have no functional effect on your pipeline. They are purely for making it easier to grok large pipelines in the web UI.
+	Groups []Group `pulumi:"groups"`
+	// A set of jobs for the pipeline to continuously schedule. At least one job is required for a pipeline to be valid.
+	Jobs []Job `pulumi:"jobs"`
+	// Explicitly set to overwrite auto-naming.
+	PipelineName *string `pulumi:"pipelineName"`
+	// A set of resource types for resources within the pipeline to use.
+	ResourceTypes []ResourceType `pulumi:"resourceTypes"`
+	// A set of resources for the pipeline to continuously check.
+	Resources []Resource `pulumi:"resources"`
 }
 
 // The set of arguments for constructing a Pipeline resource.
 type PipelineArgs struct {
-	Length pulumi.IntInput
+	// Visual configurations for personalizing your pipeline.
+	Display pulumi.StringMapInput
+	// A list of job groups to use for organizing jobs in the web UI. Groups have no functional effect on your pipeline. They are purely for making it easier to grok large pipelines in the web UI.
+	Groups GroupArrayInput
+	// A set of jobs for the pipeline to continuously schedule. At least one job is required for a pipeline to be valid.
+	Jobs JobArrayInput
+	// Explicitly set to overwrite auto-naming.
+	PipelineName pulumi.StringPtrInput
+	// A set of resource types for resources within the pipeline to use.
+	ResourceTypes ResourceTypeArrayInput
+	// A set of resources for the pipeline to continuously check.
+	Resources ResourceArrayInput
 }
 
 func (PipelineArgs) ElementType() reflect.Type {

@@ -14,11 +14,13 @@ __all__ = ['ProviderArgs', 'Provider']
 class ProviderArgs:
     def __init__(__self__, *,
                  password: Optional[pulumi.Input[str]] = None,
+                 team: Optional[pulumi.Input[str]] = None,
                  url: Optional[pulumi.Input[str]] = None,
                  username: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Provider resource.
         :param pulumi.Input[str] password: Password for basic auth.
+        :param pulumi.Input[str] team: Team to authenticate with.
         :param pulumi.Input[str] url: URL of your concourse instance.
         :param pulumi.Input[str] username: Username for basic auth.
         """
@@ -26,6 +28,10 @@ class ProviderArgs:
             password = _utilities.get_env('CONCOURSE_PASSWORD')
         if password is not None:
             pulumi.set(__self__, "password", password)
+        if team is None:
+            team = _utilities.get_env('CONCOURSE_TEAM')
+        if team is not None:
+            pulumi.set(__self__, "team", team)
         if url is None:
             url = _utilities.get_env('CONCOURSE_URL')
         if url is not None:
@@ -46,6 +52,18 @@ class ProviderArgs:
     @password.setter
     def password(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "password", value)
+
+    @property
+    @pulumi.getter
+    def team(self) -> Optional[pulumi.Input[str]]:
+        """
+        Team to authenticate with.
+        """
+        return pulumi.get(self, "team")
+
+    @team.setter
+    def team(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "team", value)
 
     @property
     @pulumi.getter
@@ -78,6 +96,7 @@ class Provider(pulumi.ProviderResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  password: Optional[pulumi.Input[str]] = None,
+                 team: Optional[pulumi.Input[str]] = None,
                  url: Optional[pulumi.Input[str]] = None,
                  username: Optional[pulumi.Input[str]] = None,
                  __props__=None):
@@ -87,6 +106,7 @@ class Provider(pulumi.ProviderResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] password: Password for basic auth.
+        :param pulumi.Input[str] team: Team to authenticate with.
         :param pulumi.Input[str] url: URL of your concourse instance.
         :param pulumi.Input[str] username: Username for basic auth.
         """
@@ -115,6 +135,7 @@ class Provider(pulumi.ProviderResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  password: Optional[pulumi.Input[str]] = None,
+                 team: Optional[pulumi.Input[str]] = None,
                  url: Optional[pulumi.Input[str]] = None,
                  username: Optional[pulumi.Input[str]] = None,
                  __props__=None):
@@ -132,6 +153,9 @@ class Provider(pulumi.ProviderResource):
             if password is None:
                 password = _utilities.get_env('CONCOURSE_PASSWORD')
             __props__.__dict__["password"] = password
+            if team is None:
+                team = _utilities.get_env('CONCOURSE_TEAM')
+            __props__.__dict__["team"] = team
             if url is None:
                 url = _utilities.get_env('CONCOURSE_URL')
             __props__.__dict__["url"] = url

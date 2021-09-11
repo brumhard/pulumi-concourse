@@ -35,6 +35,7 @@ export class Provider extends pulumi.ProviderResource {
         opts = opts || {};
         {
             inputs["password"] = (args ? args.password : undefined) ?? utilities.getEnv("CONCOURSE_PASSWORD");
+            inputs["team"] = (args ? args.team : undefined) ?? utilities.getEnv("CONCOURSE_TEAM");
             inputs["url"] = (args ? args.url : undefined) ?? utilities.getEnv("CONCOURSE_URL");
             inputs["username"] = (args ? args.username : undefined) ?? utilities.getEnv("CONCOURSE_USERNAME");
         }
@@ -53,6 +54,10 @@ export interface ProviderArgs {
      * Password for basic auth.
      */
     password?: pulumi.Input<string>;
+    /**
+     * Team to authenticate with.
+     */
+    team?: pulumi.Input<string>;
     /**
      * URL of your concourse instance.
      */

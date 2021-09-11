@@ -22,6 +22,13 @@ class _ExportableConfig(types.ModuleType):
         return __config__.get('password')
 
     @property
+    def team(self) -> Optional[str]:
+        """
+        Team to authenticate with.
+        """
+        return __config__.get('team')
+
+    @property
     def url(self) -> Optional[str]:
         """
         URL of your concourse instance.

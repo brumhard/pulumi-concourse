@@ -7,6 +7,7 @@ import typing
 # Export this package's modules as members:
 from .pipeline import *
 from .provider import *
+from ._inputs import *
 
 # Make subpackages available:
 if typing.TYPE_CHECKING:

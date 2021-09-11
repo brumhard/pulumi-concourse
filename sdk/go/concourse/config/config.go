@@ -13,6 +13,11 @@ func GetPassword(ctx *pulumi.Context) string {
 	return config.Get(ctx, "concourse:password")
 }
 
+// Team to authenticate with.
+func GetTeam(ctx *pulumi.Context) string {
+	return config.Get(ctx, "concourse:team")
+}
+
 // URL of your concourse instance.
 func GetUrl(ctx *pulumi.Context) string {
 	return config.Get(ctx, "concourse:url")

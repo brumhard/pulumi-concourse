@@ -12,11 +12,11 @@ namespace Pulumi.Concourse
     [ConcourseResourceType("concourse:index:Pipeline")]
     public partial class Pipeline : Pulumi.CustomResource
     {
-        [Output("length")]
-        public Output<int> Length { get; private set; } = null!;
-
-        [Output("result")]
-        public Output<string> Result { get; private set; } = null!;
+        /// <summary>
+        /// The name of the pipeline.
+        /// </summary>
+        [Output("name")]
+        public Output<string> Name { get; private set; } = null!;
 
 
         /// <summary>
@@ -63,8 +63,71 @@ namespace Pulumi.Concourse
 
     public sealed class PipelineArgs : Pulumi.ResourceArgs
     {
-        [Input("length", required: true)]
-        public Input<int> Length { get; set; } = null!;
+        [Input("display")]
+        private InputMap<string>? _display;
+
+        /// <summary>
+        /// Visual configurations for personalizing your pipeline.
+        /// </summary>
+        public InputMap<string> Display
+        {
+            get => _display ?? (_display = new InputMap<string>());
+            set => _display = value;
+        }
+
+        [Input("groups")]
+        private InputList<Inputs.GroupArgs>? _groups;
+
+        /// <summary>
+        /// A list of job groups to use for organizing jobs in the web UI. Groups have no functional effect on your pipeline. They are purely for making it easier to grok large pipelines in the web UI.
+        /// </summary>
+        public InputList<Inputs.GroupArgs> Groups
+        {
+            get => _groups ?? (_groups = new InputList<Inputs.GroupArgs>());
+            set => _groups = value;
+        }
+
+        [Input("jobs", required: true)]
+        private InputList<Inputs.JobArgs>? _jobs;
+
+        /// <summary>
+        /// A set of jobs for the pipeline to continuously schedule. At least one job is required for a pipeline to be valid.
+        /// </summary>
+        public InputList<Inputs.JobArgs> Jobs
+        {
+            get => _jobs ?? (_jobs = new InputList<Inputs.JobArgs>());
+            set => _jobs = value;
+        }
+
+        /// <summary>
+        /// Explicitly set to overwrite auto-naming.
+        /// </summary>
+        [Input("pipelineName")]
+        public Input<string>? PipelineName { get; set; }
+
+        [Input("resourceTypes")]
+        private InputList<Inputs.ResourceTypeArgs>? _resourceTypes;
+
+        /// <summary>
+        /// A set of resource types for resources within the pipeline to use.
+        /// </summary>
+        public InputList<Inputs.ResourceTypeArgs> ResourceTypes
+        {
+            get => _resourceTypes ?? (_resourceTypes = new InputList<Inputs.ResourceTypeArgs>());
+            set => _resourceTypes = value;
+        }
+
+        [Input("resources")]
+        private InputList<Inputs.ResourceArgs>? _resources;
+
+        /// <summary>
+        /// A set of resources for the pipeline to continuously check.
+        /// </summary>
+        public InputList<Inputs.ResourceArgs> Resources
+        {
+            get => _resources ?? (_resources = new InputList<Inputs.ResourceArgs>());
+            set => _resources = value;
+        }
 
         public PipelineArgs()
         {

@@ -2,6 +2,7 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
 export class Pipeline extends pulumi.CustomResource {
@@ -31,8 +32,10 @@ export class Pipeline extends pulumi.CustomResource {
         return obj['__pulumiType'] === Pipeline.__pulumiType;
     }
 
-    public readonly length!: pulumi.Output<number>;
-    public /*out*/ readonly result!: pulumi.Output<string>;
+    /**
+     * The name of the pipeline.
+     */
+    public /*out*/ readonly name!: pulumi.Output<string>;
 
     /**
      * Create a Pipeline resource with the given unique name, arguments, and options.
@@ -45,14 +48,18 @@ export class Pipeline extends pulumi.CustomResource {
         let inputs: pulumi.Inputs = {};
         opts = opts || {};
         if (!opts.id) {
-            if ((!args || args.length === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'length'");
+            if ((!args || args.jobs === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'jobs'");
             }
-            inputs["length"] = args ? args.length : undefined;
-            inputs["result"] = undefined /*out*/;
+            inputs["display"] = args ? args.display : undefined;
+            inputs["groups"] = args ? args.groups : undefined;
+            inputs["jobs"] = args ? args.jobs : undefined;
+            inputs["pipelineName"] = args ? args.pipelineName : undefined;
+            inputs["resourceTypes"] = args ? args.resourceTypes : undefined;
+            inputs["resources"] = args ? args.resources : undefined;
+            inputs["name"] = undefined /*out*/;
         } else {
-            inputs["length"] = undefined /*out*/;
-            inputs["result"] = undefined /*out*/;
+            inputs["name"] = undefined /*out*/;
         }
         if (!opts.version) {
             opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
@@ -65,5 +72,28 @@ export class Pipeline extends pulumi.CustomResource {
  * The set of arguments for constructing a Pipeline resource.
  */
 export interface PipelineArgs {
-    length: pulumi.Input<number>;
+    /**
+     * Visual configurations for personalizing your pipeline.
+     */
+    display?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * A list of job groups to use for organizing jobs in the web UI. Groups have no functional effect on your pipeline. They are purely for making it easier to grok large pipelines in the web UI.
+     */
+    groups?: pulumi.Input<pulumi.Input<inputs.GroupArgs>[]>;
+    /**
+     * A set of jobs for the pipeline to continuously schedule. At least one job is required for a pipeline to be valid.
+     */
+    jobs: pulumi.Input<pulumi.Input<inputs.JobArgs>[]>;
+    /**
+     * Explicitly set to overwrite auto-naming.
+     */
+    pipelineName?: pulumi.Input<string>;
+    /**
+     * A set of resource types for resources within the pipeline to use.
+     */
+    resourceTypes?: pulumi.Input<pulumi.Input<inputs.ResourceTypeArgs>[]>;
+    /**
+     * A set of resources for the pipeline to continuously check.
+     */
+    resources?: pulumi.Input<pulumi.Input<inputs.ResourceArgs>[]>;
 }

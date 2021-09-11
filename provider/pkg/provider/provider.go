@@ -27,6 +27,7 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"io"
+	"math/rand"
 	"os"
 	"strings"
 
@@ -116,12 +117,15 @@ func (k *concourseProvider) getConfig(configName, envName string) string {
 // representation of the properties as present in the program inputs. Though this rule is not
 // required for correctness, violations thereof can negatively impact the end-user experience, as
 // the provider inputs are using for detecting and rendering diffs.
+//
+// This can be used to also apply defaults to the resources if there are any.
 func (k *concourseProvider) Check(ctx context.Context, req *pulumirpc.CheckRequest) (*pulumirpc.CheckResponse, error) {
 	urn := resource.URN(req.GetUrn())
 	ty := urn.Type()
 	if ty != "concourse:index:Random" {
 		return nil, fmt.Errorf("Unknown resource type '%s'", ty)
 	}
+
 	return &pulumirpc.CheckResponse{Inputs: req.News, Failures: nil}, nil
 }
 
@@ -171,18 +175,18 @@ func (k *concourseProvider) Create(ctx context.Context, req *pulumirpc.CreateReq
 		return nil, err
 	}
 
-	if !inputs["length"].IsNumber() {
-		return nil, fmt.Errorf("Expected input property 'length' of type 'number' but got '%s", inputs["length"].TypeString())
+	name := inputs["pipelineName"].StringValue()
+	if name == "" {
+		name = autoName(ty.Name().String())
 	}
 
-	n := int(inputs["length"].NumberValue())
-
-	// Actually "create" the random number
-	result := makeRandom(n)
+	// Actually "create" the pipeline
+	if err := k.makePipeline(name); err != nil {
+		return nil, err
+	}
 
 	outputs := map[string]interface{}{
-		"length": n,
-		"result": result,
+		"name": name,
 	}
 
 	outputProperties, err := plugin.MarshalProperties(
@@ -193,9 +197,24 @@ func (k *concourseProvider) Create(ctx context.Context, req *pulumirpc.CreateReq
 		return nil, err
 	}
 	return &pulumirpc.CreateResponse{
-		Id:         result,
+		Id:         k.teamResourceID(name),
 		Properties: outputProperties,
 	}, nil
+}
+
+const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+
+func autoName(name string) string {
+	b := make([]byte, 8)
+	for i := range b {
+		b[i] = letterBytes[rand.Int63()%int64(len(letterBytes))]
+	}
+
+	return fmt.Sprintf("%s-%s", name, b)
+}
+
+func (k *concourseProvider) teamResourceID(name string) string {
+	return fmt.Sprintf("%s-%s", k.team, name)
 }
 
 // Read the current live state associated with a resource.
