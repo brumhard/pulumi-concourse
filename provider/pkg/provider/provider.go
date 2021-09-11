@@ -121,11 +121,35 @@ func (k *concourseProvider) getConfig(configName, envName string) string {
 // the provider inputs are using for detecting and rendering diffs.
 //
 // This can be used to also apply defaults to the resources if there are any.
+// TODO: should autoNaming be moved here to apply it as default or should the feature be removed in general
+// 	- probably remove it, the only reason is faster replace actions for things that need some time for deletion, which is not the case here
 func (k *concourseProvider) Check(ctx context.Context, req *pulumirpc.CheckRequest) (*pulumirpc.CheckResponse, error) {
 	urn := resource.URN(req.GetUrn())
 	ty := urn.Type()
 	if ty != "concourse:index:Pipeline" {
 		return nil, fmt.Errorf("Unknown resource type '%s'", ty)
+	}
+
+	news, err := plugin.UnmarshalProperties(req.GetNews(), plugin.MarshalOptions{KeepUnknowns: true, SkipNulls: true})
+	if err != nil {
+		return nil, err
+	}
+
+	// make sure that final name does not contain any colon, since that is used in teamResourceID
+	explicitlySet, name := autoName(urn, news)
+
+	property := "name"
+	if explicitlySet {
+		property = "pipelineName"
+	}
+
+	if strings.ContainsRune(name, ':') {
+		return &pulumirpc.CheckResponse{Inputs: req.News, Failures: []*pulumirpc.CheckFailure{
+			{
+				Property: property,
+				Reason:   "must not contain a colon",
+			},
+		}}, nil
 	}
 
 	return &pulumirpc.CheckResponse{Inputs: req.News, Failures: nil}, nil
@@ -177,10 +201,7 @@ func (k *concourseProvider) Create(ctx context.Context, req *pulumirpc.CreateReq
 		return nil, err
 	}
 
-	name := inputs["pipelineName"].StringValue()
-	if name == "" {
-		name = autoName(ty.Name().String())
-	}
+	_, name := autoName(urn, inputs)
 
 	inputMap := inputs.Mappable()
 	var config atc.Config
@@ -213,17 +234,43 @@ func (k *concourseProvider) Create(ctx context.Context, req *pulumirpc.CreateReq
 
 const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
 
-func autoName(name string) string {
+// autoName returns a bool indicating whether the name was explicitly set or not and the name that should be used.
+func autoName(urn resource.URN, propertyMap resource.PropertyMap) (bool, string) {
+	var propertyName string
+
+	switch urn.Type() {
+	case "concourse:index:Pipeline": propertyName = "pipelineName"
+	default:
+		panic(fmt.Sprintf("type %s does not support autoNaming", urn.Type()))
+	}
+
+	propKey := resource.PropertyKey(propertyName)
+
+	if propertyMap.HasValue(propKey) {
+		return true, propertyMap[propKey].StringValue()
+	}
+
 	b := make([]byte, 8)
 	for i := range b {
 		b[i] = letterBytes[rand.Int63()%int64(len(letterBytes))]
 	}
 
-	return fmt.Sprintf("%s-%s", name, b)
+	return false, fmt.Sprintf("%s-%s", urn.Name().String(), b)
 }
 
+const separator = ':'
+
 func (k *concourseProvider) teamResourceID(name string) string {
-	return fmt.Sprintf("%s-%s", k.team, name)
+	return fmt.Sprintf("%s%c%s", k.team, separator, name)
+}
+
+func nameFromTeamResourceID(teamResourceID string) string {
+	parts := strings.Split(teamResourceID, string(separator))
+	if len(parts) != 2 {
+		panic("teamResourceID should be in the format %s")
+	}
+
+	return parts[1]
 }
 
 // Read the current live state associated with a resource.
@@ -255,6 +302,12 @@ func (k *concourseProvider) Delete(ctx context.Context, req *pulumirpc.DeleteReq
 	ty := urn.Type()
 	if ty != "concourse:index:Pipeline" {
 		return nil, fmt.Errorf("Unknown resource type '%s'", ty)
+	}
+
+	pipelineName := nameFromTeamResourceID(req.GetId())
+
+	if err := k.deletePipeline(pipelineName); err != nil {
+		return nil, err
 	}
 
 	// Note that for our Random resource, we don't have to do anything on Delete.

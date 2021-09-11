@@ -3,9 +3,8 @@ import * as concourse from "@pulumi/concourse";
 const provider = new concourse.Provider("concourse", { url: "http://localhost:8080", username: "test", password: "test" })
 
 const pipeline = new concourse.Pipeline(
-  "my-random",
+  "testing-pipeline",
   {
-    pipelineName: "my-random",
     jobs: [
       {
         name: "lel",
