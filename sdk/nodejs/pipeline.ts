@@ -75,7 +75,7 @@ export interface PipelineArgs {
     /**
      * Visual configurations for personalizing your pipeline.
      */
-    display?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    display?: pulumi.Input<inputs.DisplayOptionsArgs>;
     /**
      * A list of job groups to use for organizing jobs in the web UI. Groups have no functional effect on your pipeline. They are purely for making it easier to grok large pipelines in the web UI.
      */

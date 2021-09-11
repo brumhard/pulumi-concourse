@@ -10,6 +10,379 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type AnonymousResource struct {
+	Params map[string]string `pulumi:"params"`
+	Source map[string]string `pulumi:"source"`
+	Type   string            `pulumi:"type"`
+}
+
+// AnonymousResourceInput is an input type that accepts AnonymousResourceArgs and AnonymousResourceOutput values.
+// You can construct a concrete instance of `AnonymousResourceInput` via:
+//
+//          AnonymousResourceArgs{...}
+type AnonymousResourceInput interface {
+	pulumi.Input
+
+	ToAnonymousResourceOutput() AnonymousResourceOutput
+	ToAnonymousResourceOutputWithContext(context.Context) AnonymousResourceOutput
+}
+
+type AnonymousResourceArgs struct {
+	Params pulumi.StringMapInput `pulumi:"params"`
+	Source pulumi.StringMapInput `pulumi:"source"`
+	Type   pulumi.StringInput    `pulumi:"type"`
+}
+
+func (AnonymousResourceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AnonymousResource)(nil)).Elem()
+}
+
+func (i AnonymousResourceArgs) ToAnonymousResourceOutput() AnonymousResourceOutput {
+	return i.ToAnonymousResourceOutputWithContext(context.Background())
+}
+
+func (i AnonymousResourceArgs) ToAnonymousResourceOutputWithContext(ctx context.Context) AnonymousResourceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AnonymousResourceOutput)
+}
+
+func (i AnonymousResourceArgs) ToAnonymousResourcePtrOutput() AnonymousResourcePtrOutput {
+	return i.ToAnonymousResourcePtrOutputWithContext(context.Background())
+}
+
+func (i AnonymousResourceArgs) ToAnonymousResourcePtrOutputWithContext(ctx context.Context) AnonymousResourcePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AnonymousResourceOutput).ToAnonymousResourcePtrOutputWithContext(ctx)
+}
+
+// AnonymousResourcePtrInput is an input type that accepts AnonymousResourceArgs, AnonymousResourcePtr and AnonymousResourcePtrOutput values.
+// You can construct a concrete instance of `AnonymousResourcePtrInput` via:
+//
+//          AnonymousResourceArgs{...}
+//
+//  or:
+//
+//          nil
+type AnonymousResourcePtrInput interface {
+	pulumi.Input
+
+	ToAnonymousResourcePtrOutput() AnonymousResourcePtrOutput
+	ToAnonymousResourcePtrOutputWithContext(context.Context) AnonymousResourcePtrOutput
+}
+
+type anonymousResourcePtrType AnonymousResourceArgs
+
+func AnonymousResourcePtr(v *AnonymousResourceArgs) AnonymousResourcePtrInput {
+	return (*anonymousResourcePtrType)(v)
+}
+
+func (*anonymousResourcePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**AnonymousResource)(nil)).Elem()
+}
+
+func (i *anonymousResourcePtrType) ToAnonymousResourcePtrOutput() AnonymousResourcePtrOutput {
+	return i.ToAnonymousResourcePtrOutputWithContext(context.Background())
+}
+
+func (i *anonymousResourcePtrType) ToAnonymousResourcePtrOutputWithContext(ctx context.Context) AnonymousResourcePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AnonymousResourcePtrOutput)
+}
+
+type AnonymousResourceOutput struct{ *pulumi.OutputState }
+
+func (AnonymousResourceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AnonymousResource)(nil)).Elem()
+}
+
+func (o AnonymousResourceOutput) ToAnonymousResourceOutput() AnonymousResourceOutput {
+	return o
+}
+
+func (o AnonymousResourceOutput) ToAnonymousResourceOutputWithContext(ctx context.Context) AnonymousResourceOutput {
+	return o
+}
+
+func (o AnonymousResourceOutput) ToAnonymousResourcePtrOutput() AnonymousResourcePtrOutput {
+	return o.ToAnonymousResourcePtrOutputWithContext(context.Background())
+}
+
+func (o AnonymousResourceOutput) ToAnonymousResourcePtrOutputWithContext(ctx context.Context) AnonymousResourcePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v AnonymousResource) *AnonymousResource {
+		return &v
+	}).(AnonymousResourcePtrOutput)
+}
+
+func (o AnonymousResourceOutput) Params() pulumi.StringMapOutput {
+	return o.ApplyT(func(v AnonymousResource) map[string]string { return v.Params }).(pulumi.StringMapOutput)
+}
+
+func (o AnonymousResourceOutput) Source() pulumi.StringMapOutput {
+	return o.ApplyT(func(v AnonymousResource) map[string]string { return v.Source }).(pulumi.StringMapOutput)
+}
+
+func (o AnonymousResourceOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v AnonymousResource) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type AnonymousResourcePtrOutput struct{ *pulumi.OutputState }
+
+func (AnonymousResourcePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**AnonymousResource)(nil)).Elem()
+}
+
+func (o AnonymousResourcePtrOutput) ToAnonymousResourcePtrOutput() AnonymousResourcePtrOutput {
+	return o
+}
+
+func (o AnonymousResourcePtrOutput) ToAnonymousResourcePtrOutputWithContext(ctx context.Context) AnonymousResourcePtrOutput {
+	return o
+}
+
+func (o AnonymousResourcePtrOutput) Elem() AnonymousResourceOutput {
+	return o.ApplyT(func(v *AnonymousResource) AnonymousResource {
+		if v != nil {
+			return *v
+		}
+		var ret AnonymousResource
+		return ret
+	}).(AnonymousResourceOutput)
+}
+
+func (o AnonymousResourcePtrOutput) Params() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *AnonymousResource) map[string]string {
+		if v == nil {
+			return nil
+		}
+		return v.Params
+	}).(pulumi.StringMapOutput)
+}
+
+func (o AnonymousResourcePtrOutput) Source() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *AnonymousResource) map[string]string {
+		if v == nil {
+			return nil
+		}
+		return v.Source
+	}).(pulumi.StringMapOutput)
+}
+
+func (o AnonymousResourcePtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AnonymousResource) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+type DisplayOptions struct {
+	// Allows users to specify a custom background image which is put at 30% opacity, grayscaled and blended into existing background. Must be an http, https, or relative URL.
+	BackgroundImage *string `pulumi:"backgroundImage"`
+}
+
+// DisplayOptionsInput is an input type that accepts DisplayOptionsArgs and DisplayOptionsOutput values.
+// You can construct a concrete instance of `DisplayOptionsInput` via:
+//
+//          DisplayOptionsArgs{...}
+type DisplayOptionsInput interface {
+	pulumi.Input
+
+	ToDisplayOptionsOutput() DisplayOptionsOutput
+	ToDisplayOptionsOutputWithContext(context.Context) DisplayOptionsOutput
+}
+
+type DisplayOptionsArgs struct {
+	// Allows users to specify a custom background image which is put at 30% opacity, grayscaled and blended into existing background. Must be an http, https, or relative URL.
+	BackgroundImage pulumi.StringPtrInput `pulumi:"backgroundImage"`
+}
+
+func (DisplayOptionsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DisplayOptions)(nil)).Elem()
+}
+
+func (i DisplayOptionsArgs) ToDisplayOptionsOutput() DisplayOptionsOutput {
+	return i.ToDisplayOptionsOutputWithContext(context.Background())
+}
+
+func (i DisplayOptionsArgs) ToDisplayOptionsOutputWithContext(ctx context.Context) DisplayOptionsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DisplayOptionsOutput)
+}
+
+func (i DisplayOptionsArgs) ToDisplayOptionsPtrOutput() DisplayOptionsPtrOutput {
+	return i.ToDisplayOptionsPtrOutputWithContext(context.Background())
+}
+
+func (i DisplayOptionsArgs) ToDisplayOptionsPtrOutputWithContext(ctx context.Context) DisplayOptionsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DisplayOptionsOutput).ToDisplayOptionsPtrOutputWithContext(ctx)
+}
+
+// DisplayOptionsPtrInput is an input type that accepts DisplayOptionsArgs, DisplayOptionsPtr and DisplayOptionsPtrOutput values.
+// You can construct a concrete instance of `DisplayOptionsPtrInput` via:
+//
+//          DisplayOptionsArgs{...}
+//
+//  or:
+//
+//          nil
+type DisplayOptionsPtrInput interface {
+	pulumi.Input
+
+	ToDisplayOptionsPtrOutput() DisplayOptionsPtrOutput
+	ToDisplayOptionsPtrOutputWithContext(context.Context) DisplayOptionsPtrOutput
+}
+
+type displayOptionsPtrType DisplayOptionsArgs
+
+func DisplayOptionsPtr(v *DisplayOptionsArgs) DisplayOptionsPtrInput {
+	return (*displayOptionsPtrType)(v)
+}
+
+func (*displayOptionsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DisplayOptions)(nil)).Elem()
+}
+
+func (i *displayOptionsPtrType) ToDisplayOptionsPtrOutput() DisplayOptionsPtrOutput {
+	return i.ToDisplayOptionsPtrOutputWithContext(context.Background())
+}
+
+func (i *displayOptionsPtrType) ToDisplayOptionsPtrOutputWithContext(ctx context.Context) DisplayOptionsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DisplayOptionsPtrOutput)
+}
+
+type DisplayOptionsOutput struct{ *pulumi.OutputState }
+
+func (DisplayOptionsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DisplayOptions)(nil)).Elem()
+}
+
+func (o DisplayOptionsOutput) ToDisplayOptionsOutput() DisplayOptionsOutput {
+	return o
+}
+
+func (o DisplayOptionsOutput) ToDisplayOptionsOutputWithContext(ctx context.Context) DisplayOptionsOutput {
+	return o
+}
+
+func (o DisplayOptionsOutput) ToDisplayOptionsPtrOutput() DisplayOptionsPtrOutput {
+	return o.ToDisplayOptionsPtrOutputWithContext(context.Background())
+}
+
+func (o DisplayOptionsOutput) ToDisplayOptionsPtrOutputWithContext(ctx context.Context) DisplayOptionsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DisplayOptions) *DisplayOptions {
+		return &v
+	}).(DisplayOptionsPtrOutput)
+}
+
+// Allows users to specify a custom background image which is put at 30% opacity, grayscaled and blended into existing background. Must be an http, https, or relative URL.
+func (o DisplayOptionsOutput) BackgroundImage() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DisplayOptions) *string { return v.BackgroundImage }).(pulumi.StringPtrOutput)
+}
+
+type DisplayOptionsPtrOutput struct{ *pulumi.OutputState }
+
+func (DisplayOptionsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DisplayOptions)(nil)).Elem()
+}
+
+func (o DisplayOptionsPtrOutput) ToDisplayOptionsPtrOutput() DisplayOptionsPtrOutput {
+	return o
+}
+
+func (o DisplayOptionsPtrOutput) ToDisplayOptionsPtrOutputWithContext(ctx context.Context) DisplayOptionsPtrOutput {
+	return o
+}
+
+func (o DisplayOptionsPtrOutput) Elem() DisplayOptionsOutput {
+	return o.ApplyT(func(v *DisplayOptions) DisplayOptions {
+		if v != nil {
+			return *v
+		}
+		var ret DisplayOptions
+		return ret
+	}).(DisplayOptionsOutput)
+}
+
+// Allows users to specify a custom background image which is put at 30% opacity, grayscaled and blended into existing background. Must be an http, https, or relative URL.
+func (o DisplayOptionsPtrOutput) BackgroundImage() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DisplayOptions) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BackgroundImage
+	}).(pulumi.StringPtrOutput)
+}
+
+type GetStep struct {
+	Get      string            `pulumi:"get"`
+	Params   map[string]string `pulumi:"params"`
+	Passed   []string          `pulumi:"passed"`
+	Resource *string           `pulumi:"resource"`
+	Trigger  *bool             `pulumi:"trigger"`
+}
+
+// GetStepInput is an input type that accepts GetStepArgs and GetStepOutput values.
+// You can construct a concrete instance of `GetStepInput` via:
+//
+//          GetStepArgs{...}
+type GetStepInput interface {
+	pulumi.Input
+
+	ToGetStepOutput() GetStepOutput
+	ToGetStepOutputWithContext(context.Context) GetStepOutput
+}
+
+type GetStepArgs struct {
+	Get      pulumi.StringInput      `pulumi:"get"`
+	Params   pulumi.StringMapInput   `pulumi:"params"`
+	Passed   pulumi.StringArrayInput `pulumi:"passed"`
+	Resource pulumi.StringPtrInput   `pulumi:"resource"`
+	Trigger  pulumi.BoolPtrInput     `pulumi:"trigger"`
+}
+
+func (GetStepArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetStep)(nil)).Elem()
+}
+
+func (i GetStepArgs) ToGetStepOutput() GetStepOutput {
+	return i.ToGetStepOutputWithContext(context.Background())
+}
+
+func (i GetStepArgs) ToGetStepOutputWithContext(ctx context.Context) GetStepOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetStepOutput)
+}
+
+type GetStepOutput struct{ *pulumi.OutputState }
+
+func (GetStepOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetStep)(nil)).Elem()
+}
+
+func (o GetStepOutput) ToGetStepOutput() GetStepOutput {
+	return o
+}
+
+func (o GetStepOutput) ToGetStepOutputWithContext(ctx context.Context) GetStepOutput {
+	return o
+}
+
+func (o GetStepOutput) Get() pulumi.StringOutput {
+	return o.ApplyT(func(v GetStep) string { return v.Get }).(pulumi.StringOutput)
+}
+
+func (o GetStepOutput) Params() pulumi.StringMapOutput {
+	return o.ApplyT(func(v GetStep) map[string]string { return v.Params }).(pulumi.StringMapOutput)
+}
+
+func (o GetStepOutput) Passed() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetStep) []string { return v.Passed }).(pulumi.StringArrayOutput)
+}
+
+func (o GetStepOutput) Resource() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetStep) *string { return v.Resource }).(pulumi.StringPtrOutput)
+}
+
+func (o GetStepOutput) Trigger() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v GetStep) *bool { return v.Trigger }).(pulumi.BoolPtrOutput)
+}
+
 type Group struct {
 	// A list of jobs that should appear in this group. A job may appear in multiple groups. Neighbours of jobs in the current group will also appear on the same page in order to give context of the location of the group in the pipeline. You may also use any valid glob to represent several jobs.
 	Jobs []string `pulumi:"jobs"`
@@ -130,8 +503,8 @@ type Job struct {
 	// Step to execute when the job fails.
 	OnFailure *Step `pulumi:"onFailure"`
 	// Step to execute when the job succeeds.
-	OnSuccess *Step  `pulumi:"onSuccess"`
-	Plan      []Step `pulumi:"plan"`
+	OnSuccess *Step         `pulumi:"onSuccess"`
+	Plan      []interface{} `pulumi:"plan"`
 	// Default false. If set to true, the build log of this job will be viewable by unauthenticated users. Unauthenticated users will always be able to see the inputs, outputs, and build status history of a job. This is useful if you would like to expose your pipeline publicly without showing sensitive information in the build log.
 	Public *bool `pulumi:"public"`
 	// Default false. If set to true, builds will queue up and execute one-by-one, rather than executing in parallel.
@@ -163,8 +536,8 @@ type JobArgs struct {
 	// Step to execute when the job fails.
 	OnFailure StepPtrInput `pulumi:"onFailure"`
 	// Step to execute when the job succeeds.
-	OnSuccess StepPtrInput   `pulumi:"onSuccess"`
-	Plan      StepArrayInput `pulumi:"plan"`
+	OnSuccess StepPtrInput      `pulumi:"onSuccess"`
+	Plan      pulumi.ArrayInput `pulumi:"plan"`
 	// Default false. If set to true, the build log of this job will be viewable by unauthenticated users. Unauthenticated users will always be able to see the inputs, outputs, and build status history of a job. This is useful if you would like to expose your pipeline publicly without showing sensitive information in the build log.
 	Public pulumi.BoolPtrInput `pulumi:"public"`
 	// Default false. If set to true, builds will queue up and execute one-by-one, rather than executing in parallel.
@@ -257,8 +630,8 @@ func (o JobOutput) OnSuccess() StepPtrOutput {
 	return o.ApplyT(func(v Job) *Step { return v.OnSuccess }).(StepPtrOutput)
 }
 
-func (o JobOutput) Plan() StepArrayOutput {
-	return o.ApplyT(func(v Job) []Step { return v.Plan }).(StepArrayOutput)
+func (o JobOutput) Plan() pulumi.ArrayOutput {
+	return o.ApplyT(func(v Job) []interface{} { return v.Plan }).(pulumi.ArrayOutput)
 }
 
 // Default false. If set to true, the build log of this job will be viewable by unauthenticated users. Unauthenticated users will always be able to see the inputs, outputs, and build status history of a job. This is useful if you would like to expose your pipeline publicly without showing sensitive information in the build log.
@@ -602,6 +975,184 @@ func (o ResourceTypeArrayOutput) Index(i pulumi.IntInput) ResourceTypeOutput {
 	}).(ResourceTypeOutput)
 }
 
+type RunArgs struct {
+	Args []string `pulumi:"args"`
+	Dir  *string  `pulumi:"dir"`
+	Path string   `pulumi:"path"`
+	User *string  `pulumi:"user"`
+}
+
+// RunArgsInput is an input type that accepts RunArgsArgs and RunArgsOutput values.
+// You can construct a concrete instance of `RunArgsInput` via:
+//
+//          RunArgsArgs{...}
+type RunArgsInput interface {
+	pulumi.Input
+
+	ToRunArgsOutput() RunArgsOutput
+	ToRunArgsOutputWithContext(context.Context) RunArgsOutput
+}
+
+type RunArgsArgs struct {
+	Args pulumi.StringArrayInput `pulumi:"args"`
+	Dir  pulumi.StringPtrInput   `pulumi:"dir"`
+	Path pulumi.StringInput      `pulumi:"path"`
+	User pulumi.StringPtrInput   `pulumi:"user"`
+}
+
+func (RunArgsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RunArgs)(nil)).Elem()
+}
+
+func (i RunArgsArgs) ToRunArgsOutput() RunArgsOutput {
+	return i.ToRunArgsOutputWithContext(context.Background())
+}
+
+func (i RunArgsArgs) ToRunArgsOutputWithContext(ctx context.Context) RunArgsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RunArgsOutput)
+}
+
+func (i RunArgsArgs) ToRunArgsPtrOutput() RunArgsPtrOutput {
+	return i.ToRunArgsPtrOutputWithContext(context.Background())
+}
+
+func (i RunArgsArgs) ToRunArgsPtrOutputWithContext(ctx context.Context) RunArgsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RunArgsOutput).ToRunArgsPtrOutputWithContext(ctx)
+}
+
+// RunArgsPtrInput is an input type that accepts RunArgsArgs, RunArgsPtr and RunArgsPtrOutput values.
+// You can construct a concrete instance of `RunArgsPtrInput` via:
+//
+//          RunArgsArgs{...}
+//
+//  or:
+//
+//          nil
+type RunArgsPtrInput interface {
+	pulumi.Input
+
+	ToRunArgsPtrOutput() RunArgsPtrOutput
+	ToRunArgsPtrOutputWithContext(context.Context) RunArgsPtrOutput
+}
+
+type runArgsPtrType RunArgsArgs
+
+func RunArgsPtr(v *RunArgsArgs) RunArgsPtrInput {
+	return (*runArgsPtrType)(v)
+}
+
+func (*runArgsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RunArgs)(nil)).Elem()
+}
+
+func (i *runArgsPtrType) ToRunArgsPtrOutput() RunArgsPtrOutput {
+	return i.ToRunArgsPtrOutputWithContext(context.Background())
+}
+
+func (i *runArgsPtrType) ToRunArgsPtrOutputWithContext(ctx context.Context) RunArgsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RunArgsPtrOutput)
+}
+
+type RunArgsOutput struct{ *pulumi.OutputState }
+
+func (RunArgsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RunArgs)(nil)).Elem()
+}
+
+func (o RunArgsOutput) ToRunArgsOutput() RunArgsOutput {
+	return o
+}
+
+func (o RunArgsOutput) ToRunArgsOutputWithContext(ctx context.Context) RunArgsOutput {
+	return o
+}
+
+func (o RunArgsOutput) ToRunArgsPtrOutput() RunArgsPtrOutput {
+	return o.ToRunArgsPtrOutputWithContext(context.Background())
+}
+
+func (o RunArgsOutput) ToRunArgsPtrOutputWithContext(ctx context.Context) RunArgsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RunArgs) *RunArgs {
+		return &v
+	}).(RunArgsPtrOutput)
+}
+
+func (o RunArgsOutput) Args() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v RunArgs) []string { return v.Args }).(pulumi.StringArrayOutput)
+}
+
+func (o RunArgsOutput) Dir() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RunArgs) *string { return v.Dir }).(pulumi.StringPtrOutput)
+}
+
+func (o RunArgsOutput) Path() pulumi.StringOutput {
+	return o.ApplyT(func(v RunArgs) string { return v.Path }).(pulumi.StringOutput)
+}
+
+func (o RunArgsOutput) User() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RunArgs) *string { return v.User }).(pulumi.StringPtrOutput)
+}
+
+type RunArgsPtrOutput struct{ *pulumi.OutputState }
+
+func (RunArgsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RunArgs)(nil)).Elem()
+}
+
+func (o RunArgsPtrOutput) ToRunArgsPtrOutput() RunArgsPtrOutput {
+	return o
+}
+
+func (o RunArgsPtrOutput) ToRunArgsPtrOutputWithContext(ctx context.Context) RunArgsPtrOutput {
+	return o
+}
+
+func (o RunArgsPtrOutput) Elem() RunArgsOutput {
+	return o.ApplyT(func(v *RunArgs) RunArgs {
+		if v != nil {
+			return *v
+		}
+		var ret RunArgs
+		return ret
+	}).(RunArgsOutput)
+}
+
+func (o RunArgsPtrOutput) Args() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *RunArgs) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Args
+	}).(pulumi.StringArrayOutput)
+}
+
+func (o RunArgsPtrOutput) Dir() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RunArgs) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Dir
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o RunArgsPtrOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RunArgs) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Path
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o RunArgsPtrOutput) User() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RunArgs) *string {
+		if v == nil {
+			return nil
+		}
+		return v.User
+	}).(pulumi.StringPtrOutput)
+}
+
 type Step struct {
 }
 
@@ -672,31 +1223,6 @@ func (i *stepPtrType) ToStepPtrOutputWithContext(ctx context.Context) StepPtrOut
 	return pulumi.ToOutputWithContext(ctx, i).(StepPtrOutput)
 }
 
-// StepArrayInput is an input type that accepts StepArray and StepArrayOutput values.
-// You can construct a concrete instance of `StepArrayInput` via:
-//
-//          StepArray{ StepArgs{...} }
-type StepArrayInput interface {
-	pulumi.Input
-
-	ToStepArrayOutput() StepArrayOutput
-	ToStepArrayOutputWithContext(context.Context) StepArrayOutput
-}
-
-type StepArray []StepInput
-
-func (StepArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]Step)(nil)).Elem()
-}
-
-func (i StepArray) ToStepArrayOutput() StepArrayOutput {
-	return i.ToStepArrayOutputWithContext(context.Background())
-}
-
-func (i StepArray) ToStepArrayOutputWithContext(ctx context.Context) StepArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(StepArrayOutput)
-}
-
 type StepOutput struct{ *pulumi.OutputState }
 
 func (StepOutput) ElementType() reflect.Type {
@@ -716,7 +1242,7 @@ func (o StepOutput) ToStepPtrOutput() StepPtrOutput {
 }
 
 func (o StepOutput) ToStepPtrOutputWithContext(ctx context.Context) StepPtrOutput {
-	return o.ApplyT(func(v Step) *Step {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v Step) *Step {
 		return &v
 	}).(StepPtrOutput)
 }
@@ -736,79 +1262,245 @@ func (o StepPtrOutput) ToStepPtrOutputWithContext(ctx context.Context) StepPtrOu
 }
 
 func (o StepPtrOutput) Elem() StepOutput {
-	return o.ApplyT(func(v *Step) Step { return *v }).(StepOutput)
-}
-
-type StepArrayOutput struct{ *pulumi.OutputState }
-
-func (StepArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]Step)(nil)).Elem()
-}
-
-func (o StepArrayOutput) ToStepArrayOutput() StepArrayOutput {
-	return o
-}
-
-func (o StepArrayOutput) ToStepArrayOutputWithContext(ctx context.Context) StepArrayOutput {
-	return o
-}
-
-func (o StepArrayOutput) Index(i pulumi.IntInput) StepOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) Step {
-		return vs[0].([]Step)[vs[1].(int)]
+	return o.ApplyT(func(v *Step) Step {
+		if v != nil {
+			return *v
+		}
+		var ret Step
+		return ret
 	}).(StepOutput)
 }
 
-type Task struct {
-	Task string `pulumi:"task"`
+type TaskConfig struct {
+	ImageResource AnonymousResource `pulumi:"imageResource"`
+	Platform      string            `pulumi:"platform"`
+	Run           RunArgs           `pulumi:"run"`
 }
 
-// TaskInput is an input type that accepts TaskArgs and TaskOutput values.
-// You can construct a concrete instance of `TaskInput` via:
+// TaskConfigInput is an input type that accepts TaskConfigArgs and TaskConfigOutput values.
+// You can construct a concrete instance of `TaskConfigInput` via:
 //
-//          TaskArgs{...}
-type TaskInput interface {
+//          TaskConfigArgs{...}
+type TaskConfigInput interface {
 	pulumi.Input
 
-	ToTaskOutput() TaskOutput
-	ToTaskOutputWithContext(context.Context) TaskOutput
+	ToTaskConfigOutput() TaskConfigOutput
+	ToTaskConfigOutputWithContext(context.Context) TaskConfigOutput
 }
 
-type TaskArgs struct {
-	Task pulumi.StringInput `pulumi:"task"`
+type TaskConfigArgs struct {
+	ImageResource AnonymousResourceInput `pulumi:"imageResource"`
+	Platform      pulumi.StringInput     `pulumi:"platform"`
+	Run           RunArgsInput           `pulumi:"run"`
 }
 
-func (TaskArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*Task)(nil)).Elem()
+func (TaskConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TaskConfig)(nil)).Elem()
 }
 
-func (i TaskArgs) ToTaskOutput() TaskOutput {
-	return i.ToTaskOutputWithContext(context.Background())
+func (i TaskConfigArgs) ToTaskConfigOutput() TaskConfigOutput {
+	return i.ToTaskConfigOutputWithContext(context.Background())
 }
 
-func (i TaskArgs) ToTaskOutputWithContext(ctx context.Context) TaskOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(TaskOutput)
+func (i TaskConfigArgs) ToTaskConfigOutputWithContext(ctx context.Context) TaskConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TaskConfigOutput)
 }
 
-type TaskOutput struct{ *pulumi.OutputState }
-
-func (TaskOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*Task)(nil)).Elem()
+func (i TaskConfigArgs) ToTaskConfigPtrOutput() TaskConfigPtrOutput {
+	return i.ToTaskConfigPtrOutputWithContext(context.Background())
 }
 
-func (o TaskOutput) ToTaskOutput() TaskOutput {
+func (i TaskConfigArgs) ToTaskConfigPtrOutputWithContext(ctx context.Context) TaskConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TaskConfigOutput).ToTaskConfigPtrOutputWithContext(ctx)
+}
+
+// TaskConfigPtrInput is an input type that accepts TaskConfigArgs, TaskConfigPtr and TaskConfigPtrOutput values.
+// You can construct a concrete instance of `TaskConfigPtrInput` via:
+//
+//          TaskConfigArgs{...}
+//
+//  or:
+//
+//          nil
+type TaskConfigPtrInput interface {
+	pulumi.Input
+
+	ToTaskConfigPtrOutput() TaskConfigPtrOutput
+	ToTaskConfigPtrOutputWithContext(context.Context) TaskConfigPtrOutput
+}
+
+type taskConfigPtrType TaskConfigArgs
+
+func TaskConfigPtr(v *TaskConfigArgs) TaskConfigPtrInput {
+	return (*taskConfigPtrType)(v)
+}
+
+func (*taskConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**TaskConfig)(nil)).Elem()
+}
+
+func (i *taskConfigPtrType) ToTaskConfigPtrOutput() TaskConfigPtrOutput {
+	return i.ToTaskConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *taskConfigPtrType) ToTaskConfigPtrOutputWithContext(ctx context.Context) TaskConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TaskConfigPtrOutput)
+}
+
+type TaskConfigOutput struct{ *pulumi.OutputState }
+
+func (TaskConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TaskConfig)(nil)).Elem()
+}
+
+func (o TaskConfigOutput) ToTaskConfigOutput() TaskConfigOutput {
 	return o
 }
 
-func (o TaskOutput) ToTaskOutputWithContext(ctx context.Context) TaskOutput {
+func (o TaskConfigOutput) ToTaskConfigOutputWithContext(ctx context.Context) TaskConfigOutput {
 	return o
 }
 
-func (o TaskOutput) Task() pulumi.StringOutput {
-	return o.ApplyT(func(v Task) string { return v.Task }).(pulumi.StringOutput)
+func (o TaskConfigOutput) ToTaskConfigPtrOutput() TaskConfigPtrOutput {
+	return o.ToTaskConfigPtrOutputWithContext(context.Background())
+}
+
+func (o TaskConfigOutput) ToTaskConfigPtrOutputWithContext(ctx context.Context) TaskConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v TaskConfig) *TaskConfig {
+		return &v
+	}).(TaskConfigPtrOutput)
+}
+
+func (o TaskConfigOutput) ImageResource() AnonymousResourceOutput {
+	return o.ApplyT(func(v TaskConfig) AnonymousResource { return v.ImageResource }).(AnonymousResourceOutput)
+}
+
+func (o TaskConfigOutput) Platform() pulumi.StringOutput {
+	return o.ApplyT(func(v TaskConfig) string { return v.Platform }).(pulumi.StringOutput)
+}
+
+func (o TaskConfigOutput) Run() RunArgsOutput {
+	return o.ApplyT(func(v TaskConfig) RunArgs { return v.Run }).(RunArgsOutput)
+}
+
+type TaskConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (TaskConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**TaskConfig)(nil)).Elem()
+}
+
+func (o TaskConfigPtrOutput) ToTaskConfigPtrOutput() TaskConfigPtrOutput {
+	return o
+}
+
+func (o TaskConfigPtrOutput) ToTaskConfigPtrOutputWithContext(ctx context.Context) TaskConfigPtrOutput {
+	return o
+}
+
+func (o TaskConfigPtrOutput) Elem() TaskConfigOutput {
+	return o.ApplyT(func(v *TaskConfig) TaskConfig {
+		if v != nil {
+			return *v
+		}
+		var ret TaskConfig
+		return ret
+	}).(TaskConfigOutput)
+}
+
+func (o TaskConfigPtrOutput) ImageResource() AnonymousResourcePtrOutput {
+	return o.ApplyT(func(v *TaskConfig) *AnonymousResource {
+		if v == nil {
+			return nil
+		}
+		return &v.ImageResource
+	}).(AnonymousResourcePtrOutput)
+}
+
+func (o TaskConfigPtrOutput) Platform() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TaskConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Platform
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o TaskConfigPtrOutput) Run() RunArgsPtrOutput {
+	return o.ApplyT(func(v *TaskConfig) *RunArgs {
+		if v == nil {
+			return nil
+		}
+		return &v.Run
+	}).(RunArgsPtrOutput)
+}
+
+type TaskStep struct {
+	Config *TaskConfig `pulumi:"config"`
+	Image  *string     `pulumi:"image"`
+	Task   string      `pulumi:"task"`
+}
+
+// TaskStepInput is an input type that accepts TaskStepArgs and TaskStepOutput values.
+// You can construct a concrete instance of `TaskStepInput` via:
+//
+//          TaskStepArgs{...}
+type TaskStepInput interface {
+	pulumi.Input
+
+	ToTaskStepOutput() TaskStepOutput
+	ToTaskStepOutputWithContext(context.Context) TaskStepOutput
+}
+
+type TaskStepArgs struct {
+	Config TaskConfigPtrInput    `pulumi:"config"`
+	Image  pulumi.StringPtrInput `pulumi:"image"`
+	Task   pulumi.StringInput    `pulumi:"task"`
+}
+
+func (TaskStepArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TaskStep)(nil)).Elem()
+}
+
+func (i TaskStepArgs) ToTaskStepOutput() TaskStepOutput {
+	return i.ToTaskStepOutputWithContext(context.Background())
+}
+
+func (i TaskStepArgs) ToTaskStepOutputWithContext(ctx context.Context) TaskStepOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TaskStepOutput)
+}
+
+type TaskStepOutput struct{ *pulumi.OutputState }
+
+func (TaskStepOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TaskStep)(nil)).Elem()
+}
+
+func (o TaskStepOutput) ToTaskStepOutput() TaskStepOutput {
+	return o
+}
+
+func (o TaskStepOutput) ToTaskStepOutputWithContext(ctx context.Context) TaskStepOutput {
+	return o
+}
+
+func (o TaskStepOutput) Config() TaskConfigPtrOutput {
+	return o.ApplyT(func(v TaskStep) *TaskConfig { return v.Config }).(TaskConfigPtrOutput)
+}
+
+func (o TaskStepOutput) Image() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TaskStep) *string { return v.Image }).(pulumi.StringPtrOutput)
+}
+
+func (o TaskStepOutput) Task() pulumi.StringOutput {
+	return o.ApplyT(func(v TaskStep) string { return v.Task }).(pulumi.StringOutput)
 }
 
 func init() {
+	pulumi.RegisterOutputType(AnonymousResourceOutput{})
+	pulumi.RegisterOutputType(AnonymousResourcePtrOutput{})
+	pulumi.RegisterOutputType(DisplayOptionsOutput{})
+	pulumi.RegisterOutputType(DisplayOptionsPtrOutput{})
+	pulumi.RegisterOutputType(GetStepOutput{})
 	pulumi.RegisterOutputType(GroupOutput{})
 	pulumi.RegisterOutputType(GroupArrayOutput{})
 	pulumi.RegisterOutputType(JobOutput{})
@@ -817,8 +1509,11 @@ func init() {
 	pulumi.RegisterOutputType(ResourceArrayOutput{})
 	pulumi.RegisterOutputType(ResourceTypeOutput{})
 	pulumi.RegisterOutputType(ResourceTypeArrayOutput{})
+	pulumi.RegisterOutputType(RunArgsOutput{})
+	pulumi.RegisterOutputType(RunArgsPtrOutput{})
 	pulumi.RegisterOutputType(StepOutput{})
 	pulumi.RegisterOutputType(StepPtrOutput{})
-	pulumi.RegisterOutputType(StepArrayOutput{})
-	pulumi.RegisterOutputType(TaskOutput{})
+	pulumi.RegisterOutputType(TaskConfigOutput{})
+	pulumi.RegisterOutputType(TaskConfigPtrOutput{})
+	pulumi.RegisterOutputType(TaskStepOutput{})
 }

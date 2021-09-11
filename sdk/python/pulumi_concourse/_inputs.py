@@ -9,12 +9,144 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = [
+    'AnonymousResourceArgs',
+    'DisplayOptionsArgs',
+    'GetStepArgs',
     'GroupArgs',
     'JobArgs',
     'ResourceTypeArgs',
     'ResourceArgs',
+    'RunArgsArgs',
     'StepArgs',
+    'TaskConfigArgs',
+    'TaskStepArgs',
 ]
+
+@pulumi.input_type
+class AnonymousResourceArgs:
+    def __init__(__self__, *,
+                 source: pulumi.Input[Mapping[str, pulumi.Input[str]]],
+                 type: pulumi.Input[str],
+                 params: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None):
+        pulumi.set(__self__, "source", source)
+        pulumi.set(__self__, "type", type)
+        if params is not None:
+            pulumi.set(__self__, "params", params)
+
+    @property
+    @pulumi.getter
+    def source(self) -> pulumi.Input[Mapping[str, pulumi.Input[str]]]:
+        return pulumi.get(self, "source")
+
+    @source.setter
+    def source(self, value: pulumi.Input[Mapping[str, pulumi.Input[str]]]):
+        pulumi.set(self, "source", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter
+    def params(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
+        return pulumi.get(self, "params")
+
+    @params.setter
+    def params(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
+        pulumi.set(self, "params", value)
+
+
+@pulumi.input_type
+class DisplayOptionsArgs:
+    def __init__(__self__, *,
+                 background_image: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] background_image: Allows users to specify a custom background image which is put at 30% opacity, grayscaled and blended into existing background. Must be an http, https, or relative URL.
+        """
+        if background_image is not None:
+            pulumi.set(__self__, "background_image", background_image)
+
+    @property
+    @pulumi.getter(name="backgroundImage")
+    def background_image(self) -> Optional[pulumi.Input[str]]:
+        """
+        Allows users to specify a custom background image which is put at 30% opacity, grayscaled and blended into existing background. Must be an http, https, or relative URL.
+        """
+        return pulumi.get(self, "background_image")
+
+    @background_image.setter
+    def background_image(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "background_image", value)
+
+
+@pulumi.input_type
+class GetStepArgs:
+    def __init__(__self__, *,
+                 get: pulumi.Input[str],
+                 params: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
+                 passed: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 resource: Optional[pulumi.Input[str]] = None,
+                 trigger: Optional[pulumi.Input[bool]] = None):
+        pulumi.set(__self__, "get", get)
+        if params is not None:
+            pulumi.set(__self__, "params", params)
+        if passed is not None:
+            pulumi.set(__self__, "passed", passed)
+        if resource is not None:
+            pulumi.set(__self__, "resource", resource)
+        if trigger is not None:
+            pulumi.set(__self__, "trigger", trigger)
+
+    @property
+    @pulumi.getter
+    def get(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "get")
+
+    @get.setter
+    def get(self, value: pulumi.Input[str]):
+        pulumi.set(self, "get", value)
+
+    @property
+    @pulumi.getter
+    def params(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
+        return pulumi.get(self, "params")
+
+    @params.setter
+    def params(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
+        pulumi.set(self, "params", value)
+
+    @property
+    @pulumi.getter
+    def passed(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        return pulumi.get(self, "passed")
+
+    @passed.setter
+    def passed(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "passed", value)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter
+    def trigger(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "trigger")
+
+    @trigger.setter
+    def trigger(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "trigger", value)
+
 
 @pulumi.input_type
 class GroupArgs:
@@ -58,7 +190,7 @@ class GroupArgs:
 class JobArgs:
     def __init__(__self__, *,
                  name: pulumi.Input[str],
-                 plan: pulumi.Input[Sequence[pulumi.Input['StepArgs']]],
+                 plan: pulumi.Input[Sequence[pulumi.Input[Union['TaskStepArgs', 'GetStepArgs']]]],
                  ensure: Optional[pulumi.Input['StepArgs']] = None,
                  max_in_flight: Optional[pulumi.Input[float]] = None,
                  on_abort: Optional[pulumi.Input['StepArgs']] = None,
@@ -111,11 +243,11 @@ class JobArgs:
 
     @property
     @pulumi.getter
-    def plan(self) -> pulumi.Input[Sequence[pulumi.Input['StepArgs']]]:
+    def plan(self) -> pulumi.Input[Sequence[pulumi.Input[Union['TaskStepArgs', 'GetStepArgs']]]]:
         return pulumi.get(self, "plan")
 
     @plan.setter
-    def plan(self, value: pulumi.Input[Sequence[pulumi.Input['StepArgs']]]):
+    def plan(self, value: pulumi.Input[Sequence[pulumi.Input[Union['TaskStepArgs', 'GetStepArgs']]]]):
         pulumi.set(self, "plan", value)
 
     @property
@@ -467,8 +599,138 @@ class ResourceArgs:
 
 
 @pulumi.input_type
+class RunArgsArgs:
+    def __init__(__self__, *,
+                 path: pulumi.Input[str],
+                 args: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 dir: Optional[pulumi.Input[str]] = None,
+                 user: Optional[pulumi.Input[str]] = None):
+        pulumi.set(__self__, "path", path)
+        if args is not None:
+            pulumi.set(__self__, "args", args)
+        if dir is not None:
+            pulumi.set(__self__, "dir", dir)
+        if user is not None:
+            pulumi.set(__self__, "user", user)
+
+    @property
+    @pulumi.getter
+    def path(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "path")
+
+    @path.setter
+    def path(self, value: pulumi.Input[str]):
+        pulumi.set(self, "path", value)
+
+    @property
+    @pulumi.getter
+    def args(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        return pulumi.get(self, "args")
+
+    @args.setter
+    def args(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "args", value)
+
+    @property
+    @pulumi.getter
+    def dir(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "dir")
+
+    @dir.setter
+    def dir(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dir", value)
+
+    @property
+    @pulumi.getter
+    def user(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "user")
+
+    @user.setter
+    def user(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "user", value)
+
+
+@pulumi.input_type
 class StepArgs:
     def __init__(__self__):
         pass
+
+
+@pulumi.input_type
+class TaskConfigArgs:
+    def __init__(__self__, *,
+                 image_resource: pulumi.Input['AnonymousResourceArgs'],
+                 platform: pulumi.Input[str],
+                 run: pulumi.Input['RunArgsArgs']):
+        pulumi.set(__self__, "image_resource", image_resource)
+        pulumi.set(__self__, "platform", platform)
+        pulumi.set(__self__, "run", run)
+
+    @property
+    @pulumi.getter(name="imageResource")
+    def image_resource(self) -> pulumi.Input['AnonymousResourceArgs']:
+        return pulumi.get(self, "image_resource")
+
+    @image_resource.setter
+    def image_resource(self, value: pulumi.Input['AnonymousResourceArgs']):
+        pulumi.set(self, "image_resource", value)
+
+    @property
+    @pulumi.getter
+    def platform(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "platform")
+
+    @platform.setter
+    def platform(self, value: pulumi.Input[str]):
+        pulumi.set(self, "platform", value)
+
+    @property
+    @pulumi.getter
+    def run(self) -> pulumi.Input['RunArgsArgs']:
+        return pulumi.get(self, "run")
+
+    @run.setter
+    def run(self, value: pulumi.Input['RunArgsArgs']):
+        pulumi.set(self, "run", value)
+
+
+@pulumi.input_type
+class TaskStepArgs:
+    def __init__(__self__, *,
+                 task: pulumi.Input[str],
+                 config: Optional[pulumi.Input['TaskConfigArgs']] = None,
+                 image: Optional[pulumi.Input[str]] = None):
+        pulumi.set(__self__, "task", task)
+        if config is not None:
+            pulumi.set(__self__, "config", config)
+        if image is not None:
+            pulumi.set(__self__, "image", image)
+
+    @property
+    @pulumi.getter
+    def task(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "task")
+
+    @task.setter
+    def task(self, value: pulumi.Input[str]):
+        pulumi.set(self, "task", value)
+
+    @property
+    @pulumi.getter
+    def config(self) -> Optional[pulumi.Input['TaskConfigArgs']]:
+        return pulumi.get(self, "config")
+
+    @config.setter
+    def config(self, value: Optional[pulumi.Input['TaskConfigArgs']]):
+        pulumi.set(self, "config", value)
+
+    @property
+    @pulumi.getter
+    def image(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "image")
+
+    @image.setter
+    def image(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "image", value)
 
 

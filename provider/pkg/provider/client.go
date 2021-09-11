@@ -2,7 +2,7 @@ package provider
 
 import (
 	"context"
-	"github.com/concourse/go-concourse/concourse"
+	"github.com/concourse/concourse/go-concourse/concourse"
 	"github.com/pkg/errors"
 	"golang.org/x/oauth2"
 	"net/http"
@@ -15,6 +15,7 @@ func newPasswordGrantHTTPClient(url, username, password string) (*http.Client, e
 		return nil, ErrUsernamePasswordRequired
 	}
 
+	// copied from concourse code
 	oauth2Config := oauth2.Config{
 		ClientID:     "fly",
 		ClientSecret: "Zmx5",

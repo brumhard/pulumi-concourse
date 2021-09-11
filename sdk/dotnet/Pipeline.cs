@@ -63,17 +63,11 @@ namespace Pulumi.Concourse
 
     public sealed class PipelineArgs : Pulumi.ResourceArgs
     {
-        [Input("display")]
-        private InputMap<string>? _display;
-
         /// <summary>
         /// Visual configurations for personalizing your pipeline.
         /// </summary>
-        public InputMap<string> Display
-        {
-            get => _display ?? (_display = new InputMap<string>());
-            set => _display = value;
-        }
+        [Input("display")]
+        public Input<Inputs.DisplayOptionsArgs>? Display { get; set; }
 
         [Input("groups")]
         private InputList<Inputs.GroupArgs>? _groups;

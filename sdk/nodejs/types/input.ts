@@ -4,6 +4,27 @@
 import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 
+export interface AnonymousResourceArgs {
+    params?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    source: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    type: pulumi.Input<string>;
+}
+
+export interface DisplayOptionsArgs {
+    /**
+     * Allows users to specify a custom background image which is put at 30% opacity, grayscaled and blended into existing background. Must be an http, https, or relative URL.
+     */
+    backgroundImage?: pulumi.Input<string>;
+}
+
+export interface GetStepArgs {
+    get: pulumi.Input<string>;
+    params?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    passed?: pulumi.Input<pulumi.Input<string>[]>;
+    resource?: pulumi.Input<string>;
+    trigger?: pulumi.Input<boolean>;
+}
+
 export interface GroupArgs {
     /**
      * A list of jobs that should appear in this group. A job may appear in multiple groups. Neighbours of jobs in the current group will also appear on the same page in order to give context of the location of the group in the pipeline. You may also use any valid glob to represent several jobs.
@@ -44,7 +65,7 @@ export interface JobArgs {
      * Step to execute when the job succeeds.
      */
     onSuccess?: pulumi.Input<inputs.StepArgs>;
-    plan: pulumi.Input<pulumi.Input<inputs.StepArgs>[]>;
+    plan: pulumi.Input<pulumi.Input<inputs.TaskStepArgs | inputs.GetStepArgs>[]>;
     /**
      * Default false. If set to true, the build log of this job will be viewable by unauthenticated users. Unauthenticated users will always be able to see the inputs, outputs, and build status history of a job. This is useful if you would like to expose your pipeline publicly without showing sensitive information in the build log.
      */
@@ -121,6 +142,24 @@ export interface ResourceTypeArgs {
     type?: pulumi.Input<string>;
 }
 
+export interface RunArgsArgs {
+    args?: pulumi.Input<pulumi.Input<string>[]>;
+    dir?: pulumi.Input<string>;
+    path: pulumi.Input<string>;
+    user?: pulumi.Input<string>;
+}
+
 export interface StepArgs {
 }
 
+export interface TaskConfigArgs {
+    imageResource: pulumi.Input<inputs.AnonymousResourceArgs>;
+    platform: pulumi.Input<string>;
+    run: pulumi.Input<inputs.RunArgsArgs>;
+}
+
+export interface TaskStepArgs {
+    config?: pulumi.Input<inputs.TaskConfigArgs>;
+    image?: pulumi.Input<string>;
+    task: pulumi.Input<string>;
+}
