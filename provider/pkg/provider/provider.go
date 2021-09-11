@@ -21,22 +21,22 @@ import (
 	"fmt"
 	"github.com/concourse/go-concourse/concourse"
 	"github.com/pkg/errors"
-	"io"
-	"math/rand"
-	"os"
-	"strings"
-	"time"
-
 	"github.com/pulumi/pulumi/pkg/v3/resource/provider"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource/plugin"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+	"io"
+	"os"
+	"strings"
 
 	pulumirpc "github.com/pulumi/pulumi/sdk/v3/proto/go"
 
 	pbempty "github.com/golang/protobuf/ptypes/empty"
 )
+
+// TODO: get this from concourse package somewhere?
+var concourseDefaultTeam = "main"
 
 type concourseProvider struct {
 	host        *provider.HostClient
@@ -48,57 +48,57 @@ type concourseProvider struct {
 	team        string
 }
 
-func makeProvider(host *provider.HostClient, name, version string) (pulumirpc.ResourceProviderServer, error) {
+func makeProvider(host *provider.HostClient, name, version string, schemaBytes []byte) (pulumirpc.ResourceProviderServer, error) {
 	// Return the new provider
 	return &concourseProvider{
 		host:        host,
 		name:        name,
 		version:     version,
-		schemaBytes: schemaBytes, // TODO: where to get this
+		schemaBytes: schemaBytes,
 		config:      map[string]string{},
-	}, nil
-}
-
-// Call dynamically executes a method in the provider associated with a component resource.
-func (k *concourseProvider) Call(ctx context.Context, req *pulumirpc.CallRequest) (*pulumirpc.CallResponse, error) {
-	// NOTE: same as in azure-native provider
-	return nil, status.Error(codes.Unimplemented, "Call is not yet implemented")
-}
-
-// Construct creates a new component resource.
-func (k *concourseProvider) Construct(ctx context.Context, req *pulumirpc.ConstructRequest) (*pulumirpc.ConstructResponse, error) {
-	/// NOTE: same as in azure-native provider
-	return nil, status.Error(codes.Unimplemented, "Construct is not yet implemented")
-}
-
-// CheckConfig validates the configuration for this provider.
-func (k *concourseProvider) CheckConfig(ctx context.Context, req *pulumirpc.CheckRequest) (*pulumirpc.CheckResponse, error) {
-	// NOTE: same as in azure-native provider
-	return &pulumirpc.CheckResponse{Inputs: req.GetNews()}, nil
-}
-
-// DiffConfig diffs the configuration for this provider.
-func (k *concourseProvider) DiffConfig(ctx context.Context, req *pulumirpc.DiffRequest) (*pulumirpc.DiffResponse, error) {
-	// NOTE: same as in azure-native provider
-	return &pulumirpc.DiffResponse{
-		Changes:             0,
-		Replaces:            []string{},
-		Stables:             []string{},
-		DeleteBeforeReplace: false,
 	}, nil
 }
 
 // Configure configures the resource provider with "globals" that control its behavior.
 // It sets all required properties on the provider that are not set in makeProvider and come from the
-func (k *concourseProvider) Configure(_ context.Context, req *pulumirpc.ConfigureRequest) (*pulumirpc.ConfigureResponse, error) {
+func (k *concourseProvider) Configure(_ context.Context, req *pulumirpc.ConfigureRequest) (
+	*pulumirpc.ConfigureResponse, error,
+) {
 	for key, val := range req.GetVariables() {
 		k.config[strings.TrimPrefix(key, "concourse:config:")] = val
 	}
 
-	// TODO: set all properties on concourseProvider using getConfig
 	// TODO: setup logging
+	if err := k.getClient(); err != nil {
+		return nil, err
+	}
+
+	k.getTeam()
 
 	return &pulumirpc.ConfigureResponse{}, nil
+}
+
+func (k *concourseProvider) getClient() error {
+	url := k.getConfig("url", "CONCOURSE_URL")
+	username := k.getConfig("username", "CONCOURSE_USERNAME")
+	password := k.getConfig("password", "CONCOURSE_PASSWORD")
+
+	client, err := NewClient(url, username, password)
+	if err != nil {
+		return err
+	}
+
+	k.client = client
+	return nil
+}
+
+func (k *concourseProvider) getTeam() {
+	team := k.getConfig("team", "CONCOURSE_TEAM")
+	if team == "" {
+		team = concourseDefaultTeam
+	}
+
+	k.team = team
 }
 
 // TODO: the env vars queried with this function should match the ones defined in schema.json provider section
@@ -108,20 +108,6 @@ func (k *concourseProvider) getConfig(configName, envName string) string {
 	}
 
 	return os.Getenv(envName)
-}
-
-// Invoke dynamically executes a built-in function in the provider.
-func (k *concourseProvider) Invoke(_ context.Context, req *pulumirpc.InvokeRequest) (*pulumirpc.InvokeResponse, error) {
-	tok := req.GetTok()
-	// TODO: implement functions defined in schema functions e.g. concourse:index:getPipeline
-	return nil, fmt.Errorf("Unknown Invoke token '%s'", tok)
-}
-
-// StreamInvoke dynamically executes a built-in function in the provider. The result is streamed
-// back as a series of messages.
-func (k *concourseProvider) StreamInvoke(req *pulumirpc.InvokeRequest, server pulumirpc.ResourceProvider_StreamInvokeServer) error {
-	// NOTE: same as in azure-native provider
-	return status.Error(codes.Unimplemented, "StreamInvoke is not yet implemented")
 }
 
 // Check validates that the given property bag is valid for a resource of the given type and returns
@@ -247,8 +233,23 @@ func (k *concourseProvider) Delete(ctx context.Context, req *pulumirpc.DeleteReq
 	return &pbempty.Empty{}, nil
 }
 
+// Invoke dynamically executes a built-in function in the provider.
+func (k *concourseProvider) Invoke(_ context.Context, req *pulumirpc.InvokeRequest) (*pulumirpc.InvokeResponse, error) {
+	tok := req.GetTok()
+	// TODO: implement functions defined in schema functions e.g. concourse:index:getPipeline
+	return nil, fmt.Errorf("Unknown Invoke token '%s'", tok)
+}
+
+// StreamInvoke dynamically executes a built-in function in the provider. The result is streamed
+// back as a series of messages.
+func (k *concourseProvider) StreamInvoke(req *pulumirpc.InvokeRequest, server pulumirpc.ResourceProvider_StreamInvokeServer) error {
+	// NOTE: same as in azure-native provider
+	return status.Error(codes.Unimplemented, "StreamInvoke is not yet implemented")
+}
+
 // GetPluginInfo returns generic information about this plugin, like its version.
 func (k *concourseProvider) GetPluginInfo(context.Context, *pbempty.Empty) (*pulumirpc.PluginInfo, error) {
+	// NOTE: same as in azure-native provider
 	return &pulumirpc.PluginInfo{
 		Version: k.version,
 	}, nil
@@ -290,13 +291,31 @@ func (k *concourseProvider) Cancel(context.Context, *pbempty.Empty) (*pbempty.Em
 	return &pbempty.Empty{}, nil
 }
 
-func makeRandom(length int) string {
-	seededRand := rand.New(rand.NewSource(time.Now().UnixNano()))
-	charset := []rune("abcdefghijklmnopqrstuvwconcourseABCDEFGHIJKLMNOPQRSTUVWCONCOURSE0123456789")
+// Call dynamically executes a method in the provider associated with a component resource.
+func (k *concourseProvider) Call(ctx context.Context, req *pulumirpc.CallRequest) (*pulumirpc.CallResponse, error) {
+	// NOTE: same as in azure-native provider
+	return nil, status.Error(codes.Unimplemented, "Call is not yet implemented")
+}
 
-	result := make([]rune, length)
-	for i := range result {
-		result[i] = charset[seededRand.Intn(len(charset))]
-	}
-	return string(result)
+// Construct creates a new component resource.
+func (k *concourseProvider) Construct(ctx context.Context, req *pulumirpc.ConstructRequest) (*pulumirpc.ConstructResponse, error) {
+	/// NOTE: same as in azure-native provider
+	return nil, status.Error(codes.Unimplemented, "Construct is not yet implemented")
+}
+
+// CheckConfig validates the configuration for this provider.
+func (k *concourseProvider) CheckConfig(ctx context.Context, req *pulumirpc.CheckRequest) (*pulumirpc.CheckResponse, error) {
+	// NOTE: same as in azure-native provider
+	return &pulumirpc.CheckResponse{Inputs: req.GetNews()}, nil
+}
+
+// DiffConfig diffs the configuration for this provider.
+func (k *concourseProvider) DiffConfig(ctx context.Context, req *pulumirpc.DiffRequest) (*pulumirpc.DiffResponse, error) {
+	// NOTE: same as in azure-native provider
+	return &pulumirpc.DiffResponse{
+		Changes:             0,
+		Replaces:            []string{},
+		Stables:             []string{},
+		DeleteBeforeReplace: false,
+	}, nil
 }
