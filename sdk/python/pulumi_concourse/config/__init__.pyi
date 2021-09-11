@@ -13,6 +13,11 @@ password: Optional[str]
 Password for basic auth.
 """
 
+team: Optional[str]
+"""
+Team to authenticate with.
+"""
+
 url: Optional[str]
 """
 URL of your concourse instance.

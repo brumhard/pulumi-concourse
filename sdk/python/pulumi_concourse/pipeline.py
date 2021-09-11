@@ -7,26 +7,111 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
+from ._inputs import *
 
 __all__ = ['PipelineArgs', 'Pipeline']
 
 @pulumi.input_type
 class PipelineArgs:
     def __init__(__self__, *,
-                 length: pulumi.Input[int]):
+                 jobs: pulumi.Input[Sequence[pulumi.Input['JobArgs']]],
+                 display: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
+                 groups: Optional[pulumi.Input[Sequence[pulumi.Input['GroupArgs']]]] = None,
+                 pipeline_name: Optional[pulumi.Input[str]] = None,
+                 resource_types: Optional[pulumi.Input[Sequence[pulumi.Input['ResourceTypeArgs']]]] = None,
+                 resources: Optional[pulumi.Input[Sequence[pulumi.Input['ResourceArgs']]]] = None):
         """
         The set of arguments for constructing a Pipeline resource.
+        :param pulumi.Input[Sequence[pulumi.Input['JobArgs']]] jobs: A set of jobs for the pipeline to continuously schedule. At least one job is required for a pipeline to be valid.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] display: Visual configurations for personalizing your pipeline.
+        :param pulumi.Input[Sequence[pulumi.Input['GroupArgs']]] groups: A list of job groups to use for organizing jobs in the web UI. Groups have no functional effect on your pipeline. They are purely for making it easier to grok large pipelines in the web UI.
+        :param pulumi.Input[str] pipeline_name: Explicitly set to overwrite auto-naming.
+        :param pulumi.Input[Sequence[pulumi.Input['ResourceTypeArgs']]] resource_types: A set of resource types for resources within the pipeline to use.
+        :param pulumi.Input[Sequence[pulumi.Input['ResourceArgs']]] resources: A set of resources for the pipeline to continuously check.
         """
-        pulumi.set(__self__, "length", length)
+        pulumi.set(__self__, "jobs", jobs)
+        if display is not None:
+            pulumi.set(__self__, "display", display)
+        if groups is not None:
+            pulumi.set(__self__, "groups", groups)
+        if pipeline_name is not None:
+            pulumi.set(__self__, "pipeline_name", pipeline_name)
+        if resource_types is not None:
+            pulumi.set(__self__, "resource_types", resource_types)
+        if resources is not None:
+            pulumi.set(__self__, "resources", resources)
 
     @property
     @pulumi.getter
-    def length(self) -> pulumi.Input[int]:
-        return pulumi.get(self, "length")
+    def jobs(self) -> pulumi.Input[Sequence[pulumi.Input['JobArgs']]]:
+        """
+        A set of jobs for the pipeline to continuously schedule. At least one job is required for a pipeline to be valid.
+        """
+        return pulumi.get(self, "jobs")
 
-    @length.setter
-    def length(self, value: pulumi.Input[int]):
-        pulumi.set(self, "length", value)
+    @jobs.setter
+    def jobs(self, value: pulumi.Input[Sequence[pulumi.Input['JobArgs']]]):
+        pulumi.set(self, "jobs", value)
+
+    @property
+    @pulumi.getter
+    def display(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
+        """
+        Visual configurations for personalizing your pipeline.
+        """
+        return pulumi.get(self, "display")
+
+    @display.setter
+    def display(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
+        pulumi.set(self, "display", value)
+
+    @property
+    @pulumi.getter
+    def groups(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['GroupArgs']]]]:
+        """
+        A list of job groups to use for organizing jobs in the web UI. Groups have no functional effect on your pipeline. They are purely for making it easier to grok large pipelines in the web UI.
+        """
+        return pulumi.get(self, "groups")
+
+    @groups.setter
+    def groups(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['GroupArgs']]]]):
+        pulumi.set(self, "groups", value)
+
+    @property
+    @pulumi.getter(name="pipelineName")
+    def pipeline_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Explicitly set to overwrite auto-naming.
+        """
+        return pulumi.get(self, "pipeline_name")
+
+    @pipeline_name.setter
+    def pipeline_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "pipeline_name", value)
+
+    @property
+    @pulumi.getter(name="resourceTypes")
+    def resource_types(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ResourceTypeArgs']]]]:
+        """
+        A set of resource types for resources within the pipeline to use.
+        """
+        return pulumi.get(self, "resource_types")
+
+    @resource_types.setter
+    def resource_types(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ResourceTypeArgs']]]]):
+        pulumi.set(self, "resource_types", value)
+
+    @property
+    @pulumi.getter
+    def resources(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ResourceArgs']]]]:
+        """
+        A set of resources for the pipeline to continuously check.
+        """
+        return pulumi.get(self, "resources")
+
+    @resources.setter
+    def resources(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ResourceArgs']]]]):
+        pulumi.set(self, "resources", value)
 
 
 class Pipeline(pulumi.CustomResource):
@@ -34,12 +119,23 @@ class Pipeline(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 length: Optional[pulumi.Input[int]] = None,
+                 display: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
+                 groups: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['GroupArgs']]]]] = None,
+                 jobs: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['JobArgs']]]]] = None,
+                 pipeline_name: Optional[pulumi.Input[str]] = None,
+                 resource_types: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ResourceTypeArgs']]]]] = None,
+                 resources: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ResourceArgs']]]]] = None,
                  __props__=None):
         """
         Create a Pipeline resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] display: Visual configurations for personalizing your pipeline.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['GroupArgs']]]] groups: A list of job groups to use for organizing jobs in the web UI. Groups have no functional effect on your pipeline. They are purely for making it easier to grok large pipelines in the web UI.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['JobArgs']]]] jobs: A set of jobs for the pipeline to continuously schedule. At least one job is required for a pipeline to be valid.
+        :param pulumi.Input[str] pipeline_name: Explicitly set to overwrite auto-naming.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ResourceTypeArgs']]]] resource_types: A set of resource types for resources within the pipeline to use.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ResourceArgs']]]] resources: A set of resources for the pipeline to continuously check.
         """
         ...
     @overload
@@ -64,7 +160,12 @@ class Pipeline(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 length: Optional[pulumi.Input[int]] = None,
+                 display: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
+                 groups: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['GroupArgs']]]]] = None,
+                 jobs: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['JobArgs']]]]] = None,
+                 pipeline_name: Optional[pulumi.Input[str]] = None,
+                 resource_types: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ResourceTypeArgs']]]]] = None,
+                 resources: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ResourceArgs']]]]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -77,10 +178,15 @@ class Pipeline(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = PipelineArgs.__new__(PipelineArgs)
 
-            if length is None and not opts.urn:
-                raise TypeError("Missing required property 'length'")
-            __props__.__dict__["length"] = length
-            __props__.__dict__["result"] = None
+            __props__.__dict__["display"] = display
+            __props__.__dict__["groups"] = groups
+            if jobs is None and not opts.urn:
+                raise TypeError("Missing required property 'jobs'")
+            __props__.__dict__["jobs"] = jobs
+            __props__.__dict__["pipeline_name"] = pipeline_name
+            __props__.__dict__["resource_types"] = resource_types
+            __props__.__dict__["resources"] = resources
+            __props__.__dict__["name"] = None
         super(Pipeline, __self__).__init__(
             'concourse:index:Pipeline',
             resource_name,
@@ -103,17 +209,14 @@ class Pipeline(pulumi.CustomResource):
 
         __props__ = PipelineArgs.__new__(PipelineArgs)
 
-        __props__.__dict__["length"] = None
-        __props__.__dict__["result"] = None
+        __props__.__dict__["name"] = None
         return Pipeline(resource_name, opts=opts, __props__=__props__)
 
     @property
     @pulumi.getter
-    def length(self) -> pulumi.Output[int]:
-        return pulumi.get(self, "length")
-
-    @property
-    @pulumi.getter
-    def result(self) -> pulumi.Output[str]:
-        return pulumi.get(self, "result")
+    def name(self) -> pulumi.Output[str]:
+        """
+        The name of the pipeline.
+        """
+        return pulumi.get(self, "name")
 

@@ -70,27 +70,244 @@
             }
         }
     },
-    "resources": {
-        "concourse:index:Pipeline": {
+    "types": {
+        "concourse:index:Task": {
+            "type": "object",
             "properties": {
-                "length": {
-                    "type": "integer"
-                },
-                "result": {
+                "task": {
                     "type": "string"
                 }
             },
             "required": [
-                "length",
-                "result"
+                "task"
+            ]
+        },
+        "concourse:index:Step": {
+            "type": "object",
+            "oneOf": [
+                {
+                    "$ref": "#/types/concourse:index:Task"
+                }
+            ]
+        },
+        "concourse:index:Group": {
+            "type": "object",
+            "description": "",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "A unique name for the group. This should be short and simple as it will be used as the tab name for navigation."
+                },
+                "jobs": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of jobs that should appear in this group. A job may appear in multiple groups. Neighbours of jobs in the current group will also appear on the same page in order to give context of the location of the group in the pipeline. You may also use any valid glob to represent several jobs."
+                }
+            },
+            "required": [
+                "name"
+            ]
+        },
+        "concourse:index:Resource": {
+            "type": "object",
+            "description": "",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the resource. This should be short and simple. This name will be referenced by build plans of jobs in the pipeline."
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The resource type implementing the resource."
+                },
+                "source": {
+                    "type": "object",
+                    "description": "The configuration for the resource. This varies by resource type, and is a black box to Concourse; it is blindly passed to the resource at runtime."
+                },
+                "checkEvery": {
+                    "type": "string",
+                    "description": "Default 1m. The interval on which to check for new versions of the resource. Acceptable interval options are defined by the time.ParseDuration function. If set to never the resource will not be automatically checked. The resource can still be checked manually via the web UI, fly, or webhooks."
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Default []. A list of tags to determine which workers the checks will be performed on. You'll want to specify this if the source is internal to a worker's network, for example."
+                },
+                "public": {
+                    "type": "boolean",
+                    "description": "Default false. If set to true, the metadata for each version of the resource will be viewable by unauthenticated users (assuming the pipeline has been exposed)."
+                },
+                "webhookToken": {
+                    "type": "string",
+                    "description": "If specified, web hooks can be sent to trigger an immediate check of the resource, specifying this value as a primitive form of authentication via query params."
+                }
+            },
+            "required": [
+                "name",
+                "type",
+                "source"
+            ]
+        },
+        "concourse:index:ResourceType": {
+            "type": "object",
+            "description": "",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "TThe name of the resource type. This should be short and simple. This name will be referenced by pipeline.resources defined within the same pipeline, and task.image_resources used by tasks running in the pipeline."
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The resource type implementing the resource."
+                },
+                "source": {
+                    "type": "object",
+                    "description": "The configuration for the resource. This varies by resource type, and is a black box to Concourse; it is blindly passed to the resource at runtime."
+                },
+                "privileged": {
+                    "type": "boolean",
+                    "description": "Default false. If set to true, the resource's containers will be run with full capabilities, as determined by the worker backend the task runs on."
+                },
+                "params": {
+                    "type": "object",
+                    "description": "Arbitrary config to pass when running the get to fetch the resource type's image."
+                },
+                "checkEvery": {
+                    "type": "string",
+                    "description": "Default 1m. The interval on which to check for new versions of the resource. Acceptable interval options are defined by the time.ParseDuration function. If set to never the resource will not be automatically checked. The resource can still be checked manually via the web UI, fly, or webhooks."
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Default []. A list of tags to determine which workers the checks will be performed on. You'll want to specify this if the source is internal to a worker's network, for example."
+                },
+                "defaults": {
+                    "type": "object",
+                    "description": "The default configuration for the resource type. This varies by resource type, and is a black box to Concourse; it is merged with (duplicate fields are overwritten by) resource.source and passed to the resource at runtime."
+                }
+            }
+        },
+        "concourse:index:Job": {
+            "type": "object",
+            "description": "",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the job. This should be short; it will show up in URLs."
+                },
+                "plan": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/concourse:index:Step"
+                    }
+                },
+                "serial": {
+                    "type": "boolean",
+                    "description": "Default false. If set to true, builds will queue up and execute one-by-one, rather than executing in parallel."
+                },
+                "maxInFlight": {
+                    "type": "number",
+                    "description": "If set, specifies a maximum number of builds to run at a time. If serial or serial_groups are set, they take precedence and force this value to be 1."
+                },
+                "public": {
+                    "type": "boolean",
+                    "description": "Default false. If set to true, the build log of this job will be viewable by unauthenticated users. Unauthenticated users will always be able to see the inputs, outputs, and build status history of a job. This is useful if you would like to expose your pipeline publicly without showing sensitive information in the build log."
+                },
+                "onSuccess": {
+                    "$ref": "#/types/concourse:index:Step",
+                    "description": "Step to execute when the job succeeds."
+                },
+                "onFailure": {
+                    "$ref":  "#/types/concourse:index:Step",
+                    "description": "Step to execute when the job fails."
+                },
+                "onError": {
+                    "$ref":  "#/types/concourse:index:Step",
+                    "description": "Step to execute when the job errors."
+                },
+                "onAbort": {
+                    "$ref":  "#/types/concourse:index:Step",
+                    "description": "Step to execute when the job aborts."
+                },
+                "ensure": {
+                    "$ref":  "#/types/concourse:index:Step",
+                    "description": "Step to execute regardless of whether the job succeeds, fails, errors, or aborts."
+                }
+            },
+            "required": [
+                "name",
+                "plan"
+            ]
+        }
+    },
+    "resources": {
+        "concourse:index:Pipeline": {
+            "description": "",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the pipeline."
+                }
+            },
+            "required": [
+                "name"
             ],
             "inputProperties": {
-                "length": {
-                    "type": "integer"
+                "pipelineName": {
+                    "type": "string",
+                    "description": "Explicitly set to overwrite auto-naming."
+                },
+                "groups": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "$ref": "#/types/concourse:index:Group"
+                    },
+                    "description": "A list of job groups to use for organizing jobs in the web UI. Groups have no functional effect on your pipeline. They are purely for making it easier to grok large pipelines in the web UI."
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "$ref": "#/types/concourse:index:Resource"
+                    },
+                    "description": "A set of resources for the pipeline to continuously check."
+                },
+                "resourceTypes": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "$ref": "#/types/concourse:index:ResourceType"
+                    },
+                    "description": "A set of resource types for resources within the pipeline to use."
+                },
+                "jobs": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "$ref": "#/types/concourse:index:Job"
+                    },
+                    "description": "A set of jobs for the pipeline to continuously schedule. At least one job is required for a pipeline to be valid."
+                },
+                "display": {
+                    "type": "object",
+                    "properties": {
+                        "backgroundImage": {
+                            "type": "string",
+                            "description": "Allows users to specify a custom background image which is put at 30% opacity, grayscaled and blended into existing background. Must be an http, https, or relative URL."
+                        }
+                    },
+                    "description": "Visual configurations for personalizing your pipeline."
                 }
             },
             "requiredInputs": [
-                "length"
+                "jobs"
             ]
         }
     },

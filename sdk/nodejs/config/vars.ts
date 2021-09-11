@@ -19,6 +19,17 @@ Object.defineProperty(exports, "password", {
 });
 
 /**
+ * Team to authenticate with.
+ */
+export declare const team: string | undefined;
+Object.defineProperty(exports, "team", {
+    get() {
+        return __config.get("team");
+    },
+    enumerable: true,
+});
+
+/**
  * URL of your concourse instance.
  */
 export declare const url: string | undefined;

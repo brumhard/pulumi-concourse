@@ -25,6 +25,9 @@ func NewProvider(ctx *pulumi.Context,
 	if args.Password == nil {
 		args.Password = pulumi.StringPtr(getEnvOrDefault("", nil, "CONCOURSE_PASSWORD").(string))
 	}
+	if args.Team == nil {
+		args.Team = pulumi.StringPtr(getEnvOrDefault("", nil, "CONCOURSE_TEAM").(string))
+	}
 	if args.Url == nil {
 		args.Url = pulumi.StringPtr(getEnvOrDefault("", nil, "CONCOURSE_URL").(string))
 	}
@@ -42,6 +45,8 @@ func NewProvider(ctx *pulumi.Context,
 type providerArgs struct {
 	// Password for basic auth.
 	Password *string `pulumi:"password"`
+	// Team to authenticate with.
+	Team *string `pulumi:"team"`
 	// URL of your concourse instance.
 	Url *string `pulumi:"url"`
 	// Username for basic auth.
@@ -52,6 +57,8 @@ type providerArgs struct {
 type ProviderArgs struct {
 	// Password for basic auth.
 	Password pulumi.StringPtrInput
+	// Team to authenticate with.
+	Team pulumi.StringPtrInput
 	// URL of your concourse instance.
 	Url pulumi.StringPtrInput
 	// Username for basic auth.

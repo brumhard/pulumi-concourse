@@ -49,6 +49,12 @@ namespace Pulumi.Concourse
         public Input<string>? Password { get; set; }
 
         /// <summary>
+        /// Team to authenticate with.
+        /// </summary>
+        [Input("team")]
+        public Input<string>? Team { get; set; }
+
+        /// <summary>
         /// URL of your concourse instance.
         /// </summary>
         [Input("url")]
@@ -63,6 +69,7 @@ namespace Pulumi.Concourse
         public ProviderArgs()
         {
             Password = Utilities.GetEnv("CONCOURSE_PASSWORD");
+            Team = Utilities.GetEnv("CONCOURSE_TEAM");
             Url = Utilities.GetEnv("CONCOURSE_URL");
             Username = Utilities.GetEnv("CONCOURSE_USERNAME");
         }
