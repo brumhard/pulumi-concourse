@@ -1,6 +1,9 @@
 package provider
 
-import "github.com/concourse/concourse/atc"
+import (
+	"github.com/concourse/concourse/atc"
+	"github.com/pulumi/pulumi/sdk/v3/go/common/util/logging"
+)
 import "sigs.k8s.io/yaml"
 
 // TODO: check if schema with camelCase works
@@ -11,13 +14,26 @@ func (k *concourseProvider) makePipeline(name string, config atc.Config) error {
 	// concourse/concourse/atc/api/configserver/save.go
 	// concourse/concourse/atc/config.go
 
+	// TODO: why doesn't this work
+	logging.V(3).Infof("creating concourse pipeline")
+
 	configBytes, err := yaml.Marshal(config)
 	if err != nil {
 		return err
 	}
 
-	_, _, _, err = k.client.Team(k.team).CreateOrUpdatePipelineConfig(atc.PipelineRef{Name: name}, "", configBytes, false)
-	return err
+	_, _, warnings, err := k.client.Team(k.team).CreateOrUpdatePipelineConfig(atc.PipelineRef{Name: name}, "", configBytes, false)
+	if err != nil {
+		return err
+	}
+
+	if len(warnings) > 0 {
+		for _, w := range warnings {
+			logging.V(3).Infof("%s: %s", w.Type, w.Message)
+		}
+	}
+
+	return nil
 }
 
 func (k *concourseProvider) deletePipeline(name string) error {
