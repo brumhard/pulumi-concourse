@@ -29,6 +29,7 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"io"
+	"log"
 	"math/rand"
 	"os"
 	"strings"
@@ -64,12 +65,14 @@ func makeProvider(host *provider.HostClient, name, version string, schemaBytes [
 
 // Configure configures the resource provider with "globals" that control its behavior.
 // It sets all required properties on the provider that are not set in makeProvider and come from the
-func (k *concourseProvider) Configure(_ context.Context, req *pulumirpc.ConfigureRequest) (
+func (k *concourseProvider) Configure(ctx context.Context, req *pulumirpc.ConfigureRequest) (
 	*pulumirpc.ConfigureResponse, error,
 ) {
 	for key, val := range req.GetVariables() {
 		k.config[strings.TrimPrefix(key, "concourse:config:")] = val
 	}
+
+	k.setLoggingContext(ctx)
 
 	// TODO: setup logging
 	if err := k.getClient(); err != nil {
@@ -79,6 +82,10 @@ func (k *concourseProvider) Configure(_ context.Context, req *pulumirpc.Configur
 	k.getTeam()
 
 	return &pulumirpc.ConfigureResponse{}, nil
+}
+
+func (k *concourseProvider) setLoggingContext(ctx context.Context) {
+	log.SetOutput(NewLogRedirector(ctx, k.host))
 }
 
 func (k *concourseProvider) getClient() error {
@@ -239,7 +246,8 @@ func autoName(urn resource.URN, propertyMap resource.PropertyMap) (bool, string)
 	var propertyName string
 
 	switch urn.Type() {
-	case "concourse:index:Pipeline": propertyName = "pipelineName"
+	case "concourse:index:Pipeline":
+		propertyName = "pipelineName"
 	default:
 		panic(fmt.Sprintf("type %s does not support autoNaming", urn.Type()))
 	}
