@@ -19,3 +19,8 @@ func (k *concourseProvider) makePipeline(name string, config atc.Config) error {
 	_, _, _, err = k.client.Team(k.team).CreateOrUpdatePipelineConfig(atc.PipelineRef{Name: name}, "", configBytes, false)
 	return err
 }
+
+func (k *concourseProvider) deletePipeline(name string) error {
+	_, err := k.client.Team(k.team).DeletePipeline(atc.PipelineRef{Name: name})
+	return err
+}
