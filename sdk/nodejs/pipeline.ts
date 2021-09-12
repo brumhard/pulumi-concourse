@@ -54,7 +54,6 @@ export class Pipeline extends pulumi.CustomResource {
             inputs["display"] = args ? args.display : undefined;
             inputs["groups"] = args ? args.groups : undefined;
             inputs["jobs"] = args ? args.jobs : undefined;
-            inputs["pipelineName"] = args ? args.pipelineName : undefined;
             inputs["resourceTypes"] = args ? args.resourceTypes : undefined;
             inputs["resources"] = args ? args.resources : undefined;
             inputs["name"] = undefined /*out*/;
@@ -84,10 +83,6 @@ export interface PipelineArgs {
      * A set of jobs for the pipeline to continuously schedule. At least one job is required for a pipeline to be valid.
      */
     jobs: pulumi.Input<pulumi.Input<inputs.JobArgs>[]>;
-    /**
-     * Explicitly set to overwrite auto-naming.
-     */
-    pipelineName?: pulumi.Input<string>;
     /**
      * A set of resource types for resources within the pipeline to use.
      */

@@ -93,12 +93,6 @@ namespace Pulumi.Concourse
             set => _jobs = value;
         }
 
-        /// <summary>
-        /// Explicitly set to overwrite auto-naming.
-        /// </summary>
-        [Input("pipelineName")]
-        public Input<string>? PipelineName { get; set; }
-
         [Input("resourceTypes")]
         private InputList<Inputs.ResourceTypeArgs>? _resourceTypes;
 

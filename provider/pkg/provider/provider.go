@@ -195,17 +195,8 @@ func (k *concourseProvider) Create(ctx context.Context, req *pulumirpc.CreateReq
 		return nil, err
 	}
 
-	_, name := autoName(urn, inputs)
-
-	inputMap := inputs.Mappable()
-	var config atc.Config
-	if err := mapstructure.Decode(inputMap, &config); err != nil {
-		return nil, err
-	}
-
 	// Actually "create" the pipeline
-	// TODO: check if you could also just use a map here
-	if err := k.makePipeline(name, config); err != nil {
+	if err := k.makePipeline(name, inputs.Mappable()); err != nil {
 		return nil, err
 	}
 

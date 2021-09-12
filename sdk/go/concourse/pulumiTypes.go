@@ -1272,9 +1272,9 @@ func (o StepPtrOutput) Elem() StepOutput {
 }
 
 type TaskConfig struct {
-	ImageResource AnonymousResource `pulumi:"imageResource"`
-	Platform      string            `pulumi:"platform"`
-	Run           RunArgs           `pulumi:"run"`
+	Image_resource AnonymousResource `pulumi:"image_resource"`
+	Platform       string            `pulumi:"platform"`
+	Run            RunArgs           `pulumi:"run"`
 }
 
 // TaskConfigInput is an input type that accepts TaskConfigArgs and TaskConfigOutput values.
@@ -1289,9 +1289,9 @@ type TaskConfigInput interface {
 }
 
 type TaskConfigArgs struct {
-	ImageResource AnonymousResourceInput `pulumi:"imageResource"`
-	Platform      pulumi.StringInput     `pulumi:"platform"`
-	Run           RunArgsInput           `pulumi:"run"`
+	Image_resource AnonymousResourceInput `pulumi:"image_resource"`
+	Platform       pulumi.StringInput     `pulumi:"platform"`
+	Run            RunArgsInput           `pulumi:"run"`
 }
 
 func (TaskConfigArgs) ElementType() reflect.Type {
@@ -1371,8 +1371,8 @@ func (o TaskConfigOutput) ToTaskConfigPtrOutputWithContext(ctx context.Context) 
 	}).(TaskConfigPtrOutput)
 }
 
-func (o TaskConfigOutput) ImageResource() AnonymousResourceOutput {
-	return o.ApplyT(func(v TaskConfig) AnonymousResource { return v.ImageResource }).(AnonymousResourceOutput)
+func (o TaskConfigOutput) Image_resource() AnonymousResourceOutput {
+	return o.ApplyT(func(v TaskConfig) AnonymousResource { return v.Image_resource }).(AnonymousResourceOutput)
 }
 
 func (o TaskConfigOutput) Platform() pulumi.StringOutput {
@@ -1407,12 +1407,12 @@ func (o TaskConfigPtrOutput) Elem() TaskConfigOutput {
 	}).(TaskConfigOutput)
 }
 
-func (o TaskConfigPtrOutput) ImageResource() AnonymousResourcePtrOutput {
+func (o TaskConfigPtrOutput) Image_resource() AnonymousResourcePtrOutput {
 	return o.ApplyT(func(v *TaskConfig) *AnonymousResource {
 		if v == nil {
 			return nil
 		}
-		return &v.ImageResource
+		return &v.Image_resource
 	}).(AnonymousResourcePtrOutput)
 }
 

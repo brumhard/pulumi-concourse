@@ -153,7 +153,7 @@ export interface StepArgs {
 }
 
 export interface TaskConfigArgs {
-    imageResource: pulumi.Input<inputs.AnonymousResourceArgs>;
+    image_resource: pulumi.Input<inputs.AnonymousResourceArgs>;
     platform: pulumi.Input<string>;
     run: pulumi.Input<inputs.RunArgsArgs>;
 }
