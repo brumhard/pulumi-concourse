@@ -72,7 +72,7 @@ class DisplayOptionsArgs:
             pulumi.set(__self__, "background_image", background_image)
 
     @property
-    @pulumi.getter(name="backgroundImage")
+    @pulumi.getter
     def background_image(self) -> Optional[pulumi.Input[str]]:
         """
         Allows users to specify a custom background image which is put at 30% opacity, grayscaled and blended into existing background. Must be an http, https, or relative URL.
@@ -263,7 +263,7 @@ class JobArgs:
         pulumi.set(self, "ensure", value)
 
     @property
-    @pulumi.getter(name="maxInFlight")
+    @pulumi.getter
     def max_in_flight(self) -> Optional[pulumi.Input[float]]:
         """
         If set, specifies a maximum number of builds to run at a time. If serial or serial_groups are set, they take precedence and force this value to be 1.
@@ -275,7 +275,7 @@ class JobArgs:
         pulumi.set(self, "max_in_flight", value)
 
     @property
-    @pulumi.getter(name="onAbort")
+    @pulumi.getter
     def on_abort(self) -> Optional[pulumi.Input['StepArgs']]:
         """
         Step to execute when the job aborts.
@@ -287,7 +287,7 @@ class JobArgs:
         pulumi.set(self, "on_abort", value)
 
     @property
-    @pulumi.getter(name="onError")
+    @pulumi.getter
     def on_error(self) -> Optional[pulumi.Input['StepArgs']]:
         """
         Step to execute when the job errors.
@@ -299,7 +299,7 @@ class JobArgs:
         pulumi.set(self, "on_error", value)
 
     @property
-    @pulumi.getter(name="onFailure")
+    @pulumi.getter
     def on_failure(self) -> Optional[pulumi.Input['StepArgs']]:
         """
         Step to execute when the job fails.
@@ -311,7 +311,7 @@ class JobArgs:
         pulumi.set(self, "on_failure", value)
 
     @property
-    @pulumi.getter(name="onSuccess")
+    @pulumi.getter
     def on_success(self) -> Optional[pulumi.Input['StepArgs']]:
         """
         Step to execute when the job succeeds.
@@ -386,7 +386,7 @@ class ResourceTypeArgs:
             pulumi.set(__self__, "type", type)
 
     @property
-    @pulumi.getter(name="checkEvery")
+    @pulumi.getter
     def check_every(self) -> Optional[pulumi.Input[str]]:
         """
         Default 1m. The interval on which to check for new versions of the resource. Acceptable interval options are defined by the time.ParseDuration function. If set to never the resource will not be automatically checked. The resource can still be checked manually via the web UI, fly, or webhooks.
@@ -550,7 +550,7 @@ class ResourceArgs:
         pulumi.set(self, "type", value)
 
     @property
-    @pulumi.getter(name="checkEvery")
+    @pulumi.getter
     def check_every(self) -> Optional[pulumi.Input[str]]:
         """
         Default 1m. The interval on which to check for new versions of the resource. Acceptable interval options are defined by the time.ParseDuration function. If set to never the resource will not be automatically checked. The resource can still be checked manually via the web UI, fly, or webhooks.
@@ -586,7 +586,7 @@ class ResourceArgs:
         pulumi.set(self, "tags", value)
 
     @property
-    @pulumi.getter(name="webhookToken")
+    @pulumi.getter
     def webhook_token(self) -> Optional[pulumi.Input[str]]:
         """
         If specified, web hooks can be sent to trigger an immediate check of the resource, specifying this value as a primitive form of authentication via query params.

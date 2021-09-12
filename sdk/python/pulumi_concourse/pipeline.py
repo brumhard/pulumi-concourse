@@ -74,7 +74,7 @@ class PipelineArgs:
         pulumi.set(self, "groups", value)
 
     @property
-    @pulumi.getter(name="resourceTypes")
+    @pulumi.getter
     def resource_types(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ResourceTypeArgs']]]]:
         """
         A set of resource types for resources within the pipeline to use.

@@ -93,16 +93,16 @@ namespace Pulumi.Concourse
             set => _jobs = value;
         }
 
-        [Input("resourceTypes")]
-        private InputList<Inputs.ResourceTypeArgs>? _resourceTypes;
+        [Input("resource_types")]
+        private InputList<Inputs.ResourceTypeArgs>? _resource_types;
 
         /// <summary>
         /// A set of resource types for resources within the pipeline to use.
         /// </summary>
-        public InputList<Inputs.ResourceTypeArgs> ResourceTypes
+        public InputList<Inputs.ResourceTypeArgs> Resource_types
         {
-            get => _resourceTypes ?? (_resourceTypes = new InputList<Inputs.ResourceTypeArgs>());
-            set => _resourceTypes = value;
+            get => _resource_types ?? (_resource_types = new InputList<Inputs.ResourceTypeArgs>());
+            set => _resource_types = value;
         }
 
         [Input("resources")]

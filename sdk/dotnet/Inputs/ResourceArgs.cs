@@ -15,8 +15,8 @@ namespace Pulumi.Concourse.Inputs
         /// <summary>
         /// Default 1m. The interval on which to check for new versions of the resource. Acceptable interval options are defined by the time.ParseDuration function. If set to never the resource will not be automatically checked. The resource can still be checked manually via the web UI, fly, or webhooks.
         /// </summary>
-        [Input("checkEvery")]
-        public Input<string>? CheckEvery { get; set; }
+        [Input("check_every")]
+        public Input<string>? Check_every { get; set; }
 
         /// <summary>
         /// The name of the resource. This should be short and simple. This name will be referenced by build plans of jobs in the pipeline.
@@ -63,8 +63,8 @@ namespace Pulumi.Concourse.Inputs
         /// <summary>
         /// If specified, web hooks can be sent to trigger an immediate check of the resource, specifying this value as a primitive form of authentication via query params.
         /// </summary>
-        [Input("webhookToken")]
-        public Input<string>? WebhookToken { get; set; }
+        [Input("webhook_token")]
+        public Input<string>? Webhook_token { get; set; }
 
         public ResourceArgs()
         {
