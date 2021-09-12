@@ -40,7 +40,7 @@ export interface JobArgs {
     /**
      * Step to execute regardless of whether the job succeeds, fails, errors, or aborts.
      */
-    ensure?: pulumi.Input<inputs.StepArgs>;
+    ensure?: pulumi.Input<inputs.TaskStepArgs | inputs.GetStepArgs>;
     /**
      * If set, specifies a maximum number of builds to run at a time. If serial or serial_groups are set, they take precedence and force this value to be 1.
      */
@@ -52,19 +52,19 @@ export interface JobArgs {
     /**
      * Step to execute when the job aborts.
      */
-    on_abort?: pulumi.Input<inputs.StepArgs>;
+    on_abort?: pulumi.Input<inputs.TaskStepArgs | inputs.GetStepArgs>;
     /**
      * Step to execute when the job errors.
      */
-    on_error?: pulumi.Input<inputs.StepArgs>;
+    on_error?: pulumi.Input<inputs.TaskStepArgs | inputs.GetStepArgs>;
     /**
      * Step to execute when the job fails.
      */
-    on_failure?: pulumi.Input<inputs.StepArgs>;
+    on_failure?: pulumi.Input<inputs.TaskStepArgs | inputs.GetStepArgs>;
     /**
      * Step to execute when the job succeeds.
      */
-    on_success?: pulumi.Input<inputs.StepArgs>;
+    on_success?: pulumi.Input<inputs.TaskStepArgs | inputs.GetStepArgs>;
     plan: pulumi.Input<pulumi.Input<inputs.TaskStepArgs | inputs.GetStepArgs>[]>;
     /**
      * Default false. If set to true, the build log of this job will be viewable by unauthenticated users. Unauthenticated users will always be able to see the inputs, outputs, and build status history of a job. This is useful if you would like to expose your pipeline publicly without showing sensitive information in the build log.
@@ -147,9 +147,6 @@ export interface RunArgsArgs {
     dir?: pulumi.Input<string>;
     path: pulumi.Input<string>;
     user?: pulumi.Input<string>;
-}
-
-export interface StepArgs {
 }
 
 export interface TaskConfigArgs {
