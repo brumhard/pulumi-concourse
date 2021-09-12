@@ -2,11 +2,12 @@ package provider
 
 import (
 	"fmt"
+
 	"github.com/concourse/concourse/atc"
 	"github.com/concourse/concourse/atc/configvalidate"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/util/logging"
+	"sigs.k8s.io/yaml"
 )
-import "sigs.k8s.io/yaml"
 
 // makeOrUpdatePipeline creates the pipeline in concourse and returns the pipeline name
 func (k *concourseProvider) makeOrUpdatePipeline(name string, configMap map[string]interface{}) error {

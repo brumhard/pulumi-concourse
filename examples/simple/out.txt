@@ -1,302 +1,319 @@
-I0912 10:06:15.070585   17955 backend.go:410] found username for access token
-I0912 10:06:16.082292   17955 backend.go:410] found username for access token
-I0912 10:06:16.845824   17955 backend.go:410] found username for access token
-I0912 10:06:16.845571   17955 backend.go:920] Stack test being updated to version 31
-I0912 10:06:17.274791   17955 update.go:182] *** Starting Update(preview=false) ***
-I0912 10:06:17.275135   17955 plugins.go:78] gatherPluginsFromProgram(): gathering plugins from language host
-I0912 10:06:17.275302   17955 plugins.go:612] GetPluginPath(language, nodejs, <nil>): found on $PATH /usr/local/bin/pulumi-language-nodejs
-I0912 10:06:17.275390   17955 plugin.go:125] Launching plugin 'nodejs' from '/usr/local/bin/pulumi-language-nodejs' with args: -root=/Users/brumhard/repos/personal/concourse-pulumi-provider/examples/simple,127.0.0.1:52420
-I0912 10:06:17.443080   17955 langruntime_plugin.go:207] langhost[nodejs].GetPluginInfo() executing
-I0912 10:06:17.443938   17955 langruntime_plugin.go:115] langhost[nodejs].GetRequiredPlugins(proj=simple,pwd=/Users/brumhard/repos/personal/concourse-pulumi-provider/examples/simple,program=.) executing
-I0912 10:06:17.617365   17955 langruntime_plugin.go:157] langhost[nodejs].GetRequiredPlugins(proj=simple,pwd=/Users/brumhard/repos/personal/concourse-pulumi-provider/examples/simple,program=.) success: #versions=1
-I0912 10:06:17.617419   17955 plugins.go:90] gatherPluginsFromProgram(): plugin nodejs <nil> () is required by language host
-I0912 10:06:17.617454   17955 plugins.go:90] gatherPluginsFromProgram(): plugin concourse 0.0.1-alpha.1631397036+6838185e.dirty () is required by language host
-I0912 10:06:17.617478   17955 plugins.go:102] gatherPluginsFromSnapshot(): gathering plugins from snapshot
-I0912 10:06:17.617499   17955 plugins.go:134] ensurePluginsAreInstalled(): beginning
-I0912 10:06:17.617651   17955 plugins.go:612] GetPluginPath(resource, concourse, 0.0.1-alpha.1631397036+6838185e.dirty): found on $PATH /Users/brumhard/go/bin/pulumi-resource-concourse
-I0912 10:06:17.617674   17955 plugins.go:139] ensurePluginsAreInstalled(): plugin concourse 0.0.1-alpha.1631397036+6838185e.dirty already installed
-I0912 10:06:17.617730   17955 plugins.go:612] GetPluginPath(language, nodejs, <nil>): found on $PATH /usr/local/bin/pulumi-language-nodejs
-I0912 10:06:17.617754   17955 plugins.go:139] ensurePluginsAreInstalled(): plugin nodejs <nil> already installed
-I0912 10:06:17.617774   17955 plugins.go:154] ensurePluginsAreInstalled(): completed
-I0912 10:06:17.617796   17955 plugins.go:242] computeDefaultProviderPlugins(): considering nodejs
-I0912 10:06:17.617817   17955 plugins.go:245] computeDefaultProviderPlugins(): skipping nodejs, not a resource provider
-I0912 10:06:17.617834   17955 plugins.go:242] computeDefaultProviderPlugins(): considering concourse-0.0.1-alpha.1631397036+6838185e.dirty
-I0912 10:06:17.617854   17955 plugins.go:273] computeDefaultProviderPlugins(): plugin concourse-0.0.1-alpha.1631397036+6838185e.dirty selected for package concourse (first seen)
-I0912 10:06:17.617875   17955 plugins.go:279] computeDefaultProviderPlugins(): summary of default plugins:
-I0912 10:06:17.617889   17955 plugins.go:281]   concourse       = 0.0.1-alpha.1631397036+6838185e.dirty
-I0912 10:06:17.618305   17955 step_generator.go:858] stepGenerator.GeneratePendingDeletes(): scanning previous snapshot for pending deletes
-I0912 10:06:17.618335   17955 langruntime_plugin.go:168] langhost[nodejs].Run(pwd=/Users/brumhard/repos/personal/concourse-pulumi-provider/examples/simple,program=.,#args=0,proj=simple,stack=test,#config=0,dryrun=false) executing
-I0912 10:06:17.618337   17955 deployment_executor.go:400] deploymentExecutor.retirePendingDeletes(...): no pending deletions
-I0912 10:06:17.618418   17955 deployment_executor.go:221] deploymentExecutor.Execute(...): waiting for incoming events
-I0912 10:06:17.618466   17955 step_executor.go:327] StepExecutor worker(-2): worker coming online
-I0912 10:06:17.618501   17955 step_executor.go:327] StepExecutor worker(-2): worker waiting for incoming chains
-I0912 10:06:18.209672   17955 eventsink.go:59] Registering resource: t=pulumi:pulumi:Stack, name=simple-test, custom=false, remote=false
-I0912 10:06:18.209703   17955 eventsink.go:62] eventSink::Debug(<{%reset%}>Registering resource: t=pulumi:pulumi:Stack, name=simple-test, custom=false, remote=false<{%reset%}>)
-I0912 10:06:18.220332   17955 eventsink.go:59] RegisterResource RPC prepared: t=pulumi:pulumi:Stack, name=simple-test
-I0912 10:06:18.220360   17955 eventsink.go:62] eventSink::Debug(<{%reset%}>RegisterResource RPC prepared: t=pulumi:pulumi:Stack, name=simple-test<{%reset%}>)
-I0912 10:06:18.223173   17955 source_eval.go:968] ResourceMonitor.RegisterResource received: t=pulumi:pulumi:Stack, name=simple-test, custom=false, #props=0, parent=, protect=false, provider=, deps=[], deleteBeforeReplace=<nil>, ignoreChanges=[], aliases=[], customTimeouts={0 0 0}, providers=map[], replaceOnChanges=[]
-I0912 10:06:18.223255   17955 source_eval.go:163] EvalSourceIterator produced a registration: t=pulumi:pulumi:Stack,name=simple-test,#props=0
-I0912 10:06:18.223269   17955 deployment_executor.go:225] deploymentExecutor.Execute(...): incoming event (nil? false, <nil>)
-I0912 10:06:18.223280   17955 deployment_executor.go:371] deploymentExecutor.handleSingleEvent(...): received RegisterResourceEvent
-I0912 10:06:18.223305   17955 step_generator.go:502] Planner decided to create 'urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test' (inputs=map[])
-I0912 10:06:18.223326   17955 step_executor.go:327] StepExecutor worker(-2): worker received chain for execution
-I0912 10:06:18.223336   17955 step_executor.go:327] StepExecutor worker(-2): worker waiting for incoming chains
-I0912 10:06:18.223346   17955 step_executor.go:327] StepExecutor worker(0): launching oneshot worker
-I0912 10:06:18.223398   17955 snapshot.go:130] SnapshotManager: Beginning mutation for step `create` on resource `urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test`
-I0912 10:06:18.223439   17955 snapshot.go:298] SnapshotManager.doCreate(urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test)
-I0912 10:06:18.223460   17955 snapshot.go:529] SnapshotManager.markPendingOperation(urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test, creating)
-I0912 10:06:18.576236   17955 step_executor.go:327] StepExecutor worker(0): applying step create on urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test (preview false)
-I0912 10:06:18.576294   17955 snapshot.go:316] SnapshotManager: createSnapshotMutation.End(..., true)
-I0912 10:06:18.576318   17955 snapshot.go:536] SnapshotManager.markOperationComplete(urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test)
-I0912 10:06:18.576331   17955 snapshot.go:522] Appended new state snapshot to be written: urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test
-I0912 10:06:18.895906   17955 step_executor.go:327] StepExecutor worker(0): step create on urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test retired
-I0912 10:06:18.896019   17955 source_eval.go:1057] ResourceMonitor.RegisterResource operation finished: t=pulumi:pulumi:Stack, urn=urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test, #outs=0
-I0912 10:06:18.934532   17955 eventsink.go:59] RegisterResource RPC finished: resource:simple-test[pulumi:pulumi:Stack]; err: null, resp: urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test,,,,
-I0912 10:06:18.934569   17955 eventsink.go:62] eventSink::Debug(<{%reset%}>RegisterResource RPC finished: resource:simple-test[pulumi:pulumi:Stack]; err: null, resp: urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test,,,,<{%reset%}>)
-I0912 10:06:19.564559   17955 eventsink.go:59] Running program '/Users/brumhard/repos/personal/concourse-pulumi-provider/examples/simple' in pwd '/Users/brumhard/repos/personal/concourse-pulumi-provider/examples/simple' w/ args: 
-I0912 10:06:19.564611   17955 eventsink.go:62] eventSink::Debug(<{%reset%}>Running program '/Users/brumhard/repos/personal/concourse-pulumi-provider/examples/simple' in pwd '/Users/brumhard/repos/personal/concourse-pulumi-provider/examples/simple' w/ args: <{%reset%}>)
-I0912 10:06:19.567941   17955 eventsink.go:59] Registering resource: t=pulumi:providers:concourse, name=concourse, custom=true, remote=false
-I0912 10:06:19.567969   17955 eventsink.go:62] eventSink::Debug(<{%reset%}>Registering resource: t=pulumi:providers:concourse, name=concourse, custom=true, remote=false<{%reset%}>)
-I0912 10:06:19.586868   17955 eventsink.go:59] Registering resource: t=concourse:index:Pipeline, name=testing-pipeline, custom=true, remote=false
-I0912 10:06:19.586934   17955 eventsink.go:62] eventSink::Debug(<{%reset%}>Registering resource: t=concourse:index:Pipeline, name=testing-pipeline, custom=true, remote=false<{%reset%}>)
-I0912 10:06:19.589139   17955 eventsink.go:59] RegisterResource RPC prepared: t=pulumi:providers:concourse, name=concourse
-I0912 10:06:19.589164   17955 eventsink.go:62] eventSink::Debug(<{%reset%}>RegisterResource RPC prepared: t=pulumi:providers:concourse, name=concourse<{%reset%}>)
-I0912 10:06:19.589967   17955 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(pulumi:providers:concourse,concourse)]: password={test}
-I0912 10:06:19.590024   17955 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(pulumi:providers:concourse,concourse)]: url={http://localhost:8080}
-I0912 10:06:19.590035   17955 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(pulumi:providers:concourse,concourse)]: username={test}
-I0912 10:06:19.590048   17955 source_eval.go:968] ResourceMonitor.RegisterResource received: t=pulumi:providers:concourse, name=concourse, custom=true, #props=4, parent=urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test, protect=false, provider=, deps=[], deleteBeforeReplace=<nil>, ignoreChanges=[], aliases=[], customTimeouts={0 0 0}, providers=map[], replaceOnChanges=[]
-I0912 10:06:19.590077   17955 source_eval.go:163] EvalSourceIterator produced a registration: t=pulumi:providers:concourse,name=concourse,#props=4
-I0912 10:06:19.590090   17955 deployment_executor.go:225] deploymentExecutor.Execute(...): incoming event (nil? false, <nil>)
-I0912 10:06:19.590097   17955 deployment_executor.go:371] deploymentExecutor.handleSingleEvent(...): received RegisterResourceEvent
-I0912 10:06:19.590117   17955 registry.go:234] ProviderRegistry.Check(urn:pulumi:test::simple::pulumi:providers:concourse::concourse) executing (#olds=0,#news=4)
-I0912 10:06:19.590225   17955 plugins.go:612] GetPluginPath(resource, concourse, 0.0.1-alpha.1631397036+6838185e.dirty): found on $PATH /Users/brumhard/go/bin/pulumi-resource-concourse
-I0912 10:06:19.590243   17955 plugin.go:125] Launching plugin 'concourse (resource)' from '/Users/brumhard/go/bin/pulumi-resource-concourse' with args: 127.0.0.1:52420
-I0912 10:06:19.607388   17955 provider_plugin.go:1428] Provider[concourse, 0xc0016fa120].GetPluginInfo() executing
-I0912 10:06:19.608196   17955 provider_plugin.go:183] Provider[concourse, 0xc0016fa120].CheckConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse) executing (#olds=0,#news=4)
-I0912 10:06:19.608223   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].CheckConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse).news]: password={test}
-I0912 10:06:19.608250   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].CheckConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse).news]: url={http://localhost:8080}
-I0912 10:06:19.608259   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].CheckConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse).news]: username={test}
-I0912 10:06:19.608270   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].CheckConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse).news]: version={0.0.1-alpha.1631397036+6838185e.dirty}
-I0912 10:06:19.609127   17955 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc0016fa120].CheckConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse).inputs]: password={test}
-I0912 10:06:19.609166   17955 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc0016fa120].CheckConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse).inputs]: url={http://localhost:8080}
-I0912 10:06:19.609176   17955 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc0016fa120].CheckConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse).inputs]: username={test}
-I0912 10:06:19.609183   17955 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc0016fa120].CheckConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse).inputs]: version={0.0.1-alpha.1631397036+6838185e.dirty}
-I0912 10:06:19.609197   17955 provider_plugin.go:246] Provider[concourse, 0xc0016fa120].CheckConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse) success: inputs=#4 failures=#0
-I0912 10:06:19.609209   17955 registry.go:158] setProvider(urn:pulumi:test::simple::pulumi:providers:concourse::concourse::04da6b54-80e4-46f7-96ec-b56ff0331ba9)
-I0912 10:06:19.609227   17955 step_generator.go:502] Planner decided to create 'urn:pulumi:test::simple::pulumi:providers:concourse::concourse' (inputs=map[password:{test} url:{http://localhost:8080} username:{test} version:{0.0.1-alpha.1631397036+6838185e.dirty}])
-I0912 10:06:19.609250   17955 step_executor.go:327] StepExecutor worker(-2): worker received chain for execution
-I0912 10:06:19.609265   17955 step_executor.go:327] StepExecutor worker(-2): worker waiting for incoming chains
-I0912 10:06:19.609283   17955 step_executor.go:327] StepExecutor worker(1): launching oneshot worker
-I0912 10:06:19.609350   17955 snapshot.go:130] SnapshotManager: Beginning mutation for step `create` on resource `urn:pulumi:test::simple::pulumi:providers:concourse::concourse`
-I0912 10:06:19.609361   17955 snapshot.go:298] SnapshotManager.doCreate(urn:pulumi:test::simple::pulumi:providers:concourse::concourse)
-I0912 10:06:19.609377   17955 snapshot.go:529] SnapshotManager.markPendingOperation(urn:pulumi:test::simple::pulumi:providers:concourse::concourse, creating)
-I0912 10:06:19.907911   17955 step_executor.go:327] StepExecutor worker(1): applying step create on urn:pulumi:test::simple::pulumi:providers:concourse::concourse (preview false)
-I0912 10:06:19.907998   17955 registry.go:345] ProviderRegistry.Create(urn:pulumi:test::simple::pulumi:providers:concourse::concourse) executing (#news=4)
-I0912 10:06:19.908026   17955 registry.go:148] GetProvider(urn:pulumi:test::simple::pulumi:providers:concourse::concourse::04da6b54-80e4-46f7-96ec-b56ff0331ba9)
-I0912 10:06:19.908066   17955 provider_plugin.go:455] Provider[concourse, 0xc0016fa120].Configure() executing (#vars=4)
-I0912 10:06:19.908100   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].Configure().inputs]: password={test}
-I0912 10:06:19.908127   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].Configure().inputs]: url={http://localhost:8080}
-I0912 10:06:19.908168   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].Configure().inputs]: username={test}
-I0912 10:06:19.908189   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].Configure().inputs]: version={0.0.1-alpha.1631397036+6838185e.dirty}
-I0912 10:06:19.908237   17955 registry.go:158] setProvider(urn:pulumi:test::simple::pulumi:providers:concourse::concourse::a4707b2d-d19b-4b36-a0be-8eab0a79c908)
-I0912 10:06:19.908364   17955 snapshot.go:316] SnapshotManager: createSnapshotMutation.End(..., true)
-I0912 10:06:19.908402   17955 snapshot.go:536] SnapshotManager.markOperationComplete(urn:pulumi:test::simple::pulumi:providers:concourse::concourse)
-I0912 10:06:19.908424   17955 snapshot.go:522] Appended new state snapshot to be written: urn:pulumi:test::simple::pulumi:providers:concourse::concourse
-I0912 10:06:20.214427   17955 step_executor.go:327] StepExecutor worker(1): step create on urn:pulumi:test::simple::pulumi:providers:concourse::concourse retired
-I0912 10:06:20.214491   17955 source_eval.go:1057] ResourceMonitor.RegisterResource operation finished: t=pulumi:providers:concourse, urn=urn:pulumi:test::simple::pulumi:providers:concourse::concourse, #outs=4
-I0912 10:06:20.214532   17955 rpc.go:72] Marshaling property for RPC[ResourceMonitor.RegisterResource(pulumi:providers:concourse,concourse)]: password={test}
-I0912 10:06:20.214547   17955 rpc.go:72] Marshaling property for RPC[ResourceMonitor.RegisterResource(pulumi:providers:concourse,concourse)]: url={http://localhost:8080}
-I0912 10:06:20.214557   17955 rpc.go:72] Marshaling property for RPC[ResourceMonitor.RegisterResource(pulumi:providers:concourse,concourse)]: username={test}
-I0912 10:06:20.214566   17955 rpc.go:72] Marshaling property for RPC[ResourceMonitor.RegisterResource(pulumi:providers:concourse,concourse)]: version={0.0.1-alpha.1631397036+6838185e.dirty}
-I0912 10:06:20.228984   17955 eventsink.go:59] RegisterResource RPC finished: resource:concourse[pulumi:providers:concourse]; err: null, resp: urn:pulumi:test::simple::pulumi:providers:concourse::concourse,a4707b2d-d19b-4b36-a0be-8eab0a79c908,password,,,test,url,,,http://localhost:8080,username,,,test,version,,,0.0.1-alpha.1631397036+6838185e.dirty,,
-I0912 10:06:20.229023   17955 eventsink.go:62] eventSink::Debug(<{%reset%}>RegisterResource RPC finished: resource:concourse[pulumi:providers:concourse]; err: null, resp: urn:pulumi:test::simple::pulumi:providers:concourse::concourse,a4707b2d-d19b-4b36-a0be-8eab0a79c908,password,,,test,url,,,http://localhost:8080,username,,,test,version,,,0.0.1-alpha.1631397036+6838185e.dirty,,<{%reset%}>)
-I0912 10:06:20.229280   17955 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: name={lel}
-I0912 10:06:20.229305   17955 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: repository={debian}
-I0912 10:06:20.229337   17955 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: source={map[repository:{debian}]}
-I0912 10:06:20.229350   17955 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: type={registry-image}
-I0912 10:06:20.229361   17955 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: image_resource={map[source:{map[repository:{debian}]} type:{registry-image}]}
-I0912 10:06:20.229415   17955 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: platform={linux}
-I0912 10:06:20.229424   17955 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: args={[{-cex} {
-                  echo "this is great"
-                  echo "cmon main"
-                  echo "let's party"
-                  }]}
-I0912 10:06:20.229435   17955 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: path={bash}
-I0912 10:06:20.229443   17955 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: run={map[args:{[{-cex} {
-                  echo "this is great"
-                  echo "cmon main"
-                  echo "let's party"
-                  }]} path:{bash}]}
-I0912 10:06:20.229459   17955 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: config={map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {
-                  echo "this is great"
-                  echo "cmon main"
-                  echo "let's party"
-                  }]} path:{bash}]}]}
-I0912 10:06:20.229476   17955 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: task={lel}
-I0912 10:06:20.229487   17955 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: plan={[{map[config:{map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {
-                  echo "this is great"
-                  echo "cmon main"
-                  echo "let's party"
-                  }]} path:{bash}]}]} task:{lel}]}]}
-I0912 10:06:20.229527   17955 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: jobs={[{map[name:{lel} plan:{[{map[config:{map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {
-                  echo "this is great"
-                  echo "cmon main"
-                  echo "let's party"
-                  }]} path:{bash}]}]} task:{lel}]}]}]}]}
-I0912 10:06:20.229564   17955 source_eval.go:968] ResourceMonitor.RegisterResource received: t=concourse:index:Pipeline, name=testing-pipeline, custom=true, #props=1, parent=urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test, protect=false, provider=urn:pulumi:test::simple::pulumi:providers:concourse::concourse::a4707b2d-d19b-4b36-a0be-8eab0a79c908, deps=[], deleteBeforeReplace=<nil>, ignoreChanges=[], aliases=[], customTimeouts={0 0 0}, providers=map[], replaceOnChanges=[]
-I0912 10:06:20.229595   17955 source_eval.go:163] EvalSourceIterator produced a registration: t=concourse:index:Pipeline,name=testing-pipeline,#props=1
-I0912 10:06:20.229612   17955 deployment_executor.go:225] deploymentExecutor.Execute(...): incoming event (nil? false, <nil>)
-I0912 10:06:20.229620   17955 deployment_executor.go:371] deploymentExecutor.handleSingleEvent(...): received RegisterResourceEvent
-I0912 10:06:20.229634   17955 registry.go:148] GetProvider(urn:pulumi:test::simple::pulumi:providers:concourse::concourse::a4707b2d-d19b-4b36-a0be-8eab0a79c908)
-I0912 10:06:20.229645   17955 provider_plugin.go:529] Provider[concourse, 0xc0016fa120].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline) executing (#olds=0,#news=1
-I0912 10:06:20.229656   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).news]: jobs={[{map[name:{lel} plan:{[{map[config:{map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {
-                  echo "this is great"
-                  echo "cmon main"
-                  echo "let's party"
-                  }]} path:{bash}]}]} task:{lel}]}]}]}]}
-I0912 10:06:20.229707   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).news]: name={lel}
-I0912 10:06:20.229715   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).news]: plan={[{map[config:{map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {
-                  echo "this is great"
-                  echo "cmon main"
-                  echo "let's party"
-                  }]} path:{bash}]}]} task:{lel}]}]}
-I0912 10:06:20.229736   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).news]: config={map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {
-                  echo "this is great"
-                  echo "cmon main"
-                  echo "let's party"
-                  }]} path:{bash}]}]}
-I0912 10:06:20.229761   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).news]: image_resource={map[source:{map[repository:{debian}]} type:{registry-image}]}
-I0912 10:06:20.229771   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).news]: source={map[repository:{debian}]}
-I0912 10:06:20.229790   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).news]: repository={debian}
-I0912 10:06:20.229798   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).news]: type={registry-image}
-I0912 10:06:20.229805   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).news]: platform={linux}
-I0912 10:06:20.229812   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).news]: run={map[args:{[{-cex} {
-                  echo "this is great"
-                  echo "cmon main"
-                  echo "let's party"
-                  }]} path:{bash}]}
-I0912 10:06:20.229828   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).news]: args={[{-cex} {
-                  echo "this is great"
-                  echo "cmon main"
-                  echo "let's party"
-                  }]}
-I0912 10:06:20.229837   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).news]: path={bash}
-I0912 10:06:20.229844   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).news]: task={lel}
-I0912 10:06:20.230033   17955 eventsink.go:59] RegisterResource RPC prepared: t=concourse:index:Pipeline, name=testing-pipeline
-I0912 10:06:20.230068   17955 eventsink.go:62] eventSink::Debug(<{%reset%}>RegisterResource RPC prepared: t=concourse:index:Pipeline, name=testing-pipeline<{%reset%}>)
-I0912 10:06:20.230348   17955 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc0016fa120].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: name={lel}
-I0912 10:06:20.230374   17955 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc0016fa120].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: repository={debian}
-I0912 10:06:20.230393   17955 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc0016fa120].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: source={map[repository:{debian}]}
-I0912 10:06:20.230408   17955 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc0016fa120].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: type={registry-image}
-I0912 10:06:20.230420   17955 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc0016fa120].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: image_resource={map[source:{map[repository:{debian}]} type:{registry-image}]}
-I0912 10:06:20.230433   17955 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc0016fa120].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: platform={linux}
-I0912 10:06:20.230445   17955 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc0016fa120].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: args={[{-cex} {
-                  echo "this is great"
-                  echo "cmon main"
-                  echo "let's party"
-                  }]}
-I0912 10:06:20.230456   17955 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc0016fa120].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: path={bash}
-I0912 10:06:20.230479   17955 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc0016fa120].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: run={map[args:{[{-cex} {
-                  echo "this is great"
-                  echo "cmon main"
-                  echo "let's party"
-                  }]} path:{bash}]}
-I0912 10:06:20.230516   17955 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc0016fa120].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: config={map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {
-                  echo "this is great"
-                  echo "cmon main"
-                  echo "let's party"
-                  }]} path:{bash}]}]}
-I0912 10:06:20.230537   17955 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc0016fa120].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: task={lel}
-I0912 10:06:20.230556   17955 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc0016fa120].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: plan={[{map[config:{map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {
-                  echo "this is great"
-                  echo "cmon main"
-                  echo "let's party"
-                  }]} path:{bash}]}]} task:{lel}]}]}
-I0912 10:06:20.230585   17955 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc0016fa120].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: jobs={[{map[name:{lel} plan:{[{map[config:{map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {
-                  echo "this is great"
-                  echo "cmon main"
-                  echo "let's party"
-                  }]} path:{bash}]}]} task:{lel}]}]}]}]}
-I0912 10:06:20.230612   17955 provider_plugin.go:601] Provider[concourse, 0xc0016fa120].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline) success: inputs=#1 failures=#0
-I0912 10:06:20.230625   17955 step_generator.go:502] Planner decided to create 'urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline' (inputs=map[jobs:{[{map[name:{lel} plan:{[{map[config:{map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {
-                  echo "this is great"
-                  echo "cmon main"
-                  echo "let's party"
-                  }]} path:{bash}]}]} task:{lel}]}]}]}]}])
-I0912 10:06:20.230670   17955 step_executor.go:327] StepExecutor worker(-2): worker received chain for execution
-I0912 10:06:20.230682   17955 step_executor.go:327] StepExecutor worker(-2): worker waiting for incoming chains
-I0912 10:06:20.230694   17955 step_executor.go:327] StepExecutor worker(2): launching oneshot worker
-I0912 10:06:20.230763   17955 snapshot.go:130] SnapshotManager: Beginning mutation for step `create` on resource `urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline`
-I0912 10:06:20.230773   17955 snapshot.go:298] SnapshotManager.doCreate(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline)
-I0912 10:06:20.230783   17955 snapshot.go:529] SnapshotManager.markPendingOperation(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline, creating)
-I0912 10:06:20.521929   17955 step_executor.go:327] StepExecutor worker(2): applying step create on urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline (preview false)
-I0912 10:06:20.521999   17955 registry.go:148] GetProvider(urn:pulumi:test::simple::pulumi:providers:concourse::concourse::a4707b2d-d19b-4b36-a0be-8eab0a79c908)
-I0912 10:06:20.522052   17955 provider_plugin.go:702] Provider[concourse, 0xc0016fa120].Create(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline) executing (#props=1)
-I0912 10:06:20.522105   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].Create(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: jobs={[{map[name:{lel} plan:{[{map[config:{map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {
-                  echo "this is great"
-                  echo "cmon main"
-                  echo "let's party"
-                  }]} path:{bash}]}]} task:{lel}]}]}]}]}
-I0912 10:06:20.522264   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].Create(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: name={lel}
-I0912 10:06:20.522280   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].Create(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: plan={[{map[config:{map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {
-                  echo "this is great"
-                  echo "cmon main"
-                  echo "let's party"
-                  }]} path:{bash}]}]} task:{lel}]}]}
-I0912 10:06:20.522325   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].Create(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: config={map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {
-                  echo "this is great"
-                  echo "cmon main"
-                  echo "let's party"
-                  }]} path:{bash}]}]}
-I0912 10:06:20.522350   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].Create(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: image_resource={map[source:{map[repository:{debian}]} type:{registry-image}]}
-I0912 10:06:20.522366   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].Create(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: source={map[repository:{debian}]}
-I0912 10:06:20.522380   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].Create(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: repository={debian}
-I0912 10:06:20.522393   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].Create(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: type={registry-image}
-I0912 10:06:20.522404   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].Create(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: platform={linux}
-I0912 10:06:20.522415   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].Create(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: run={map[args:{[{-cex} {
-                  echo "this is great"
-                  echo "cmon main"
-                  echo "let's party"
-                  }]} path:{bash}]}
-I0912 10:06:20.522441   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].Create(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: args={[{-cex} {
-                  echo "this is great"
-                  echo "cmon main"
-                  echo "let's party"
-                  }]}
-I0912 10:06:20.522456   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].Create(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: path={bash}
-I0912 10:06:20.522471   17955 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc0016fa120].Create(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: task={lel}
-I0912 10:06:20.539651   17955 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc0016fa120].Create(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).outputs]: name={testing-pipeline}
-I0912 10:06:20.539684   17955 provider_plugin.go:792] Provider[concourse, 0xc0016fa120].Create(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline) success: id=main:testing-pipeline; #outs=1
-I0912 10:06:20.539790   17955 snapshot.go:316] SnapshotManager: createSnapshotMutation.End(..., true)
-I0912 10:06:20.539805   17955 snapshot.go:536] SnapshotManager.markOperationComplete(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline)
-I0912 10:06:20.539815   17955 snapshot.go:522] Appended new state snapshot to be written: urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline
-I0912 10:06:20.825412   17955 step_executor.go:327] StepExecutor worker(2): step create on urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline retired
-I0912 10:06:20.825459   17955 source_eval.go:1057] ResourceMonitor.RegisterResource operation finished: t=concourse:index:Pipeline, urn=urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline, #outs=1
-I0912 10:06:20.825476   17955 rpc.go:72] Marshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: name={testing-pipeline}
-I0912 10:06:20.833871   17955 eventsink.go:59] RegisterResource RPC finished: resource:testing-pipeline[concourse:index:Pipeline]; err: null, resp: urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline,main:testing-pipeline,name,,,testing-pipeline,,
-I0912 10:06:20.833904   17955 eventsink.go:62] eventSink::Debug(<{%reset%}>RegisterResource RPC finished: resource:testing-pipeline[concourse:index:Pipeline]; err: null, resp: urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline,main:testing-pipeline,name,,,testing-pipeline,,<{%reset%}>)
-I0912 10:06:20.833955   17955 eventsink.go:59] RegisterResourceOutputs RPC prepared: urn=urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test
-I0912 10:06:20.833985   17955 eventsink.go:62] eventSink::Debug(<{%reset%}>RegisterResourceOutputs RPC prepared: urn=urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test<{%reset%}>)
-I0912 10:06:20.834152   17955 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResourceOutputs(urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test)]: output={testing-pipeline}
-I0912 10:06:20.834171   17955 source_eval.go:1102] ResourceMonitor.RegisterResourceOutputs received: urn=urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test, #outs=1
-I0912 10:06:20.834188   17955 source_eval.go:168] EvalSourceIterator produced a completion: urn=urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test,#outs=1
-I0912 10:06:20.834198   17955 deployment_executor.go:225] deploymentExecutor.Execute(...): incoming event (nil? false, <nil>)
-I0912 10:06:20.834212   17955 deployment_executor.go:377] deploymentExecutor.handleSingleEvent(...): received register resource outputs
-I0912 10:06:20.834223   17955 step_executor.go:327] StepExecutor worker(-1): registered resource outputs urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test: old=#0, new=#1
-I0912 10:06:21.095486   17955 source_eval.go:1126] ResourceMonitor.RegisterResourceOutputs operation finished: urn=urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test, #outs=1
-I0912 10:06:21.103428   17955 eventsink.go:59] RegisterResourceOutputs RPC finished: urn=urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test; err: null, resp: 
-I0912 10:06:21.103453   17955 eventsink.go:62] eventSink::Debug(<{%reset%}>RegisterResourceOutputs RPC finished: urn=urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test; err: null, resp: <{%reset%}>)
-I0912 10:06:21.104260   17955 eventsink.go:59] RegisterResourceOutputs RPC finished: urn=urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test; err: null, resp: 
-I0912 10:06:21.104283   17955 eventsink.go:62] eventSink::Debug(<{%reset%}>RegisterResourceOutputs RPC finished: urn=urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test; err: null, resp: <{%reset%}>)
-I0912 10:06:21.119761   17955 langruntime_plugin.go:200] langhost[nodejs].RunPlan(pwd=/Users/brumhard/repos/personal/concourse-pulumi-provider/examples/simple,program=.,...,dryrun=false) success: progerr=
-I0912 10:06:21.120909   17955 deployment_executor.go:225] deploymentExecutor.Execute(...): incoming event (nil? true, <nil>)
-I0912 10:06:21.120931   17955 step_executor.go:327] StepExecutor worker(-1): StepExecutor.waitForCompletion(): waiting for worker threads to exit
-I0912 10:06:21.120944   17955 step_executor.go:327] StepExecutor worker(-2): worker received nil chain, exiting
-I0912 10:06:21.120957   17955 step_executor.go:327] StepExecutor worker(-1): StepExecutor.waitForCompletion(): worker threads all exited
-I0912 10:06:21.120965   17955 deployment_executor.go:261] deploymentExecutor.Execute(...): step executor has completed
-I0912 10:06:21.121007   17955 deployment_executor.go:132] deploymentExecutor.Execute(...): exiting provider canceller
-I0912 10:06:21.122059   17955 ignore.go:44] Explicitly ignoring and discarding error: rpc error: code = Canceled desc = grpc: the client connection is closing
-I0912 10:06:21.122109   17955 host.go:417] Error closing 'nodejs' language plugin during shutdown; ignoring: 1 error occurred:
+I0912 12:02:01.466984   50607 backend.go:410] found username for access token
+I0912 12:02:02.482500   50607 backend.go:410] found username for access token
+I0912 12:02:03.096610   50607 backend.go:410] found username for access token
+I0912 12:02:03.096379   50607 backend.go:920] Stack test being updated to version 39
+I0912 12:02:03.547309   50607 update.go:182] *** Starting Update(preview=true) ***
+I0912 12:02:03.547709   50607 plugins.go:78] gatherPluginsFromProgram(): gathering plugins from language host
+I0912 12:02:03.547903   50607 plugins.go:612] GetPluginPath(language, nodejs, <nil>): found on $PATH /usr/local/bin/pulumi-language-nodejs
+I0912 12:02:03.547979   50607 plugin.go:125] Launching plugin 'nodejs' from '/usr/local/bin/pulumi-language-nodejs' with args: -root=/Users/brumhard/repos/personal/concourse-pulumi-provider/examples/simple,127.0.0.1:56832
+I0912 12:02:03.611182   50607 langruntime_plugin.go:207] langhost[nodejs].GetPluginInfo() executing
+I0912 12:02:03.650936   50607 langruntime_plugin.go:115] langhost[nodejs].GetRequiredPlugins(proj=simple,pwd=/Users/brumhard/repos/personal/concourse-pulumi-provider/examples/simple,program=.) executing
+I0912 12:02:03.743199   50607 langruntime_plugin.go:157] langhost[nodejs].GetRequiredPlugins(proj=simple,pwd=/Users/brumhard/repos/personal/concourse-pulumi-provider/examples/simple,program=.) success: #versions=1
+I0912 12:02:03.743230   50607 plugins.go:90] gatherPluginsFromProgram(): plugin nodejs <nil> () is required by language host
+I0912 12:02:03.743255   50607 plugins.go:90] gatherPluginsFromProgram(): plugin concourse 0.0.1-alpha.1631438815+c9084943.dirty () is required by language host
+I0912 12:02:03.743270   50607 plugins.go:102] gatherPluginsFromSnapshot(): gathering plugins from snapshot
+I0912 12:02:03.743282   50607 plugins.go:111] gatherPluginsFromSnapshot(): skipping "urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test", not a provider
+I0912 12:02:03.743299   50607 plugins.go:119] gatherPluginsFromSnapshot(): plugin concourse 0.0.1-alpha.1631438815+c9084943.dirty is required by first-class provider "urn:pulumi:test::simple::pulumi:providers:concourse::concourse"
+I0912 12:02:03.743315   50607 plugins.go:111] gatherPluginsFromSnapshot(): skipping "urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline", not a provider
+I0912 12:02:03.743332   50607 plugins.go:134] ensurePluginsAreInstalled(): beginning
+I0912 12:02:03.743392   50607 plugins.go:612] GetPluginPath(language, nodejs, <nil>): found on $PATH /usr/local/bin/pulumi-language-nodejs
+I0912 12:02:03.743408   50607 plugins.go:139] ensurePluginsAreInstalled(): plugin nodejs <nil> already installed
+I0912 12:02:03.743471   50607 plugins.go:612] GetPluginPath(resource, concourse, 0.0.1-alpha.1631438815+c9084943.dirty): found on $PATH /Users/brumhard/go/bin/pulumi-resource-concourse
+I0912 12:02:03.743483   50607 plugins.go:139] ensurePluginsAreInstalled(): plugin concourse 0.0.1-alpha.1631438815+c9084943.dirty already installed
+I0912 12:02:03.743493   50607 plugins.go:154] ensurePluginsAreInstalled(): completed
+I0912 12:02:03.743506   50607 plugins.go:242] computeDefaultProviderPlugins(): considering nodejs
+I0912 12:02:03.743518   50607 plugins.go:245] computeDefaultProviderPlugins(): skipping nodejs, not a resource provider
+I0912 12:02:03.743526   50607 plugins.go:242] computeDefaultProviderPlugins(): considering concourse-0.0.1-alpha.1631438815+c9084943.dirty
+I0912 12:02:03.743538   50607 plugins.go:273] computeDefaultProviderPlugins(): plugin concourse-0.0.1-alpha.1631438815+c9084943.dirty selected for package concourse (first seen)
+I0912 12:02:03.743547   50607 plugins.go:279] computeDefaultProviderPlugins(): summary of default plugins:
+I0912 12:02:03.743556   50607 plugins.go:281]   concourse       = 0.0.1-alpha.1631438815+c9084943.dirty
+I0912 12:02:03.743593   50607 registry.go:101] provider(urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test): 
+I0912 12:02:03.743657   50607 plugins.go:612] GetPluginPath(resource, concourse, 0.0.1-alpha.1631438815+c9084943.dirty): found on $PATH /Users/brumhard/go/bin/pulumi-resource-concourse
+I0912 12:02:03.743684   50607 plugin.go:125] Launching plugin 'concourse (resource)' from '/Users/brumhard/go/bin/pulumi-resource-concourse' with args: 127.0.0.1:56832
+I0912 12:02:03.761408   50607 provider_plugin.go:1428] Provider[concourse, 0xc000b14cc0].GetPluginInfo() executing
+I0912 12:02:03.761941   50607 provider_plugin.go:455] Provider[concourse, 0xc000b14cc0].Configure() executing (#vars=4)
+I0912 12:02:03.761987   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Configure().inputs]: password={test}
+I0912 12:02:03.762009   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Configure().inputs]: url={http://localhost:8080}
+I0912 12:02:03.762067   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Configure().inputs]: username={test}
+I0912 12:02:03.762075   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Configure().inputs]: version={0.0.1-alpha.1631438815+c9084943.dirty}
+I0912 12:02:03.762104   50607 registry.go:136] loaded provider urn:pulumi:test::simple::pulumi:providers:concourse::concourse::a4707b2d-d19b-4b36-a0be-8eab0a79c908
+I0912 12:02:03.762119   50607 registry.go:101] provider(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline): urn:pulumi:test::simple::pulumi:providers:concourse::concourse::a4707b2d-d19b-4b36-a0be-8eab0a79c908
+I0912 12:02:03.762482   50607 step_generator.go:858] stepGenerator.GeneratePendingDeletes(): scanning previous snapshot for pending deletes
+I0912 12:02:03.762516   50607 deployment_executor.go:400] deploymentExecutor.retirePendingDeletes(...): no pending deletions
+I0912 12:02:03.762526   50607 langruntime_plugin.go:168] langhost[nodejs].Run(pwd=/Users/brumhard/repos/personal/concourse-pulumi-provider/examples/simple,program=.,#args=0,proj=simple,stack=test,#config=0,dryrun=true) executing
+I0912 12:02:03.762541   50607 deployment_executor.go:221] deploymentExecutor.Execute(...): waiting for incoming events
+I0912 12:02:03.762594   50607 step_executor.go:327] StepExecutor worker(-2): worker coming online
+I0912 12:02:03.762608   50607 step_executor.go:327] StepExecutor worker(-2): worker waiting for incoming chains
+I0912 12:02:04.286746   50607 eventsink.go:59] Registering resource: t=pulumi:pulumi:Stack, name=simple-test, custom=false, remote=false
+I0912 12:02:04.286840   50607 eventsink.go:62] eventSink::Debug(<{%reset%}>Registering resource: t=pulumi:pulumi:Stack, name=simple-test, custom=false, remote=false<{%reset%}>)
+I0912 12:02:04.296440   50607 eventsink.go:59] RegisterResource RPC prepared: t=pulumi:pulumi:Stack, name=simple-test
+I0912 12:02:04.296474   50607 eventsink.go:62] eventSink::Debug(<{%reset%}>RegisterResource RPC prepared: t=pulumi:pulumi:Stack, name=simple-test<{%reset%}>)
+I0912 12:02:04.300753   50607 source_eval.go:968] ResourceMonitor.RegisterResource received: t=pulumi:pulumi:Stack, name=simple-test, custom=false, #props=0, parent=, protect=false, provider=, deps=[], deleteBeforeReplace=<nil>, ignoreChanges=[], aliases=[], customTimeouts={0 0 0}, providers=map[], replaceOnChanges=[]
+I0912 12:02:04.300838   50607 source_eval.go:163] EvalSourceIterator produced a registration: t=pulumi:pulumi:Stack,name=simple-test,#props=0
+I0912 12:02:04.300854   50607 deployment_executor.go:225] deploymentExecutor.Execute(...): incoming event (nil? false, <nil>)
+I0912 12:02:04.300864   50607 deployment_executor.go:371] deploymentExecutor.handleSingleEvent(...): received RegisterResourceEvent
+I0912 12:02:04.300892   50607 step_generator.go:461] Planner decided not to update 'urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test' after diff (same) (inputs=map[])
+I0912 12:02:04.300915   50607 step_executor.go:327] StepExecutor worker(-2): worker received chain for execution
+I0912 12:02:04.300926   50607 step_executor.go:327] StepExecutor worker(-2): worker waiting for incoming chains
+I0912 12:02:04.300938   50607 step_executor.go:327] StepExecutor worker(0): launching oneshot worker
+I0912 12:02:04.301026   50607 step_executor.go:327] StepExecutor worker(0): applying step same on urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test (preview true)
+I0912 12:02:04.301061   50607 step_executor.go:327] StepExecutor worker(0): step same on urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test retired
+I0912 12:02:04.301118   50607 source_eval.go:1057] ResourceMonitor.RegisterResource operation finished: t=pulumi:pulumi:Stack, urn=urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test, #outs=0
+I0912 12:02:04.343862   50607 eventsink.go:59] RegisterResource RPC finished: resource:simple-test[pulumi:pulumi:Stack]; err: null, resp: urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test,,,,
+I0912 12:02:04.343949   50607 eventsink.go:62] eventSink::Debug(<{%reset%}>RegisterResource RPC finished: resource:simple-test[pulumi:pulumi:Stack]; err: null, resp: urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test,,,,<{%reset%}>)
+I0912 12:02:04.973521   50607 eventsink.go:59] Running program '/Users/brumhard/repos/personal/concourse-pulumi-provider/examples/simple' in pwd '/Users/brumhard/repos/personal/concourse-pulumi-provider/examples/simple' w/ args: 
+I0912 12:02:04.973577   50607 eventsink.go:62] eventSink::Debug(<{%reset%}>Running program '/Users/brumhard/repos/personal/concourse-pulumi-provider/examples/simple' in pwd '/Users/brumhard/repos/personal/concourse-pulumi-provider/examples/simple' w/ args: <{%reset%}>)
+I0912 12:02:04.973914   50607 source_eval.go:1102] ResourceMonitor.RegisterResourceOutputs received: urn=urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test, #outs=0
+I0912 12:02:04.973937   50607 source_eval.go:168] EvalSourceIterator produced a completion: urn=urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test,#outs=0
+I0912 12:02:04.973947   50607 deployment_executor.go:225] deploymentExecutor.Execute(...): incoming event (nil? false, <nil>)
+I0912 12:02:04.973956   50607 deployment_executor.go:377] deploymentExecutor.handleSingleEvent(...): received register resource outputs
+I0912 12:02:04.973965   50607 step_executor.go:327] StepExecutor worker(-1): registered resource outputs urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test: old=#0, new=#0
+I0912 12:02:04.973994   50607 source_eval.go:1126] ResourceMonitor.RegisterResourceOutputs operation finished: urn=urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test, #outs=0
+I0912 12:02:04.977347   50607 eventsink.go:59] RegisterResourceOutputs RPC prepared: urn=urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test
+I0912 12:02:04.977388   50607 eventsink.go:62] eventSink::Debug(<{%reset%}>RegisterResourceOutputs RPC prepared: urn=urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test<{%reset%}>)
+I0912 12:02:04.984915   50607 eventsink.go:59] RegisterResourceOutputs RPC finished: urn=urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test; err: null, resp: 
+I0912 12:02:04.984975   50607 eventsink.go:62] eventSink::Debug(<{%reset%}>RegisterResourceOutputs RPC finished: urn=urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test; err: null, resp: <{%reset%}>)
+I0912 12:02:04.986829   50607 eventsink.go:59] Registering resource: t=pulumi:providers:concourse, name=concourse, custom=true, remote=false
+I0912 12:02:04.986852   50607 eventsink.go:62] eventSink::Debug(<{%reset%}>Registering resource: t=pulumi:providers:concourse, name=concourse, custom=true, remote=false<{%reset%}>)
+I0912 12:02:04.987594   50607 eventsink.go:59] RegisterResourceOutputs RPC finished: urn=urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test; err: null, resp: 
+I0912 12:02:04.987629   50607 eventsink.go:62] eventSink::Debug(<{%reset%}>RegisterResourceOutputs RPC finished: urn=urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test; err: null, resp: <{%reset%}>)
+I0912 12:02:04.994627   50607 eventsink.go:59] Registering resource: t=concourse:index:Pipeline, name=testing-pipeline, custom=true, remote=false
+I0912 12:02:04.994644   50607 eventsink.go:62] eventSink::Debug(<{%reset%}>Registering resource: t=concourse:index:Pipeline, name=testing-pipeline, custom=true, remote=false<{%reset%}>)
+I0912 12:02:04.996272   50607 eventsink.go:59] RegisterResource RPC prepared: t=pulumi:providers:concourse, name=concourse
+I0912 12:02:04.996289   50607 eventsink.go:62] eventSink::Debug(<{%reset%}>RegisterResource RPC prepared: t=pulumi:providers:concourse, name=concourse<{%reset%}>)
+I0912 12:02:04.997375   50607 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(pulumi:providers:concourse,concourse)]: password={test}
+I0912 12:02:04.997424   50607 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(pulumi:providers:concourse,concourse)]: url={http://localhost:8080}
+I0912 12:02:04.997430   50607 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(pulumi:providers:concourse,concourse)]: username={test}
+I0912 12:02:04.997440   50607 source_eval.go:968] ResourceMonitor.RegisterResource received: t=pulumi:providers:concourse, name=concourse, custom=true, #props=4, parent=urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test, protect=false, provider=, deps=[], deleteBeforeReplace=<nil>, ignoreChanges=[], aliases=[], customTimeouts={0 0 0}, providers=map[], replaceOnChanges=[]
+I0912 12:02:04.997464   50607 source_eval.go:163] EvalSourceIterator produced a registration: t=pulumi:providers:concourse,name=concourse,#props=4
+I0912 12:02:04.997474   50607 deployment_executor.go:225] deploymentExecutor.Execute(...): incoming event (nil? false, <nil>)
+I0912 12:02:04.997480   50607 deployment_executor.go:371] deploymentExecutor.handleSingleEvent(...): received RegisterResourceEvent
+I0912 12:02:04.997495   50607 registry.go:234] ProviderRegistry.Check(urn:pulumi:test::simple::pulumi:providers:concourse::concourse) executing (#olds=4,#news=4)
+I0912 12:02:04.997596   50607 plugins.go:612] GetPluginPath(resource, concourse, 0.0.1-alpha.1631438815+c9084943.dirty): found on $PATH /Users/brumhard/go/bin/pulumi-resource-concourse
+I0912 12:02:04.997611   50607 plugin.go:125] Launching plugin 'concourse (resource)' from '/Users/brumhard/go/bin/pulumi-resource-concourse' with args: 127.0.0.1:56832
+I0912 12:02:05.014506   50607 provider_plugin.go:1428] Provider[concourse, 0xc000dd8060].GetPluginInfo() executing
+I0912 12:02:05.014891   50607 provider_plugin.go:183] Provider[concourse, 0xc000dd8060].CheckConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse) executing (#olds=4,#news=4)
+I0912 12:02:05.014936   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000dd8060].CheckConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse).olds]: password={test}
+I0912 12:02:05.014949   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000dd8060].CheckConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse).olds]: url={http://localhost:8080}
+I0912 12:02:05.014996   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000dd8060].CheckConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse).olds]: username={test}
+I0912 12:02:05.015002   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000dd8060].CheckConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse).olds]: version={0.0.1-alpha.1631438815+c9084943.dirty}
+I0912 12:02:05.015015   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000dd8060].CheckConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse).news]: password={test}
+I0912 12:02:05.015021   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000dd8060].CheckConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse).news]: url={http://localhost:8080}
+I0912 12:02:05.015048   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000dd8060].CheckConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse).news]: username={test}
+I0912 12:02:05.015054   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000dd8060].CheckConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse).news]: version={0.0.1-alpha.1631438815+c9084943.dirty}
+I0912 12:02:05.015918   50607 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc000dd8060].CheckConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse).inputs]: password={test}
+I0912 12:02:05.015965   50607 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc000dd8060].CheckConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse).inputs]: url={http://localhost:8080}
+I0912 12:02:05.015972   50607 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc000dd8060].CheckConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse).inputs]: username={test}
+I0912 12:02:05.015977   50607 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc000dd8060].CheckConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse).inputs]: version={0.0.1-alpha.1631438815+c9084943.dirty}
+I0912 12:02:05.015986   50607 provider_plugin.go:246] Provider[concourse, 0xc000dd8060].CheckConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse) success: inputs=#4 failures=#0
+I0912 12:02:05.016013   50607 registry.go:158] setProvider(urn:pulumi:test::simple::pulumi:providers:concourse::concourse::04da6b54-80e4-46f7-96ec-b56ff0331ba9)
+I0912 12:02:05.016030   50607 registry.go:278] ProviderRegistry.Diff(urn:pulumi:test::simple::pulumi:providers:concourse::concourse,a4707b2d-d19b-4b36-a0be-8eab0a79c908): executing (#olds=4,#news=4)
+I0912 12:02:05.016038   50607 registry.go:148] GetProvider(urn:pulumi:test::simple::pulumi:providers:concourse::concourse::04da6b54-80e4-46f7-96ec-b56ff0331ba9)
+I0912 12:02:05.016048   50607 provider_plugin.go:288] Provider[concourse, 0xc000dd8060].DiffConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse) executing (#olds=4,#news=4)
+I0912 12:02:05.016056   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000dd8060].DiffConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse).olds]: password={test}
+I0912 12:02:05.016062   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000dd8060].DiffConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse).olds]: url={http://localhost:8080}
+I0912 12:02:05.016068   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000dd8060].DiffConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse).olds]: username={test}
+I0912 12:02:05.016076   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000dd8060].DiffConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse).olds]: version={0.0.1-alpha.1631438815+c9084943.dirty}
+I0912 12:02:05.016082   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000dd8060].DiffConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse).news]: password={test}
+I0912 12:02:05.016089   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000dd8060].DiffConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse).news]: url={http://localhost:8080}
+I0912 12:02:05.016095   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000dd8060].DiffConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse).news]: username={test}
+I0912 12:02:05.016101   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000dd8060].DiffConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse).news]: version={0.0.1-alpha.1631438815+c9084943.dirty}
+I0912 12:02:05.016418   50607 provider_plugin.go:355] Provider[concourse, 0xc000dd8060].DiffConfig(urn:pulumi:test::simple::pulumi:providers:concourse::concourse) success: changes=0 #replaces=[] #stables=[] delbefrepl=false, diffs=#[]
+I0912 12:02:05.016442   50607 registry.go:316] ProviderRegistry.Diff(urn:pulumi:test::simple::pulumi:providers:concourse::concourse,a4707b2d-d19b-4b36-a0be-8eab0a79c908): executed (1, []resource.PropertyKey(nil))
+I0912 12:02:05.016456   50607 step_generator.go:461] Planner decided not to update 'urn:pulumi:test::simple::pulumi:providers:concourse::concourse' after diff (same) (inputs=map[password:{test} url:{http://localhost:8080} username:{test} version:{0.0.1-alpha.1631438815+c9084943.dirty}])
+I0912 12:02:05.016500   50607 step_executor.go:327] StepExecutor worker(-2): worker received chain for execution
+I0912 12:02:05.016513   50607 step_executor.go:327] StepExecutor worker(-2): worker waiting for incoming chains
+I0912 12:02:05.016528   50607 step_executor.go:327] StepExecutor worker(1): launching oneshot worker
+I0912 12:02:05.016597   50607 step_executor.go:327] StepExecutor worker(1): applying step same on urn:pulumi:test::simple::pulumi:providers:concourse::concourse (preview true)
+I0912 12:02:05.016610   50607 registry.go:327] Same(urn:pulumi:test::simple::pulumi:providers:concourse::concourse::a4707b2d-d19b-4b36-a0be-8eab0a79c908)
+I0912 12:02:05.016641   50607 step_executor.go:327] StepExecutor worker(1): step same on urn:pulumi:test::simple::pulumi:providers:concourse::concourse retired
+I0912 12:02:05.016664   50607 source_eval.go:1057] ResourceMonitor.RegisterResource operation finished: t=pulumi:providers:concourse, urn=urn:pulumi:test::simple::pulumi:providers:concourse::concourse, #outs=4
+I0912 12:02:05.016676   50607 rpc.go:72] Marshaling property for RPC[ResourceMonitor.RegisterResource(pulumi:providers:concourse,concourse)]: password={test}
+I0912 12:02:05.016684   50607 rpc.go:72] Marshaling property for RPC[ResourceMonitor.RegisterResource(pulumi:providers:concourse,concourse)]: url={http://localhost:8080}
+I0912 12:02:05.016691   50607 rpc.go:72] Marshaling property for RPC[ResourceMonitor.RegisterResource(pulumi:providers:concourse,concourse)]: username={test}
+I0912 12:02:05.016697   50607 rpc.go:72] Marshaling property for RPC[ResourceMonitor.RegisterResource(pulumi:providers:concourse,concourse)]: version={0.0.1-alpha.1631438815+c9084943.dirty}
+I0912 12:02:05.029649   50607 eventsink.go:59] RegisterResource RPC finished: resource:concourse[pulumi:providers:concourse]; err: null, resp: urn:pulumi:test::simple::pulumi:providers:concourse::concourse,a4707b2d-d19b-4b36-a0be-8eab0a79c908,password,,,test,url,,,http://localhost:8080,username,,,test,version,,,0.0.1-alpha.1631438815+c9084943.dirty,,
+I0912 12:02:05.029672   50607 eventsink.go:62] eventSink::Debug(<{%reset%}>RegisterResource RPC finished: resource:concourse[pulumi:providers:concourse]; err: null, resp: urn:pulumi:test::simple::pulumi:providers:concourse::concourse,a4707b2d-d19b-4b36-a0be-8eab0a79c908,password,,,test,url,,,http://localhost:8080,username,,,test,version,,,0.0.1-alpha.1631438815+c9084943.dirty,,<{%reset%}>)
+I0912 12:02:05.031578   50607 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: name={lel}
+I0912 12:02:05.031620   50607 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: repository={debian}
+I0912 12:02:05.031629   50607 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: source={map[repository:{debian}]}
+I0912 12:02:05.031639   50607 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: type={registry-image}
+I0912 12:02:05.031649   50607 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: image_resource={map[source:{map[repository:{debian}]} type:{registry-image}]}
+I0912 12:02:05.031684   50607 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: platform={linux}
+I0912 12:02:05.031691   50607 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: args={[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]}
+I0912 12:02:05.031697   50607 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: path={bash}
+I0912 12:02:05.031706   50607 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: run={map[args:{[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]} path:{bash}]}
+I0912 12:02:05.031739   50607 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: config={map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]} path:{bash}]}]}
+I0912 12:02:05.031754   50607 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: task={lel}
+I0912 12:02:05.031769   50607 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: plan={[{map[config:{map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]} path:{bash}]}]} task:{lel}]}]}
+I0912 12:02:05.031798   50607 rpc.go:249] Unmarshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: jobs={[{map[name:{lel} plan:{[{map[config:{map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]} path:{bash}]}]} task:{lel}]}]}]}]}
+I0912 12:02:05.031823   50607 source_eval.go:968] ResourceMonitor.RegisterResource received: t=concourse:index:Pipeline, name=testing-pipeline, custom=true, #props=1, parent=urn:pulumi:test::simple::pulumi:pulumi:Stack::simple-test, protect=false, provider=urn:pulumi:test::simple::pulumi:providers:concourse::concourse::a4707b2d-d19b-4b36-a0be-8eab0a79c908, deps=[], deleteBeforeReplace=<nil>, ignoreChanges=[], aliases=[], customTimeouts={0 0 0}, providers=map[], replaceOnChanges=[]
+I0912 12:02:05.031843   50607 source_eval.go:163] EvalSourceIterator produced a registration: t=concourse:index:Pipeline,name=testing-pipeline,#props=1
+I0912 12:02:05.031854   50607 deployment_executor.go:225] deploymentExecutor.Execute(...): incoming event (nil? false, <nil>)
+I0912 12:02:05.031861   50607 deployment_executor.go:371] deploymentExecutor.handleSingleEvent(...): received RegisterResourceEvent
+I0912 12:02:05.031874   50607 registry.go:148] GetProvider(urn:pulumi:test::simple::pulumi:providers:concourse::concourse::a4707b2d-d19b-4b36-a0be-8eab0a79c908)
+I0912 12:02:05.031884   50607 provider_plugin.go:529] Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline) executing (#olds=1,#news=1
+I0912 12:02:05.031891   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).olds]: jobs={[{map[name:{lel} plan:{[{map[config:{map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]} path:{bash}]}]} task:{lel}]}]}]}]}
+I0912 12:02:05.031933   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).olds]: name={lel}
+I0912 12:02:05.031939   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).olds]: plan={[{map[config:{map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]} path:{bash}]}]} task:{lel}]}]}
+I0912 12:02:05.031957   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).olds]: config={map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]} path:{bash}]}]}
+I0912 12:02:05.031978   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).olds]: image_resource={map[source:{map[repository:{debian}]} type:{registry-image}]}
+I0912 12:02:05.031989   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).olds]: source={map[repository:{debian}]}
+I0912 12:02:05.031995   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).olds]: repository={debian}
+I0912 12:02:05.032001   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).olds]: type={registry-image}
+I0912 12:02:05.032007   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).olds]: platform={linux}
+I0912 12:02:05.032012   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).olds]: run={map[args:{[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]} path:{bash}]}
+I0912 12:02:05.032022   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).olds]: args={[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]}
+I0912 12:02:05.032033   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).olds]: path={bash}
+I0912 12:02:05.032040   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).olds]: task={lel}
+I0912 12:02:05.032046   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).news]: jobs={[{map[name:{lel} plan:{[{map[config:{map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]} path:{bash}]}]} task:{lel}]}]}]}]}
+I0912 12:02:05.032062   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).news]: name={lel}
+I0912 12:02:05.032071   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).news]: plan={[{map[config:{map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]} path:{bash}]}]} task:{lel}]}]}
+I0912 12:02:05.032084   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).news]: config={map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]} path:{bash}]}]}
+I0912 12:02:05.032095   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).news]: image_resource={map[source:{map[repository:{debian}]} type:{registry-image}]}
+I0912 12:02:05.032102   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).news]: source={map[repository:{debian}]}
+I0912 12:02:05.032117   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).news]: repository={debian}
+I0912 12:02:05.032123   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).news]: type={registry-image}
+I0912 12:02:05.032129   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).news]: platform={linux}
+I0912 12:02:05.032134   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).news]: run={map[args:{[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]} path:{bash}]}
+I0912 12:02:05.032142   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).news]: args={[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]}
+I0912 12:02:05.032148   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).news]: path={bash}
+I0912 12:02:05.032154   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).news]: task={lel}
+I0912 12:02:05.032403   50607 eventsink.go:59] RegisterResource RPC prepared: t=concourse:index:Pipeline, name=testing-pipeline
+I0912 12:02:05.032486   50607 eventsink.go:62] eventSink::Debug(<{%reset%}>RegisterResource RPC prepared: t=concourse:index:Pipeline, name=testing-pipeline<{%reset%}>)
+I0912 12:02:05.032909   50607 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: name={lel}
+I0912 12:02:05.032976   50607 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: repository={debian}
+I0912 12:02:05.032985   50607 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: source={map[repository:{debian}]}
+I0912 12:02:05.032995   50607 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: type={registry-image}
+I0912 12:02:05.033003   50607 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: image_resource={map[source:{map[repository:{debian}]} type:{registry-image}]}
+I0912 12:02:05.033030   50607 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: platform={linux}
+I0912 12:02:05.033056   50607 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: args={[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]}
+I0912 12:02:05.033064   50607 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: path={bash}
+I0912 12:02:05.033072   50607 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: run={map[args:{[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]} path:{bash}]}
+I0912 12:02:05.033084   50607 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: config={map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]} path:{bash}]}]}
+I0912 12:02:05.033111   50607 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: task={lel}
+I0912 12:02:05.033120   50607 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: plan={[{map[config:{map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]} path:{bash}]}]} task:{lel}]}]}
+I0912 12:02:05.033151   50607 rpc.go:249] Unmarshaling property for RPC[Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline).inputs]: jobs={[{map[name:{lel} plan:{[{map[config:{map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]} path:{bash}]}]} task:{lel}]}]}]}]}
+I0912 12:02:05.033177   50607 provider_plugin.go:601] Provider[concourse, 0xc000b14cc0].Check(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline) success: inputs=#1 failures=#0
+I0912 12:02:05.033193   50607 provider_plugin.go:616] Provider[concourse, 0xc000b14cc0].Diff(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline,main:testing-pipeline): executing (#olds=1,#news=1)
+I0912 12:02:05.033201   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Diff(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline,main:testing-pipeline).olds]: name={testing-pipeline}
+I0912 12:02:05.033208   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Diff(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline,main:testing-pipeline).news]: jobs={[{map[name:{lel} plan:{[{map[config:{map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]} path:{bash}]}]} task:{lel}]}]}]}]}
+I0912 12:02:05.033226   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Diff(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline,main:testing-pipeline).news]: name={lel}
+I0912 12:02:05.033233   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Diff(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline,main:testing-pipeline).news]: plan={[{map[config:{map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]} path:{bash}]}]} task:{lel}]}]}
+I0912 12:02:05.033250   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Diff(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline,main:testing-pipeline).news]: config={map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]} path:{bash}]}]}
+I0912 12:02:05.033262   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Diff(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline,main:testing-pipeline).news]: image_resource={map[source:{map[repository:{debian}]} type:{registry-image}]}
+I0912 12:02:05.033270   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Diff(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline,main:testing-pipeline).news]: source={map[repository:{debian}]}
+I0912 12:02:05.033284   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Diff(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline,main:testing-pipeline).news]: repository={debian}
+I0912 12:02:05.033300   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Diff(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline,main:testing-pipeline).news]: type={registry-image}
+I0912 12:02:05.033307   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Diff(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline,main:testing-pipeline).news]: platform={linux}
+I0912 12:02:05.033312   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Diff(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline,main:testing-pipeline).news]: run={map[args:{[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]} path:{bash}]}
+I0912 12:02:05.033321   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Diff(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline,main:testing-pipeline).news]: args={[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]}
+I0912 12:02:05.033328   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Diff(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline,main:testing-pipeline).news]: path={bash}
+I0912 12:02:05.033334   50607 rpc.go:72] Marshaling property for RPC[Provider[concourse, 0xc000b14cc0].Diff(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline,main:testing-pipeline).news]: task={lel}
+I0912 12:02:05.033850   50607 provider_plugin.go:682] Provider[concourse, 0xc000b14cc0].Diff(urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline,main:testing-pipeline) success: changes=2 #replaces=[] #stables=[] delbefrepl=false, diffs=#[jobs name], detaileddiff=map[]
+I0912 12:02:05.033911   50607 step_generator.go:652] Planner decided to update 'urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline' (oldprops=map[jobs:{[{map[name:{lel} plan:{[{map[config:{map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]} path:{bash}]}]} task:{lel}]}]}]}]}] inputs=map[jobs:{[{map[name:{lel} plan:{[{map[config:{map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]} path:{bash}]}]} task:{lel}]}]}]}]}])
+I0912 12:02:05.034081   50607 step_executor.go:327] StepExecutor worker(-2): worker received chain for execution
+I0912 12:02:05.034093   50607 step_executor.go:327] StepExecutor worker(-2): worker waiting for incoming chains
+I0912 12:02:05.034105   50607 step_executor.go:327] StepExecutor worker(2): launching oneshot worker
+I0912 12:02:05.034259   50607 step_executor.go:327] StepExecutor worker(2): applying step update on urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline (preview true)
+I0912 12:02:05.034271   50607 registry.go:148] GetProvider(urn:pulumi:test::simple::pulumi:providers:concourse::concourse::a4707b2d-d19b-4b36-a0be-8eab0a79c908)
+I0912 12:02:05.034309   50607 provider_plugin.go:930] Provider[concourse, 0xc000b14cc0].Update(main:testing-pipeline,urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline) executing (#olds=1,#news=1)
+I0912 12:02:05.034543   50607 step_executor.go:327] StepExecutor worker(2): step update on urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline retired
+I0912 12:02:05.034559   50607 source_eval.go:1057] ResourceMonitor.RegisterResource operation finished: t=concourse:index:Pipeline, urn=urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline, #outs=1
+I0912 12:02:05.034566   50607 rpc.go:72] Marshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: jobs={[{map[name:{lel} plan:{[{map[config:{map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]} path:{bash}]}]} task:{lel}]}]}]}]}
+I0912 12:02:05.034603   50607 rpc.go:72] Marshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: name={lel}
+I0912 12:02:05.034611   50607 rpc.go:72] Marshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: plan={[{map[config:{map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]} path:{bash}]}]} task:{lel}]}]}
+I0912 12:02:05.034628   50607 rpc.go:72] Marshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: config={map[image_resource:{map[source:{map[repository:{debian}]} type:{registry-image}]} platform:{linux} run:{map[args:{[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]} path:{bash}]}]}
+I0912 12:02:05.034643   50607 rpc.go:72] Marshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: image_resource={map[source:{map[repository:{debian}]} type:{registry-image}]}
+I0912 12:02:05.034656   50607 rpc.go:72] Marshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: source={map[repository:{debian}]}
+I0912 12:02:05.034664   50607 rpc.go:72] Marshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: repository={debian}
+I0912 12:02:05.034674   50607 rpc.go:72] Marshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: type={registry-image}
+I0912 12:02:05.034680   50607 rpc.go:72] Marshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: platform={linux}
+I0912 12:02:05.034705   50607 rpc.go:72] Marshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: run={map[args:{[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]} path:{bash}]}
+I0912 12:02:05.034714   50607 rpc.go:72] Marshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: args={[{-cex} {echo "this is garbage"
+echo "cmon main"
+echo "let's party"}]}
+I0912 12:02:05.034721   50607 rpc.go:72] Marshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: path={bash}
+I0912 12:02:05.034727   50607 rpc.go:72] Marshaling property for RPC[ResourceMonitor.RegisterResource(concourse:index:Pipeline,testing-pipeline)]: task={lel}
+I0912 12:02:05.037490   50607 eventsink.go:59] RegisterResource RPC finished: resource:testing-pipeline[concourse:index:Pipeline]; err: null, resp: urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline,main:testing-pipeline,jobs,,,,,,,,,,name,,,lel,plan,,,,,,,,,,config,,,,,image_resource,,,,,source,,,,,repository,,,debian,type,,,registry-image,platform,,,linux,run,,,,,args,,,,,,,,-cex,,,echo "this is garbage"
+echo "cmon main"
+echo "let's party",path,,,bash,task,,,lel,,
+I0912 12:02:05.037514   50607 eventsink.go:62] eventSink::Debug(<{%reset%}>RegisterResource RPC finished: resource:testing-pipeline[concourse:index:Pipeline]; err: null, resp: urn:pulumi:test::simple::concourse:index:Pipeline::testing-pipeline,main:testing-pipeline,jobs,,,,,,,,,,name,,,lel,plan,,,,,,,,,,config,,,,,image_resource,,,,,source,,,,,repository,,,debian,type,,,registry-image,platform,,,linux,run,,,,,args,,,,,,,,-cex,,,echo "this is garbage"
+echo "cmon main"
+echo "let's party",path,,,bash,task,,,lel,,<{%reset%}>)
+I0912 12:02:05.054646   50607 langruntime_plugin.go:200] langhost[nodejs].RunPlan(pwd=/Users/brumhard/repos/personal/concourse-pulumi-provider/examples/simple,program=.,...,dryrun=true) success: progerr=
+I0912 12:02:05.055948   50607 deployment_executor.go:225] deploymentExecutor.Execute(...): incoming event (nil? true, <nil>)
+I0912 12:02:05.055994   50607 deployment_executor.go:314] performDeletes(...): beginning
+I0912 12:02:05.056007   50607 step_generator.go:912] Planner trusts dependency graph, scheduling deletions in parallel
+I0912 12:02:05.056020   50607 step_executor.go:327] StepExecutor worker(-1): StepExecutor.waitForCompletion(): waiting for worker threads to exit
+I0912 12:02:05.056032   50607 step_executor.go:327] StepExecutor worker(-2): worker received nil chain, exiting
+I0912 12:02:05.056042   50607 step_executor.go:327] StepExecutor worker(-1): StepExecutor.waitForCompletion(): worker threads all exited
+I0912 12:02:05.056050   50607 deployment_executor.go:261] deploymentExecutor.Execute(...): step executor has completed
+I0912 12:02:05.056098   50607 deployment_executor.go:132] deploymentExecutor.Execute(...): exiting provider canceller
+I0912 12:02:05.058872   50607 ignore.go:44] Explicitly ignoring and discarding error: rpc error: code = Canceled desc = grpc: the client connection is closing
+I0912 12:02:05.058924   50607 host.go:417] Error closing 'nodejs' language plugin during shutdown; ignoring: 1 error occurred:
 	* operation not permitted
 
-I0912 10:06:21.122174   17955 update.go:185] *** Update(preview=false) complete ***
+I0912 12:02:05.059013   50607 update.go:185] *** Update(preview=true) complete ***

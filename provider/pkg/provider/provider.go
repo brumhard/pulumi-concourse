@@ -19,7 +19,15 @@ import (
 	"compress/gzip"
 	"context"
 	"fmt"
+	"github.com/pulumi/pulumi/sdk/v3/go/common/util/logging"
+	"io"
+	"log"
+	"os"
+	"regexp"
+	"strings"
+
 	"github.com/concourse/concourse/go-concourse/concourse"
+	pbempty "github.com/golang/protobuf/ptypes/empty"
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v3/resource/provider"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
@@ -27,16 +35,9 @@ import (
 	pulumirpc "github.com/pulumi/pulumi/sdk/v3/proto/go"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"io"
-	"log"
-	"os"
-	"regexp"
-	"strings"
-
-	pbempty "github.com/golang/protobuf/ptypes/empty"
 )
 
-var concourseDefaultTeam = "main"
+const concourseDefaultTeam = "main"
 
 type concourseProvider struct {
 	host        *provider.HostClient
@@ -146,29 +147,38 @@ func (k *concourseProvider) Check(ctx context.Context, req *pulumirpc.CheckReque
 
 // Diff checks what impacts a hypothetical update will have on the resource's properties.
 func (k *concourseProvider) Diff(ctx context.Context, req *pulumirpc.DiffRequest) (*pulumirpc.DiffResponse, error) {
+	logging.V(9).Infof("Running Diff yknow")
+
 	urn := resource.URN(req.GetUrn())
 	ty := urn.Type()
 	if ty != "concourse:index:Pipeline" {
 		return nil, fmt.Errorf("Unknown resource type '%s'", ty)
 	}
 
-	olds, err := plugin.UnmarshalProperties(req.GetOlds(), plugin.MarshalOptions{KeepUnknowns: true, SkipNulls: true})
+	olds, err := plugin.UnmarshalProperties(req.GetOlds(), plugin.MarshalOptions{SkipNulls: true})
 	if err != nil {
 		return nil, err
 	}
 
-	news, err := plugin.UnmarshalProperties(req.GetNews(), plugin.MarshalOptions{KeepUnknowns: true, SkipNulls: true})
+	news, err := plugin.UnmarshalProperties(req.GetNews(), plugin.MarshalOptions{SkipNulls: true})
 	if err != nil {
 		return nil, err
 	}
 
 	d := olds.Diff(news)
 
+	if d == nil {
+		return &pulumirpc.DiffResponse{
+			Changes: pulumirpc.DiffResponse_DIFF_NONE,
+		}, nil
+	}
+
 	replaces := make([]string, 0, len(d.Updates))
 	for k := range d.Updates {
 		replaces = append(replaces, string(k))
 	}
 
+	// TODO: fix this as it seems to have some weird issues with name and jobs always contained in adds and deletes
 	changes := make([]string, 0, len(d.Updates)+len(d.Adds)+len(d.Deletes))
 	changes = append(changes, replaces...)
 	for k := range d.Adds {
