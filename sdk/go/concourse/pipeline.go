@@ -67,7 +67,7 @@ type pipelineArgs struct {
 	// A set of jobs for the pipeline to continuously schedule. At least one job is required for a pipeline to be valid.
 	Jobs []Job `pulumi:"jobs"`
 	// A set of resource types for resources within the pipeline to use.
-	ResourceTypes []ResourceType `pulumi:"resourceTypes"`
+	Resource_types []ResourceType `pulumi:"resource_types"`
 	// A set of resources for the pipeline to continuously check.
 	Resources []Resource `pulumi:"resources"`
 }
@@ -81,7 +81,7 @@ type PipelineArgs struct {
 	// A set of jobs for the pipeline to continuously schedule. At least one job is required for a pipeline to be valid.
 	Jobs JobArrayInput
 	// A set of resource types for resources within the pipeline to use.
-	ResourceTypes ResourceTypeArrayInput
+	Resource_types ResourceTypeArrayInput
 	// A set of resources for the pipeline to continuously check.
 	Resources ResourceArrayInput
 }

@@ -21,8 +21,8 @@ namespace Pulumi.Concourse.Inputs
         /// <summary>
         /// If set, specifies a maximum number of builds to run at a time. If serial or serial_groups are set, they take precedence and force this value to be 1.
         /// </summary>
-        [Input("maxInFlight")]
-        public Input<double>? MaxInFlight { get; set; }
+        [Input("max_in_flight")]
+        public Input<double>? Max_in_flight { get; set; }
 
         /// <summary>
         /// The name of the job. This should be short; it will show up in URLs.
@@ -33,26 +33,26 @@ namespace Pulumi.Concourse.Inputs
         /// <summary>
         /// Step to execute when the job aborts.
         /// </summary>
-        [Input("onAbort")]
-        public Input<Inputs.StepArgs>? OnAbort { get; set; }
+        [Input("on_abort")]
+        public Input<Inputs.StepArgs>? On_abort { get; set; }
 
         /// <summary>
         /// Step to execute when the job errors.
         /// </summary>
-        [Input("onError")]
-        public Input<Inputs.StepArgs>? OnError { get; set; }
+        [Input("on_error")]
+        public Input<Inputs.StepArgs>? On_error { get; set; }
 
         /// <summary>
         /// Step to execute when the job fails.
         /// </summary>
-        [Input("onFailure")]
-        public Input<Inputs.StepArgs>? OnFailure { get; set; }
+        [Input("on_failure")]
+        public Input<Inputs.StepArgs>? On_failure { get; set; }
 
         /// <summary>
         /// Step to execute when the job succeeds.
         /// </summary>
-        [Input("onSuccess")]
-        public Input<Inputs.StepArgs>? OnSuccess { get; set; }
+        [Input("on_success")]
+        public Input<Inputs.StepArgs>? On_success { get; set; }
 
         [Input("plan", required: true)]
         private InputList<Union<Inputs.TaskStepArgs, Inputs.GetStepArgs>>? _plan;

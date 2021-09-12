@@ -15,8 +15,8 @@ namespace Pulumi.Concourse.Inputs
         /// <summary>
         /// Default 1m. The interval on which to check for new versions of the resource. Acceptable interval options are defined by the time.ParseDuration function. If set to never the resource will not be automatically checked. The resource can still be checked manually via the web UI, fly, or webhooks.
         /// </summary>
-        [Input("checkEvery")]
-        public Input<string>? CheckEvery { get; set; }
+        [Input("check_every")]
+        public Input<string>? Check_every { get; set; }
 
         [Input("defaults")]
         private InputMap<string>? _defaults;

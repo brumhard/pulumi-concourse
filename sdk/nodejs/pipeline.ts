@@ -54,7 +54,7 @@ export class Pipeline extends pulumi.CustomResource {
             inputs["display"] = args ? args.display : undefined;
             inputs["groups"] = args ? args.groups : undefined;
             inputs["jobs"] = args ? args.jobs : undefined;
-            inputs["resourceTypes"] = args ? args.resourceTypes : undefined;
+            inputs["resource_types"] = args ? args.resource_types : undefined;
             inputs["resources"] = args ? args.resources : undefined;
             inputs["name"] = undefined /*out*/;
         } else {
@@ -86,7 +86,7 @@ export interface PipelineArgs {
     /**
      * A set of resource types for resources within the pipeline to use.
      */
-    resourceTypes?: pulumi.Input<pulumi.Input<inputs.ResourceTypeArgs>[]>;
+    resource_types?: pulumi.Input<pulumi.Input<inputs.ResourceTypeArgs>[]>;
     /**
      * A set of resources for the pipeline to continuously check.
      */

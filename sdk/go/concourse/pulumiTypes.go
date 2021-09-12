@@ -175,7 +175,7 @@ func (o AnonymousResourcePtrOutput) Type() pulumi.StringPtrOutput {
 
 type DisplayOptions struct {
 	// Allows users to specify a custom background image which is put at 30% opacity, grayscaled and blended into existing background. Must be an http, https, or relative URL.
-	BackgroundImage *string `pulumi:"backgroundImage"`
+	Background_image *string `pulumi:"background_image"`
 }
 
 // DisplayOptionsInput is an input type that accepts DisplayOptionsArgs and DisplayOptionsOutput values.
@@ -191,7 +191,7 @@ type DisplayOptionsInput interface {
 
 type DisplayOptionsArgs struct {
 	// Allows users to specify a custom background image which is put at 30% opacity, grayscaled and blended into existing background. Must be an http, https, or relative URL.
-	BackgroundImage pulumi.StringPtrInput `pulumi:"backgroundImage"`
+	Background_image pulumi.StringPtrInput `pulumi:"background_image"`
 }
 
 func (DisplayOptionsArgs) ElementType() reflect.Type {
@@ -272,8 +272,8 @@ func (o DisplayOptionsOutput) ToDisplayOptionsPtrOutputWithContext(ctx context.C
 }
 
 // Allows users to specify a custom background image which is put at 30% opacity, grayscaled and blended into existing background. Must be an http, https, or relative URL.
-func (o DisplayOptionsOutput) BackgroundImage() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DisplayOptions) *string { return v.BackgroundImage }).(pulumi.StringPtrOutput)
+func (o DisplayOptionsOutput) Background_image() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DisplayOptions) *string { return v.Background_image }).(pulumi.StringPtrOutput)
 }
 
 type DisplayOptionsPtrOutput struct{ *pulumi.OutputState }
@@ -301,12 +301,12 @@ func (o DisplayOptionsPtrOutput) Elem() DisplayOptionsOutput {
 }
 
 // Allows users to specify a custom background image which is put at 30% opacity, grayscaled and blended into existing background. Must be an http, https, or relative URL.
-func (o DisplayOptionsPtrOutput) BackgroundImage() pulumi.StringPtrOutput {
+func (o DisplayOptionsPtrOutput) Background_image() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DisplayOptions) *string {
 		if v == nil {
 			return nil
 		}
-		return v.BackgroundImage
+		return v.Background_image
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -493,18 +493,18 @@ type Job struct {
 	// Step to execute regardless of whether the job succeeds, fails, errors, or aborts.
 	Ensure *Step `pulumi:"ensure"`
 	// If set, specifies a maximum number of builds to run at a time. If serial or serial_groups are set, they take precedence and force this value to be 1.
-	MaxInFlight *float64 `pulumi:"maxInFlight"`
+	Max_in_flight *float64 `pulumi:"max_in_flight"`
 	// The name of the job. This should be short; it will show up in URLs.
 	Name string `pulumi:"name"`
 	// Step to execute when the job aborts.
-	OnAbort *Step `pulumi:"onAbort"`
+	On_abort *Step `pulumi:"on_abort"`
 	// Step to execute when the job errors.
-	OnError *Step `pulumi:"onError"`
+	On_error *Step `pulumi:"on_error"`
 	// Step to execute when the job fails.
-	OnFailure *Step `pulumi:"onFailure"`
+	On_failure *Step `pulumi:"on_failure"`
 	// Step to execute when the job succeeds.
-	OnSuccess *Step         `pulumi:"onSuccess"`
-	Plan      []interface{} `pulumi:"plan"`
+	On_success *Step         `pulumi:"on_success"`
+	Plan       []interface{} `pulumi:"plan"`
 	// Default false. If set to true, the build log of this job will be viewable by unauthenticated users. Unauthenticated users will always be able to see the inputs, outputs, and build status history of a job. This is useful if you would like to expose your pipeline publicly without showing sensitive information in the build log.
 	Public *bool `pulumi:"public"`
 	// Default false. If set to true, builds will queue up and execute one-by-one, rather than executing in parallel.
@@ -526,18 +526,18 @@ type JobArgs struct {
 	// Step to execute regardless of whether the job succeeds, fails, errors, or aborts.
 	Ensure StepPtrInput `pulumi:"ensure"`
 	// If set, specifies a maximum number of builds to run at a time. If serial or serial_groups are set, they take precedence and force this value to be 1.
-	MaxInFlight pulumi.Float64PtrInput `pulumi:"maxInFlight"`
+	Max_in_flight pulumi.Float64PtrInput `pulumi:"max_in_flight"`
 	// The name of the job. This should be short; it will show up in URLs.
 	Name pulumi.StringInput `pulumi:"name"`
 	// Step to execute when the job aborts.
-	OnAbort StepPtrInput `pulumi:"onAbort"`
+	On_abort StepPtrInput `pulumi:"on_abort"`
 	// Step to execute when the job errors.
-	OnError StepPtrInput `pulumi:"onError"`
+	On_error StepPtrInput `pulumi:"on_error"`
 	// Step to execute when the job fails.
-	OnFailure StepPtrInput `pulumi:"onFailure"`
+	On_failure StepPtrInput `pulumi:"on_failure"`
 	// Step to execute when the job succeeds.
-	OnSuccess StepPtrInput      `pulumi:"onSuccess"`
-	Plan      pulumi.ArrayInput `pulumi:"plan"`
+	On_success StepPtrInput      `pulumi:"on_success"`
+	Plan       pulumi.ArrayInput `pulumi:"plan"`
 	// Default false. If set to true, the build log of this job will be viewable by unauthenticated users. Unauthenticated users will always be able to see the inputs, outputs, and build status history of a job. This is useful if you would like to expose your pipeline publicly without showing sensitive information in the build log.
 	Public pulumi.BoolPtrInput `pulumi:"public"`
 	// Default false. If set to true, builds will queue up and execute one-by-one, rather than executing in parallel.
@@ -601,8 +601,8 @@ func (o JobOutput) Ensure() StepPtrOutput {
 }
 
 // If set, specifies a maximum number of builds to run at a time. If serial or serial_groups are set, they take precedence and force this value to be 1.
-func (o JobOutput) MaxInFlight() pulumi.Float64PtrOutput {
-	return o.ApplyT(func(v Job) *float64 { return v.MaxInFlight }).(pulumi.Float64PtrOutput)
+func (o JobOutput) Max_in_flight() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v Job) *float64 { return v.Max_in_flight }).(pulumi.Float64PtrOutput)
 }
 
 // The name of the job. This should be short; it will show up in URLs.
@@ -611,23 +611,23 @@ func (o JobOutput) Name() pulumi.StringOutput {
 }
 
 // Step to execute when the job aborts.
-func (o JobOutput) OnAbort() StepPtrOutput {
-	return o.ApplyT(func(v Job) *Step { return v.OnAbort }).(StepPtrOutput)
+func (o JobOutput) On_abort() StepPtrOutput {
+	return o.ApplyT(func(v Job) *Step { return v.On_abort }).(StepPtrOutput)
 }
 
 // Step to execute when the job errors.
-func (o JobOutput) OnError() StepPtrOutput {
-	return o.ApplyT(func(v Job) *Step { return v.OnError }).(StepPtrOutput)
+func (o JobOutput) On_error() StepPtrOutput {
+	return o.ApplyT(func(v Job) *Step { return v.On_error }).(StepPtrOutput)
 }
 
 // Step to execute when the job fails.
-func (o JobOutput) OnFailure() StepPtrOutput {
-	return o.ApplyT(func(v Job) *Step { return v.OnFailure }).(StepPtrOutput)
+func (o JobOutput) On_failure() StepPtrOutput {
+	return o.ApplyT(func(v Job) *Step { return v.On_failure }).(StepPtrOutput)
 }
 
 // Step to execute when the job succeeds.
-func (o JobOutput) OnSuccess() StepPtrOutput {
-	return o.ApplyT(func(v Job) *Step { return v.OnSuccess }).(StepPtrOutput)
+func (o JobOutput) On_success() StepPtrOutput {
+	return o.ApplyT(func(v Job) *Step { return v.On_success }).(StepPtrOutput)
 }
 
 func (o JobOutput) Plan() pulumi.ArrayOutput {
@@ -666,7 +666,7 @@ func (o JobArrayOutput) Index(i pulumi.IntInput) JobOutput {
 
 type Resource struct {
 	// Default 1m. The interval on which to check for new versions of the resource. Acceptable interval options are defined by the time.ParseDuration function. If set to never the resource will not be automatically checked. The resource can still be checked manually via the web UI, fly, or webhooks.
-	CheckEvery *string `pulumi:"checkEvery"`
+	Check_every *string `pulumi:"check_every"`
 	// The name of the resource. This should be short and simple. This name will be referenced by build plans of jobs in the pipeline.
 	Name string `pulumi:"name"`
 	// Default false. If set to true, the metadata for each version of the resource will be viewable by unauthenticated users (assuming the pipeline has been exposed).
@@ -678,7 +678,7 @@ type Resource struct {
 	// The resource type implementing the resource.
 	Type string `pulumi:"type"`
 	// If specified, web hooks can be sent to trigger an immediate check of the resource, specifying this value as a primitive form of authentication via query params.
-	WebhookToken *string `pulumi:"webhookToken"`
+	Webhook_token *string `pulumi:"webhook_token"`
 }
 
 // ResourceInput is an input type that accepts ResourceArgs and ResourceOutput values.
@@ -694,7 +694,7 @@ type ResourceInput interface {
 
 type ResourceArgs struct {
 	// Default 1m. The interval on which to check for new versions of the resource. Acceptable interval options are defined by the time.ParseDuration function. If set to never the resource will not be automatically checked. The resource can still be checked manually via the web UI, fly, or webhooks.
-	CheckEvery pulumi.StringPtrInput `pulumi:"checkEvery"`
+	Check_every pulumi.StringPtrInput `pulumi:"check_every"`
 	// The name of the resource. This should be short and simple. This name will be referenced by build plans of jobs in the pipeline.
 	Name pulumi.StringInput `pulumi:"name"`
 	// Default false. If set to true, the metadata for each version of the resource will be viewable by unauthenticated users (assuming the pipeline has been exposed).
@@ -706,7 +706,7 @@ type ResourceArgs struct {
 	// The resource type implementing the resource.
 	Type pulumi.StringInput `pulumi:"type"`
 	// If specified, web hooks can be sent to trigger an immediate check of the resource, specifying this value as a primitive form of authentication via query params.
-	WebhookToken pulumi.StringPtrInput `pulumi:"webhookToken"`
+	Webhook_token pulumi.StringPtrInput `pulumi:"webhook_token"`
 }
 
 func (ResourceArgs) ElementType() reflect.Type {
@@ -761,8 +761,8 @@ func (o ResourceOutput) ToResourceOutputWithContext(ctx context.Context) Resourc
 }
 
 // Default 1m. The interval on which to check for new versions of the resource. Acceptable interval options are defined by the time.ParseDuration function. If set to never the resource will not be automatically checked. The resource can still be checked manually via the web UI, fly, or webhooks.
-func (o ResourceOutput) CheckEvery() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v Resource) *string { return v.CheckEvery }).(pulumi.StringPtrOutput)
+func (o ResourceOutput) Check_every() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v Resource) *string { return v.Check_every }).(pulumi.StringPtrOutput)
 }
 
 // The name of the resource. This should be short and simple. This name will be referenced by build plans of jobs in the pipeline.
@@ -791,8 +791,8 @@ func (o ResourceOutput) Type() pulumi.StringOutput {
 }
 
 // If specified, web hooks can be sent to trigger an immediate check of the resource, specifying this value as a primitive form of authentication via query params.
-func (o ResourceOutput) WebhookToken() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v Resource) *string { return v.WebhookToken }).(pulumi.StringPtrOutput)
+func (o ResourceOutput) Webhook_token() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v Resource) *string { return v.Webhook_token }).(pulumi.StringPtrOutput)
 }
 
 type ResourceArrayOutput struct{ *pulumi.OutputState }
@@ -817,7 +817,7 @@ func (o ResourceArrayOutput) Index(i pulumi.IntInput) ResourceOutput {
 
 type ResourceType struct {
 	// Default 1m. The interval on which to check for new versions of the resource. Acceptable interval options are defined by the time.ParseDuration function. If set to never the resource will not be automatically checked. The resource can still be checked manually via the web UI, fly, or webhooks.
-	CheckEvery *string `pulumi:"checkEvery"`
+	Check_every *string `pulumi:"check_every"`
 	// The default configuration for the resource type. This varies by resource type, and is a black box to Concourse; it is merged with (duplicate fields are overwritten by) resource.source and passed to the resource at runtime.
 	Defaults map[string]string `pulumi:"defaults"`
 	// TThe name of the resource type. This should be short and simple. This name will be referenced by pipeline.resources defined within the same pipeline, and task.image_resources used by tasks running in the pipeline.
@@ -847,7 +847,7 @@ type ResourceTypeInput interface {
 
 type ResourceTypeArgs struct {
 	// Default 1m. The interval on which to check for new versions of the resource. Acceptable interval options are defined by the time.ParseDuration function. If set to never the resource will not be automatically checked. The resource can still be checked manually via the web UI, fly, or webhooks.
-	CheckEvery pulumi.StringPtrInput `pulumi:"checkEvery"`
+	Check_every pulumi.StringPtrInput `pulumi:"check_every"`
 	// The default configuration for the resource type. This varies by resource type, and is a black box to Concourse; it is merged with (duplicate fields are overwritten by) resource.source and passed to the resource at runtime.
 	Defaults pulumi.StringMapInput `pulumi:"defaults"`
 	// TThe name of the resource type. This should be short and simple. This name will be referenced by pipeline.resources defined within the same pipeline, and task.image_resources used by tasks running in the pipeline.
@@ -916,8 +916,8 @@ func (o ResourceTypeOutput) ToResourceTypeOutputWithContext(ctx context.Context)
 }
 
 // Default 1m. The interval on which to check for new versions of the resource. Acceptable interval options are defined by the time.ParseDuration function. If set to never the resource will not be automatically checked. The resource can still be checked manually via the web UI, fly, or webhooks.
-func (o ResourceTypeOutput) CheckEvery() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ResourceType) *string { return v.CheckEvery }).(pulumi.StringPtrOutput)
+func (o ResourceTypeOutput) Check_every() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ResourceType) *string { return v.Check_every }).(pulumi.StringPtrOutput)
 }
 
 // The default configuration for the resource type. This varies by resource type, and is a black box to Concourse; it is merged with (duplicate fields are overwritten by) resource.source and passed to the resource at runtime.

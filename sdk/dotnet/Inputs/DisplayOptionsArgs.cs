@@ -15,8 +15,8 @@ namespace Pulumi.Concourse.Inputs
         /// <summary>
         /// Allows users to specify a custom background image which is put at 30% opacity, grayscaled and blended into existing background. Must be an http, https, or relative URL.
         /// </summary>
-        [Input("backgroundImage")]
-        public Input<string>? BackgroundImage { get; set; }
+        [Input("background_image")]
+        public Input<string>? Background_image { get; set; }
 
         public DisplayOptionsArgs()
         {

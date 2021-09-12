@@ -14,7 +14,7 @@ export interface DisplayOptionsArgs {
     /**
      * Allows users to specify a custom background image which is put at 30% opacity, grayscaled and blended into existing background. Must be an http, https, or relative URL.
      */
-    backgroundImage?: pulumi.Input<string>;
+    background_image?: pulumi.Input<string>;
 }
 
 export interface GetStepArgs {
@@ -44,7 +44,7 @@ export interface JobArgs {
     /**
      * If set, specifies a maximum number of builds to run at a time. If serial or serial_groups are set, they take precedence and force this value to be 1.
      */
-    maxInFlight?: pulumi.Input<number>;
+    max_in_flight?: pulumi.Input<number>;
     /**
      * The name of the job. This should be short; it will show up in URLs.
      */
@@ -52,19 +52,19 @@ export interface JobArgs {
     /**
      * Step to execute when the job aborts.
      */
-    onAbort?: pulumi.Input<inputs.StepArgs>;
+    on_abort?: pulumi.Input<inputs.StepArgs>;
     /**
      * Step to execute when the job errors.
      */
-    onError?: pulumi.Input<inputs.StepArgs>;
+    on_error?: pulumi.Input<inputs.StepArgs>;
     /**
      * Step to execute when the job fails.
      */
-    onFailure?: pulumi.Input<inputs.StepArgs>;
+    on_failure?: pulumi.Input<inputs.StepArgs>;
     /**
      * Step to execute when the job succeeds.
      */
-    onSuccess?: pulumi.Input<inputs.StepArgs>;
+    on_success?: pulumi.Input<inputs.StepArgs>;
     plan: pulumi.Input<pulumi.Input<inputs.TaskStepArgs | inputs.GetStepArgs>[]>;
     /**
      * Default false. If set to true, the build log of this job will be viewable by unauthenticated users. Unauthenticated users will always be able to see the inputs, outputs, and build status history of a job. This is useful if you would like to expose your pipeline publicly without showing sensitive information in the build log.
@@ -80,7 +80,7 @@ export interface ResourceArgs {
     /**
      * Default 1m. The interval on which to check for new versions of the resource. Acceptable interval options are defined by the time.ParseDuration function. If set to never the resource will not be automatically checked. The resource can still be checked manually via the web UI, fly, or webhooks.
      */
-    checkEvery?: pulumi.Input<string>;
+    check_every?: pulumi.Input<string>;
     /**
      * The name of the resource. This should be short and simple. This name will be referenced by build plans of jobs in the pipeline.
      */
@@ -104,14 +104,14 @@ export interface ResourceArgs {
     /**
      * If specified, web hooks can be sent to trigger an immediate check of the resource, specifying this value as a primitive form of authentication via query params.
      */
-    webhookToken?: pulumi.Input<string>;
+    webhook_token?: pulumi.Input<string>;
 }
 
 export interface ResourceTypeArgs {
     /**
      * Default 1m. The interval on which to check for new versions of the resource. Acceptable interval options are defined by the time.ParseDuration function. If set to never the resource will not be automatically checked. The resource can still be checked manually via the web UI, fly, or webhooks.
      */
-    checkEvery?: pulumi.Input<string>;
+    check_every?: pulumi.Input<string>;
     /**
      * The default configuration for the resource type. This varies by resource type, and is a black box to Concourse; it is merged with (duplicate fields are overwritten by) resource.source and passed to the resource at runtime.
      */
