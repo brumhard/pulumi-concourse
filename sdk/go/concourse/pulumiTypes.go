@@ -491,19 +491,19 @@ func (o GroupArrayOutput) Index(i pulumi.IntInput) GroupOutput {
 
 type Job struct {
 	// Step to execute regardless of whether the job succeeds, fails, errors, or aborts.
-	Ensure *Step `pulumi:"ensure"`
+	Ensure interface{} `pulumi:"ensure"`
 	// If set, specifies a maximum number of builds to run at a time. If serial or serial_groups are set, they take precedence and force this value to be 1.
 	Max_in_flight *float64 `pulumi:"max_in_flight"`
 	// The name of the job. This should be short; it will show up in URLs.
 	Name string `pulumi:"name"`
 	// Step to execute when the job aborts.
-	On_abort *Step `pulumi:"on_abort"`
+	On_abort interface{} `pulumi:"on_abort"`
 	// Step to execute when the job errors.
-	On_error *Step `pulumi:"on_error"`
+	On_error interface{} `pulumi:"on_error"`
 	// Step to execute when the job fails.
-	On_failure *Step `pulumi:"on_failure"`
+	On_failure interface{} `pulumi:"on_failure"`
 	// Step to execute when the job succeeds.
-	On_success *Step         `pulumi:"on_success"`
+	On_success interface{}   `pulumi:"on_success"`
 	Plan       []interface{} `pulumi:"plan"`
 	// Default false. If set to true, the build log of this job will be viewable by unauthenticated users. Unauthenticated users will always be able to see the inputs, outputs, and build status history of a job. This is useful if you would like to expose your pipeline publicly without showing sensitive information in the build log.
 	Public *bool `pulumi:"public"`
@@ -524,19 +524,19 @@ type JobInput interface {
 
 type JobArgs struct {
 	// Step to execute regardless of whether the job succeeds, fails, errors, or aborts.
-	Ensure StepPtrInput `pulumi:"ensure"`
+	Ensure pulumi.Input `pulumi:"ensure"`
 	// If set, specifies a maximum number of builds to run at a time. If serial or serial_groups are set, they take precedence and force this value to be 1.
 	Max_in_flight pulumi.Float64PtrInput `pulumi:"max_in_flight"`
 	// The name of the job. This should be short; it will show up in URLs.
 	Name pulumi.StringInput `pulumi:"name"`
 	// Step to execute when the job aborts.
-	On_abort StepPtrInput `pulumi:"on_abort"`
+	On_abort pulumi.Input `pulumi:"on_abort"`
 	// Step to execute when the job errors.
-	On_error StepPtrInput `pulumi:"on_error"`
+	On_error pulumi.Input `pulumi:"on_error"`
 	// Step to execute when the job fails.
-	On_failure StepPtrInput `pulumi:"on_failure"`
+	On_failure pulumi.Input `pulumi:"on_failure"`
 	// Step to execute when the job succeeds.
-	On_success StepPtrInput      `pulumi:"on_success"`
+	On_success pulumi.Input      `pulumi:"on_success"`
 	Plan       pulumi.ArrayInput `pulumi:"plan"`
 	// Default false. If set to true, the build log of this job will be viewable by unauthenticated users. Unauthenticated users will always be able to see the inputs, outputs, and build status history of a job. This is useful if you would like to expose your pipeline publicly without showing sensitive information in the build log.
 	Public pulumi.BoolPtrInput `pulumi:"public"`
@@ -596,8 +596,8 @@ func (o JobOutput) ToJobOutputWithContext(ctx context.Context) JobOutput {
 }
 
 // Step to execute regardless of whether the job succeeds, fails, errors, or aborts.
-func (o JobOutput) Ensure() StepPtrOutput {
-	return o.ApplyT(func(v Job) *Step { return v.Ensure }).(StepPtrOutput)
+func (o JobOutput) Ensure() pulumi.AnyOutput {
+	return o.ApplyT(func(v Job) interface{} { return v.Ensure }).(pulumi.AnyOutput)
 }
 
 // If set, specifies a maximum number of builds to run at a time. If serial or serial_groups are set, they take precedence and force this value to be 1.
@@ -611,23 +611,23 @@ func (o JobOutput) Name() pulumi.StringOutput {
 }
 
 // Step to execute when the job aborts.
-func (o JobOutput) On_abort() StepPtrOutput {
-	return o.ApplyT(func(v Job) *Step { return v.On_abort }).(StepPtrOutput)
+func (o JobOutput) On_abort() pulumi.AnyOutput {
+	return o.ApplyT(func(v Job) interface{} { return v.On_abort }).(pulumi.AnyOutput)
 }
 
 // Step to execute when the job errors.
-func (o JobOutput) On_error() StepPtrOutput {
-	return o.ApplyT(func(v Job) *Step { return v.On_error }).(StepPtrOutput)
+func (o JobOutput) On_error() pulumi.AnyOutput {
+	return o.ApplyT(func(v Job) interface{} { return v.On_error }).(pulumi.AnyOutput)
 }
 
 // Step to execute when the job fails.
-func (o JobOutput) On_failure() StepPtrOutput {
-	return o.ApplyT(func(v Job) *Step { return v.On_failure }).(StepPtrOutput)
+func (o JobOutput) On_failure() pulumi.AnyOutput {
+	return o.ApplyT(func(v Job) interface{} { return v.On_failure }).(pulumi.AnyOutput)
 }
 
 // Step to execute when the job succeeds.
-func (o JobOutput) On_success() StepPtrOutput {
-	return o.ApplyT(func(v Job) *Step { return v.On_success }).(StepPtrOutput)
+func (o JobOutput) On_success() pulumi.AnyOutput {
+	return o.ApplyT(func(v Job) interface{} { return v.On_success }).(pulumi.AnyOutput)
 }
 
 func (o JobOutput) Plan() pulumi.ArrayOutput {
@@ -1153,124 +1153,6 @@ func (o RunArgsPtrOutput) User() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-type Step struct {
-}
-
-// StepInput is an input type that accepts StepArgs and StepOutput values.
-// You can construct a concrete instance of `StepInput` via:
-//
-//          StepArgs{...}
-type StepInput interface {
-	pulumi.Input
-
-	ToStepOutput() StepOutput
-	ToStepOutputWithContext(context.Context) StepOutput
-}
-
-type StepArgs struct {
-}
-
-func (StepArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*Step)(nil)).Elem()
-}
-
-func (i StepArgs) ToStepOutput() StepOutput {
-	return i.ToStepOutputWithContext(context.Background())
-}
-
-func (i StepArgs) ToStepOutputWithContext(ctx context.Context) StepOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(StepOutput)
-}
-
-func (i StepArgs) ToStepPtrOutput() StepPtrOutput {
-	return i.ToStepPtrOutputWithContext(context.Background())
-}
-
-func (i StepArgs) ToStepPtrOutputWithContext(ctx context.Context) StepPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(StepOutput).ToStepPtrOutputWithContext(ctx)
-}
-
-// StepPtrInput is an input type that accepts StepArgs, StepPtr and StepPtrOutput values.
-// You can construct a concrete instance of `StepPtrInput` via:
-//
-//          StepArgs{...}
-//
-//  or:
-//
-//          nil
-type StepPtrInput interface {
-	pulumi.Input
-
-	ToStepPtrOutput() StepPtrOutput
-	ToStepPtrOutputWithContext(context.Context) StepPtrOutput
-}
-
-type stepPtrType StepArgs
-
-func StepPtr(v *StepArgs) StepPtrInput {
-	return (*stepPtrType)(v)
-}
-
-func (*stepPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**Step)(nil)).Elem()
-}
-
-func (i *stepPtrType) ToStepPtrOutput() StepPtrOutput {
-	return i.ToStepPtrOutputWithContext(context.Background())
-}
-
-func (i *stepPtrType) ToStepPtrOutputWithContext(ctx context.Context) StepPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(StepPtrOutput)
-}
-
-type StepOutput struct{ *pulumi.OutputState }
-
-func (StepOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*Step)(nil)).Elem()
-}
-
-func (o StepOutput) ToStepOutput() StepOutput {
-	return o
-}
-
-func (o StepOutput) ToStepOutputWithContext(ctx context.Context) StepOutput {
-	return o
-}
-
-func (o StepOutput) ToStepPtrOutput() StepPtrOutput {
-	return o.ToStepPtrOutputWithContext(context.Background())
-}
-
-func (o StepOutput) ToStepPtrOutputWithContext(ctx context.Context) StepPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v Step) *Step {
-		return &v
-	}).(StepPtrOutput)
-}
-
-type StepPtrOutput struct{ *pulumi.OutputState }
-
-func (StepPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**Step)(nil)).Elem()
-}
-
-func (o StepPtrOutput) ToStepPtrOutput() StepPtrOutput {
-	return o
-}
-
-func (o StepPtrOutput) ToStepPtrOutputWithContext(ctx context.Context) StepPtrOutput {
-	return o
-}
-
-func (o StepPtrOutput) Elem() StepOutput {
-	return o.ApplyT(func(v *Step) Step {
-		if v != nil {
-			return *v
-		}
-		var ret Step
-		return ret
-	}).(StepOutput)
-}
-
 type TaskConfig struct {
 	Image_resource AnonymousResource `pulumi:"image_resource"`
 	Platform       string            `pulumi:"platform"`
@@ -1511,8 +1393,6 @@ func init() {
 	pulumi.RegisterOutputType(ResourceTypeArrayOutput{})
 	pulumi.RegisterOutputType(RunArgsOutput{})
 	pulumi.RegisterOutputType(RunArgsPtrOutput{})
-	pulumi.RegisterOutputType(StepOutput{})
-	pulumi.RegisterOutputType(StepPtrOutput{})
 	pulumi.RegisterOutputType(TaskConfigOutput{})
 	pulumi.RegisterOutputType(TaskConfigPtrOutput{})
 	pulumi.RegisterOutputType(TaskStepOutput{})

@@ -17,7 +17,6 @@ __all__ = [
     'ResourceTypeArgs',
     'ResourceArgs',
     'RunArgsArgs',
-    'StepArgs',
     'TaskConfigArgs',
     'TaskStepArgs',
 ]
@@ -191,22 +190,22 @@ class JobArgs:
     def __init__(__self__, *,
                  name: pulumi.Input[str],
                  plan: pulumi.Input[Sequence[pulumi.Input[Union['TaskStepArgs', 'GetStepArgs']]]],
-                 ensure: Optional[pulumi.Input['StepArgs']] = None,
+                 ensure: Optional[pulumi.Input[Union['TaskStepArgs', 'GetStepArgs']]] = None,
                  max_in_flight: Optional[pulumi.Input[float]] = None,
-                 on_abort: Optional[pulumi.Input['StepArgs']] = None,
-                 on_error: Optional[pulumi.Input['StepArgs']] = None,
-                 on_failure: Optional[pulumi.Input['StepArgs']] = None,
-                 on_success: Optional[pulumi.Input['StepArgs']] = None,
+                 on_abort: Optional[pulumi.Input[Union['TaskStepArgs', 'GetStepArgs']]] = None,
+                 on_error: Optional[pulumi.Input[Union['TaskStepArgs', 'GetStepArgs']]] = None,
+                 on_failure: Optional[pulumi.Input[Union['TaskStepArgs', 'GetStepArgs']]] = None,
+                 on_success: Optional[pulumi.Input[Union['TaskStepArgs', 'GetStepArgs']]] = None,
                  public: Optional[pulumi.Input[bool]] = None,
                  serial: Optional[pulumi.Input[bool]] = None):
         """
         :param pulumi.Input[str] name: The name of the job. This should be short; it will show up in URLs.
-        :param pulumi.Input['StepArgs'] ensure: Step to execute regardless of whether the job succeeds, fails, errors, or aborts.
+        :param pulumi.Input[Union['TaskStepArgs', 'GetStepArgs']] ensure: Step to execute regardless of whether the job succeeds, fails, errors, or aborts.
         :param pulumi.Input[float] max_in_flight: If set, specifies a maximum number of builds to run at a time. If serial or serial_groups are set, they take precedence and force this value to be 1.
-        :param pulumi.Input['StepArgs'] on_abort: Step to execute when the job aborts.
-        :param pulumi.Input['StepArgs'] on_error: Step to execute when the job errors.
-        :param pulumi.Input['StepArgs'] on_failure: Step to execute when the job fails.
-        :param pulumi.Input['StepArgs'] on_success: Step to execute when the job succeeds.
+        :param pulumi.Input[Union['TaskStepArgs', 'GetStepArgs']] on_abort: Step to execute when the job aborts.
+        :param pulumi.Input[Union['TaskStepArgs', 'GetStepArgs']] on_error: Step to execute when the job errors.
+        :param pulumi.Input[Union['TaskStepArgs', 'GetStepArgs']] on_failure: Step to execute when the job fails.
+        :param pulumi.Input[Union['TaskStepArgs', 'GetStepArgs']] on_success: Step to execute when the job succeeds.
         :param pulumi.Input[bool] public: Default false. If set to true, the build log of this job will be viewable by unauthenticated users. Unauthenticated users will always be able to see the inputs, outputs, and build status history of a job. This is useful if you would like to expose your pipeline publicly without showing sensitive information in the build log.
         :param pulumi.Input[bool] serial: Default false. If set to true, builds will queue up and execute one-by-one, rather than executing in parallel.
         """
@@ -252,14 +251,14 @@ class JobArgs:
 
     @property
     @pulumi.getter
-    def ensure(self) -> Optional[pulumi.Input['StepArgs']]:
+    def ensure(self) -> Optional[pulumi.Input[Union['TaskStepArgs', 'GetStepArgs']]]:
         """
         Step to execute regardless of whether the job succeeds, fails, errors, or aborts.
         """
         return pulumi.get(self, "ensure")
 
     @ensure.setter
-    def ensure(self, value: Optional[pulumi.Input['StepArgs']]):
+    def ensure(self, value: Optional[pulumi.Input[Union['TaskStepArgs', 'GetStepArgs']]]):
         pulumi.set(self, "ensure", value)
 
     @property
@@ -276,50 +275,50 @@ class JobArgs:
 
     @property
     @pulumi.getter
-    def on_abort(self) -> Optional[pulumi.Input['StepArgs']]:
+    def on_abort(self) -> Optional[pulumi.Input[Union['TaskStepArgs', 'GetStepArgs']]]:
         """
         Step to execute when the job aborts.
         """
         return pulumi.get(self, "on_abort")
 
     @on_abort.setter
-    def on_abort(self, value: Optional[pulumi.Input['StepArgs']]):
+    def on_abort(self, value: Optional[pulumi.Input[Union['TaskStepArgs', 'GetStepArgs']]]):
         pulumi.set(self, "on_abort", value)
 
     @property
     @pulumi.getter
-    def on_error(self) -> Optional[pulumi.Input['StepArgs']]:
+    def on_error(self) -> Optional[pulumi.Input[Union['TaskStepArgs', 'GetStepArgs']]]:
         """
         Step to execute when the job errors.
         """
         return pulumi.get(self, "on_error")
 
     @on_error.setter
-    def on_error(self, value: Optional[pulumi.Input['StepArgs']]):
+    def on_error(self, value: Optional[pulumi.Input[Union['TaskStepArgs', 'GetStepArgs']]]):
         pulumi.set(self, "on_error", value)
 
     @property
     @pulumi.getter
-    def on_failure(self) -> Optional[pulumi.Input['StepArgs']]:
+    def on_failure(self) -> Optional[pulumi.Input[Union['TaskStepArgs', 'GetStepArgs']]]:
         """
         Step to execute when the job fails.
         """
         return pulumi.get(self, "on_failure")
 
     @on_failure.setter
-    def on_failure(self, value: Optional[pulumi.Input['StepArgs']]):
+    def on_failure(self, value: Optional[pulumi.Input[Union['TaskStepArgs', 'GetStepArgs']]]):
         pulumi.set(self, "on_failure", value)
 
     @property
     @pulumi.getter
-    def on_success(self) -> Optional[pulumi.Input['StepArgs']]:
+    def on_success(self) -> Optional[pulumi.Input[Union['TaskStepArgs', 'GetStepArgs']]]:
         """
         Step to execute when the job succeeds.
         """
         return pulumi.get(self, "on_success")
 
     @on_success.setter
-    def on_success(self, value: Optional[pulumi.Input['StepArgs']]):
+    def on_success(self, value: Optional[pulumi.Input[Union['TaskStepArgs', 'GetStepArgs']]]):
         pulumi.set(self, "on_success", value)
 
     @property
@@ -648,12 +647,6 @@ class RunArgsArgs:
     @user.setter
     def user(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "user", value)
-
-
-@pulumi.input_type
-class StepArgs:
-    def __init__(__self__):
-        pass
 
 
 @pulumi.input_type

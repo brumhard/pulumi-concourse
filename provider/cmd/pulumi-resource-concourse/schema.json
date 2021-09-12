@@ -177,18 +177,6 @@
                 "get"
             ]
         },
-        "concourse:index:Step": {
-            "type": "object",
-            "oneOf": [
-                {
-                    "type": "object",
-                    "$ref": "#/types/concourse:index:TaskStep"
-                },
-                {
-                    "$ref": "#/types/concourse:index:GetStep"
-                }
-            ]
-        },
         "concourse:index:Group": {
             "type": "object",
             "description": "",
@@ -326,24 +314,59 @@
                     "description": "Default false. If set to true, the build log of this job will be viewable by unauthenticated users. Unauthenticated users will always be able to see the inputs, outputs, and build status history of a job. This is useful if you would like to expose your pipeline publicly without showing sensitive information in the build log."
                 },
                 "on_success": {
-                    "$ref": "#/types/concourse:index:Step",
-                    "description": "Step to execute when the job succeeds."
+                    "description": "Step to execute when the job succeeds.",
+                    "oneOf": [
+                        {
+                            "$ref": "#/types/concourse:index:TaskStep"
+                        },
+                        {
+                            "$ref": "#/types/concourse:index:GetStep"
+                        }
+                    ]
                 },
                 "on_failure": {
-                    "$ref":  "#/types/concourse:index:Step",
-                    "description": "Step to execute when the job fails."
+                    "description": "Step to execute when the job fails.",
+                    "oneOf": [
+                        {
+                            "$ref": "#/types/concourse:index:TaskStep"
+                        },
+                        {
+                            "$ref": "#/types/concourse:index:GetStep"
+                        }
+                    ]
                 },
                 "on_error": {
-                    "$ref":  "#/types/concourse:index:Step",
-                    "description": "Step to execute when the job errors."
+                    "description": "Step to execute when the job errors.",
+                    "oneOf": [
+                        {
+                            "$ref": "#/types/concourse:index:TaskStep"
+                        },
+                        {
+                            "$ref": "#/types/concourse:index:GetStep"
+                        }
+                    ]
                 },
                 "on_abort": {
-                    "$ref":  "#/types/concourse:index:Step",
-                    "description": "Step to execute when the job aborts."
+                    "description": "Step to execute when the job aborts.",
+                    "oneOf": [
+                        {
+                            "$ref": "#/types/concourse:index:TaskStep"
+                        },
+                        {
+                            "$ref": "#/types/concourse:index:GetStep"
+                        }
+                    ]
                 },
                 "ensure": {
-                    "$ref":  "#/types/concourse:index:Step",
-                    "description": "Step to execute regardless of whether the job succeeds, fails, errors, or aborts."
+                    "description": "Step to execute regardless of whether the job succeeds, fails, errors, or aborts.",
+                    "oneOf": [
+                        {
+                            "$ref": "#/types/concourse:index:TaskStep"
+                        },
+                        {
+                            "$ref": "#/types/concourse:index:GetStep"
+                        }
+                    ]
                 }
             },
             "required": [
