@@ -7,14 +7,8 @@ import (
 )
 import "sigs.k8s.io/yaml"
 
-// TODO: check if schema with camelCase works
 // makePipeline creates the pipeline in concourse and returns the pipeline name
 func (k *concourseProvider) makePipeline(name string, configMap map[string]interface{}) error {
-	// TODO: check if it works with version set to empty string, otherwise put it into provider config
-	// TODO: check how checkCredentials works
-	// concourse/concourse/atc/api/configserver/save.go
-	// concourse/concourse/atc/config.go
-
 	// TODO: why doesn't this work
 	logging.V(3).Infof("creating concourse pipeline")
 

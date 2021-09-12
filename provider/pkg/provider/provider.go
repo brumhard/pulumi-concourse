@@ -108,7 +108,6 @@ func (k *concourseProvider) getTeam() {
 	k.team = team
 }
 
-// TODO: the env vars queried with this function should match the ones defined in schema.json provider section
 func (k *concourseProvider) getConfig(configName, envName string) string {
 	if val, ok := k.config[configName]; ok {
 		return val
@@ -180,7 +179,6 @@ func (k *concourseProvider) Diff(ctx context.Context, req *pulumirpc.DiffRequest
 }
 
 // Create allocates a new instance of the provided resource and returns its unique ID afterwards.
-// TODO: could be somewhat equal to https://github.com/concourse/concourse/blob/91bc30439da46c104c223d7530e9ffcbff285bba/fly/commands/internal/setpipelinehelpers/atc_config.go#L48
 func (k *concourseProvider) Create(ctx context.Context, req *pulumirpc.CreateRequest) (*pulumirpc.CreateResponse, error) {
 	urn := resource.URN(req.GetUrn())
 	ty := urn.Type()
