@@ -21,11 +21,9 @@ const pipeline = new concourse.Pipeline(
                 path: "bash",
                 args: [
                   "-cex",
-                  `
-                  echo "this is garbage"
-                  echo "cmon main"
-                  echo "let's party"
-                  `
+                  `echo "this is garbage"
+echo "cmon main"
+echo "let's party"`
                 ]
               }
             }
