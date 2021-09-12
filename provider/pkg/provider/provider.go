@@ -36,7 +36,6 @@ import (
 	pbempty "github.com/golang/protobuf/ptypes/empty"
 )
 
-// TODO: get this from concourse package somewhere?
 var concourseDefaultTeam = "main"
 
 type concourseProvider struct {
@@ -71,7 +70,6 @@ func (k *concourseProvider) Configure(ctx context.Context, req *pulumirpc.Config
 
 	k.setLoggingContext(ctx)
 
-	// TODO: setup logging
 	if err := k.getClient(); err != nil {
 		return nil, err
 	}
