@@ -66,8 +66,6 @@ type pipelineArgs struct {
 	Groups []Group `pulumi:"groups"`
 	// A set of jobs for the pipeline to continuously schedule. At least one job is required for a pipeline to be valid.
 	Jobs []Job `pulumi:"jobs"`
-	// Explicitly set to overwrite auto-naming.
-	PipelineName *string `pulumi:"pipelineName"`
 	// A set of resource types for resources within the pipeline to use.
 	ResourceTypes []ResourceType `pulumi:"resourceTypes"`
 	// A set of resources for the pipeline to continuously check.
@@ -82,8 +80,6 @@ type PipelineArgs struct {
 	Groups GroupArrayInput
 	// A set of jobs for the pipeline to continuously schedule. At least one job is required for a pipeline to be valid.
 	Jobs JobArrayInput
-	// Explicitly set to overwrite auto-naming.
-	PipelineName pulumi.StringPtrInput
 	// A set of resource types for resources within the pipeline to use.
 	ResourceTypes ResourceTypeArrayInput
 	// A set of resources for the pipeline to continuously check.

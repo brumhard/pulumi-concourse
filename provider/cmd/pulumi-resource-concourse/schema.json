@@ -118,7 +118,7 @@
                 "platform": {
                     "type": "string"
                 },
-                "imageResource": {
+                "image_resource": {
                     "type": "object",
                     "$ref": "#/types/concourse:index:AnonymousResource"
                 },
@@ -129,7 +129,7 @@
             },
             "required": [
                 "platform",
-                "imageResource",
+                "image_resource",
                 "run"
             ]
         },
@@ -374,10 +374,6 @@
                 "name"
             ],
             "inputProperties": {
-                "pipelineName": {
-                    "type": "string",
-                    "description": "Explicitly set to overwrite auto-naming."
-                },
                 "groups": {
                     "type": "array",
                     "items": {

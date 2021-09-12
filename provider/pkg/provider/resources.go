@@ -2,6 +2,7 @@ package provider
 
 import (
 	"github.com/concourse/concourse/atc"
+	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/util/logging"
 )
 import "sigs.k8s.io/yaml"
@@ -28,9 +29,13 @@ func (k *concourseProvider) makePipeline(name string, config atc.Config) error {
 	}
 
 	if len(warnings) > 0 {
+		warnString := ""
 		for _, w := range warnings {
 			logging.V(3).Infof("%s: %s", w.Type, w.Message)
+			warnString += "     " + w.Type + ":" + w.Message
 		}
+		// TODO: replace this with proper warnings, otherwise it will leave behind orphaned pipelines
+		return errors.New("pipeline creation had errors my dude:" + warnString)
 	}
 
 	return nil
