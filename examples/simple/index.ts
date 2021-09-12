@@ -22,7 +22,7 @@ const pipeline = new concourse.Pipeline(
                 args: [
                   "-cex",
                   `
-                  echo "this is great"
+                  echo "this is garbage"
                   echo "cmon main"
                   echo "let's party"
                   `
@@ -38,6 +38,3 @@ const pipeline = new concourse.Pipeline(
     provider: provider,
   }
 );
-
-
-export const output = pipeline.name;
