@@ -147,8 +147,6 @@ func (k *concourseProvider) Check(ctx context.Context, req *pulumirpc.CheckReque
 }
 
 // Diff checks what impacts a hypothetical update will have on the resource's properties.
-// TODO: apparently there is a diff function in the pipeline config struct
-// https://github.com/concourse/concourse/blob/master/atc/config_diff.go#L277
 func (k *concourseProvider) Diff(ctx context.Context, req *pulumirpc.DiffRequest) (*pulumirpc.DiffResponse, error) {
 	urn := resource.URN(req.GetUrn())
 	ty := urn.Type()
@@ -167,14 +165,31 @@ func (k *concourseProvider) Diff(ctx context.Context, req *pulumirpc.DiffRequest
 	}
 
 	d := olds.Diff(news)
-	changes := pulumirpc.DiffResponse_DIFF_NONE
-	if d.Changed("length") {
-		changes = pulumirpc.DiffResponse_DIFF_SOME
+
+	replaces := make([]string, 0, len(d.Updates))
+	for k := range d.Updates {
+		replaces = append(replaces, string(k))
 	}
 
+	changes := make([]string, 0, len(d.Updates)+len(d.Adds)+len(d.Deletes))
+	changes = append(changes, replaces...)
+	for k := range d.Adds {
+		changes = append(changes, string(k))
+	}
+	for k := range d.Deletes {
+		changes = append(changes, string(k))
+	}
+
+	changeType := pulumirpc.DiffResponse_DIFF_NONE
+	if len(changes) > 0 {
+		changeType = pulumirpc.DiffResponse_DIFF_SOME
+	}
+
+	// TODO: add DetailedDiff
 	return &pulumirpc.DiffResponse{
-		Changes:  changes,
-		Replaces: []string{"length"},
+		Replaces: replaces,
+		Changes:  changeType,
+		Diffs:    changes,
 	}, nil
 }
 
@@ -194,7 +209,7 @@ func (k *concourseProvider) Create(ctx context.Context, req *pulumirpc.CreateReq
 	}
 
 	// Actually "create" the pipeline
-	if err := k.makePipeline(name, inputs.Mappable()); err != nil {
+	if err := k.makeOrUpdatePipeline(name, inputs.Mappable()); err != nil {
 		return nil, err
 	}
 
@@ -209,6 +224,7 @@ func (k *concourseProvider) Create(ctx context.Context, req *pulumirpc.CreateReq
 	if err != nil {
 		return nil, err
 	}
+
 	return &pulumirpc.CreateResponse{
 		Id:         k.teamResourceID(name),
 		Properties: outputProperties,
@@ -248,8 +264,33 @@ func (k *concourseProvider) Update(ctx context.Context, req *pulumirpc.UpdateReq
 		return nil, fmt.Errorf("Unknown resource type '%s'", ty)
 	}
 
-	// Our Random resource will never be updated - if there is a diff, it will be a replacement.
-	return nil, status.Error(codes.Unimplemented, "Update is not yet implemented for 'concourse:index:Pipeline'")
+	name := urn.Name().String()
+
+	news, err := plugin.UnmarshalProperties(req.GetNews(), plugin.MarshalOptions{KeepUnknowns: true, SkipNulls: true})
+	if err != nil {
+		return nil, err
+	}
+
+	// Actually "update" the pipeline
+	if err := k.makeOrUpdatePipeline(name, news.Mappable()); err != nil {
+		return nil, err
+	}
+
+	outputs := map[string]interface{}{
+		"name": name,
+	}
+
+	outputProperties, err := plugin.MarshalProperties(
+		resource.NewPropertyMapFromMap(outputs),
+		plugin.MarshalOptions{KeepUnknowns: true, SkipNulls: true},
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	return &pulumirpc.UpdateResponse{
+		Properties: outputProperties,
+	}, nil
 }
 
 // Delete tears down an existing resource with the given ID.  If it fails, the resource is assumed
