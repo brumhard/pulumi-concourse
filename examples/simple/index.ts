@@ -13,7 +13,7 @@ const pipeline = new concourse.Pipeline(
             task: "lel",
             config: {
               platform: "linux",
-              imageResource: {
+              image_resource: {
                 type: "registry-image",
                 source: { "repository": "debian" }
               },

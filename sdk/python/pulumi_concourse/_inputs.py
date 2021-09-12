@@ -667,7 +667,7 @@ class TaskConfigArgs:
         pulumi.set(__self__, "run", run)
 
     @property
-    @pulumi.getter(name="imageResource")
+    @pulumi.getter
     def image_resource(self) -> pulumi.Input['AnonymousResourceArgs']:
         return pulumi.get(self, "image_resource")
 

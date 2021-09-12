@@ -12,8 +12,8 @@ namespace Pulumi.Concourse.Inputs
 
     public sealed class TaskConfigArgs : Pulumi.ResourceArgs
     {
-        [Input("imageResource", required: true)]
-        public Input<Inputs.AnonymousResourceArgs> ImageResource { get; set; } = null!;
+        [Input("image_resource", required: true)]
+        public Input<Inputs.AnonymousResourceArgs> Image_resource { get; set; } = null!;
 
         [Input("platform", required: true)]
         public Input<string> Platform { get; set; } = null!;
