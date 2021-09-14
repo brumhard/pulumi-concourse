@@ -4,7 +4,7 @@ import { Config } from "@pulumi/pulumi";
 
 // shared
 
-const bashTask = (taskName: string, script: string): input.TaskStepArgs => {
+const bashTask = (taskName: string, ...scriptLines: string[]): input.TaskStepArgs => {
   return {
     task: taskName,
     config: {
@@ -17,7 +17,7 @@ const bashTask = (taskName: string, script: string): input.TaskStepArgs => {
         path: "bash",
         args: [
           "-ce",
-          script
+          scriptLines.join("\n")
         ]
       }
     }
@@ -80,10 +80,10 @@ const jobs: input.JobArgs[] = [];
         get: stage,
         trigger: true
       },
-      bashTask("lint", `
-      echo "stage: ${stage}"
-      echo "linting..."
-      `)
+      bashTask("lint",
+        `echo "stage: ${stage}"`,
+        'echo "linting..."'
+      )
     ]
   })
   jobs.push({
@@ -94,7 +94,7 @@ const jobs: input.JobArgs[] = [];
         trigger: true,
         passed: [`lint-${stage}`]
       },
-      bashTask("build", `echo "building..."`)
+      bashTask("build", 'echo "building..."')
     ]
   })
 });
@@ -114,7 +114,10 @@ const pipeline = new concourse.Pipeline(
       {
         name: "sometask",
         plan: [
-          bashTask("final", `echo "this is the grand finally"; echo "ciao"`)
+          bashTask("final",
+            'echo "this is the grand finally"',
+            'echo "ciao"'
+          )
         ]
       }
     ]

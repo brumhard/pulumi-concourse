@@ -46,6 +46,7 @@ type concourseProvider struct {
 	schemaBytes []byte // initialize in makeProvider
 	config      map[string]string
 	client      concourse.Client
+	// TODO: move team to config as default variable, but settable in each pipeline? Just like azure location
 	team        string
 }
 
