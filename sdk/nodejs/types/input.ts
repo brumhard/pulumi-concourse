@@ -36,11 +36,21 @@ export interface GroupArgs {
     name: pulumi.Input<string>;
 }
 
+export interface InParallelConfigArgs {
+    fail_fast?: pulumi.Input<boolean>;
+    limit?: pulumi.Input<number>;
+    steps: pulumi.Input<pulumi.Input<inputs.TaskStepArgs | inputs.GetStepArgs | inputs.PutStepArgs | inputs.InParallelStepArgs>[]>;
+}
+
+export interface InParallelStepArgs {
+    in_parallel: pulumi.Input<inputs.InParallelConfigArgs>;
+}
+
 export interface JobArgs {
     /**
      * Step to execute regardless of whether the job succeeds, fails, errors, or aborts.
      */
-    ensure?: pulumi.Input<inputs.TaskStepArgs | inputs.GetStepArgs>;
+    ensure?: pulumi.Input<inputs.TaskStepArgs | inputs.GetStepArgs | inputs.PutStepArgs | inputs.InParallelStepArgs>;
     /**
      * If set, specifies a maximum number of builds to run at a time. If serial or serial_groups are set, they take precedence and force this value to be 1.
      */
@@ -52,20 +62,20 @@ export interface JobArgs {
     /**
      * Step to execute when the job aborts.
      */
-    on_abort?: pulumi.Input<inputs.TaskStepArgs | inputs.GetStepArgs>;
+    on_abort?: pulumi.Input<inputs.TaskStepArgs | inputs.GetStepArgs | inputs.PutStepArgs | inputs.InParallelStepArgs>;
     /**
      * Step to execute when the job errors.
      */
-    on_error?: pulumi.Input<inputs.TaskStepArgs | inputs.GetStepArgs>;
+    on_error?: pulumi.Input<inputs.TaskStepArgs | inputs.GetStepArgs | inputs.PutStepArgs | inputs.InParallelStepArgs>;
     /**
      * Step to execute when the job fails.
      */
-    on_failure?: pulumi.Input<inputs.TaskStepArgs | inputs.GetStepArgs>;
+    on_failure?: pulumi.Input<inputs.TaskStepArgs | inputs.GetStepArgs | inputs.PutStepArgs | inputs.InParallelStepArgs>;
     /**
      * Step to execute when the job succeeds.
      */
-    on_success?: pulumi.Input<inputs.TaskStepArgs | inputs.GetStepArgs>;
-    plan: pulumi.Input<pulumi.Input<inputs.TaskStepArgs | inputs.GetStepArgs>[]>;
+    on_success?: pulumi.Input<inputs.TaskStepArgs | inputs.GetStepArgs | inputs.PutStepArgs | inputs.InParallelStepArgs>;
+    plan: pulumi.Input<pulumi.Input<inputs.TaskStepArgs | inputs.GetStepArgs | inputs.PutStepArgs | inputs.InParallelStepArgs>[]>;
     /**
      * Default false. If set to true, the build log of this job will be viewable by unauthenticated users. Unauthenticated users will always be able to see the inputs, outputs, and build status history of a job. This is useful if you would like to expose your pipeline publicly without showing sensitive information in the build log.
      */
@@ -74,6 +84,13 @@ export interface JobArgs {
      * Default false. If set to true, builds will queue up and execute one-by-one, rather than executing in parallel.
      */
     serial?: pulumi.Input<boolean>;
+}
+
+export interface PutStepArgs {
+    get_params?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    params?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    put: pulumi.Input<string>;
+    resource?: pulumi.Input<string>;
 }
 
 export interface ResourceArgs {

@@ -16,7 +16,7 @@ namespace Pulumi.Concourse.Inputs
         /// Step to execute regardless of whether the job succeeds, fails, errors, or aborts.
         /// </summary>
         [Input("ensure")]
-        public InputUnion<Inputs.TaskStepArgs, Inputs.GetStepArgs>? Ensure { get; set; }
+        public object? Ensure { get; set; }
 
         /// <summary>
         /// If set, specifies a maximum number of builds to run at a time. If serial or serial_groups are set, they take precedence and force this value to be 1.
@@ -34,31 +34,31 @@ namespace Pulumi.Concourse.Inputs
         /// Step to execute when the job aborts.
         /// </summary>
         [Input("on_abort")]
-        public InputUnion<Inputs.TaskStepArgs, Inputs.GetStepArgs>? On_abort { get; set; }
+        public object? On_abort { get; set; }
 
         /// <summary>
         /// Step to execute when the job errors.
         /// </summary>
         [Input("on_error")]
-        public InputUnion<Inputs.TaskStepArgs, Inputs.GetStepArgs>? On_error { get; set; }
+        public object? On_error { get; set; }
 
         /// <summary>
         /// Step to execute when the job fails.
         /// </summary>
         [Input("on_failure")]
-        public InputUnion<Inputs.TaskStepArgs, Inputs.GetStepArgs>? On_failure { get; set; }
+        public object? On_failure { get; set; }
 
         /// <summary>
         /// Step to execute when the job succeeds.
         /// </summary>
         [Input("on_success")]
-        public InputUnion<Inputs.TaskStepArgs, Inputs.GetStepArgs>? On_success { get; set; }
+        public object? On_success { get; set; }
 
         [Input("plan", required: true)]
-        private InputList<Union<Inputs.TaskStepArgs, Inputs.GetStepArgs>>? _plan;
-        public InputList<Union<Inputs.TaskStepArgs, Inputs.GetStepArgs>> Plan
+        private InputList<object>? _plan;
+        public InputList<object> Plan
         {
-            get => _plan ?? (_plan = new InputList<Union<Inputs.TaskStepArgs, Inputs.GetStepArgs>>());
+            get => _plan ?? (_plan = new InputList<object>());
             set => _plan = value;
         }
 

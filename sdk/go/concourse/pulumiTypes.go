@@ -489,6 +489,116 @@ func (o GroupArrayOutput) Index(i pulumi.IntInput) GroupOutput {
 	}).(GroupOutput)
 }
 
+type InParallelConfig struct {
+	Fail_fast *bool         `pulumi:"fail_fast"`
+	Limit     *float64      `pulumi:"limit"`
+	Steps     []interface{} `pulumi:"steps"`
+}
+
+// InParallelConfigInput is an input type that accepts InParallelConfigArgs and InParallelConfigOutput values.
+// You can construct a concrete instance of `InParallelConfigInput` via:
+//
+//          InParallelConfigArgs{...}
+type InParallelConfigInput interface {
+	pulumi.Input
+
+	ToInParallelConfigOutput() InParallelConfigOutput
+	ToInParallelConfigOutputWithContext(context.Context) InParallelConfigOutput
+}
+
+type InParallelConfigArgs struct {
+	Fail_fast pulumi.BoolPtrInput    `pulumi:"fail_fast"`
+	Limit     pulumi.Float64PtrInput `pulumi:"limit"`
+	Steps     pulumi.ArrayInput      `pulumi:"steps"`
+}
+
+func (InParallelConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*InParallelConfig)(nil)).Elem()
+}
+
+func (i InParallelConfigArgs) ToInParallelConfigOutput() InParallelConfigOutput {
+	return i.ToInParallelConfigOutputWithContext(context.Background())
+}
+
+func (i InParallelConfigArgs) ToInParallelConfigOutputWithContext(ctx context.Context) InParallelConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InParallelConfigOutput)
+}
+
+type InParallelConfigOutput struct{ *pulumi.OutputState }
+
+func (InParallelConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*InParallelConfig)(nil)).Elem()
+}
+
+func (o InParallelConfigOutput) ToInParallelConfigOutput() InParallelConfigOutput {
+	return o
+}
+
+func (o InParallelConfigOutput) ToInParallelConfigOutputWithContext(ctx context.Context) InParallelConfigOutput {
+	return o
+}
+
+func (o InParallelConfigOutput) Fail_fast() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v InParallelConfig) *bool { return v.Fail_fast }).(pulumi.BoolPtrOutput)
+}
+
+func (o InParallelConfigOutput) Limit() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v InParallelConfig) *float64 { return v.Limit }).(pulumi.Float64PtrOutput)
+}
+
+func (o InParallelConfigOutput) Steps() pulumi.ArrayOutput {
+	return o.ApplyT(func(v InParallelConfig) []interface{} { return v.Steps }).(pulumi.ArrayOutput)
+}
+
+type InParallelStep struct {
+	In_parallel InParallelConfig `pulumi:"in_parallel"`
+}
+
+// InParallelStepInput is an input type that accepts InParallelStepArgs and InParallelStepOutput values.
+// You can construct a concrete instance of `InParallelStepInput` via:
+//
+//          InParallelStepArgs{...}
+type InParallelStepInput interface {
+	pulumi.Input
+
+	ToInParallelStepOutput() InParallelStepOutput
+	ToInParallelStepOutputWithContext(context.Context) InParallelStepOutput
+}
+
+type InParallelStepArgs struct {
+	In_parallel InParallelConfigInput `pulumi:"in_parallel"`
+}
+
+func (InParallelStepArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*InParallelStep)(nil)).Elem()
+}
+
+func (i InParallelStepArgs) ToInParallelStepOutput() InParallelStepOutput {
+	return i.ToInParallelStepOutputWithContext(context.Background())
+}
+
+func (i InParallelStepArgs) ToInParallelStepOutputWithContext(ctx context.Context) InParallelStepOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InParallelStepOutput)
+}
+
+type InParallelStepOutput struct{ *pulumi.OutputState }
+
+func (InParallelStepOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*InParallelStep)(nil)).Elem()
+}
+
+func (o InParallelStepOutput) ToInParallelStepOutput() InParallelStepOutput {
+	return o
+}
+
+func (o InParallelStepOutput) ToInParallelStepOutputWithContext(ctx context.Context) InParallelStepOutput {
+	return o
+}
+
+func (o InParallelStepOutput) In_parallel() InParallelConfigOutput {
+	return o.ApplyT(func(v InParallelStep) InParallelConfig { return v.In_parallel }).(InParallelConfigOutput)
+}
+
 type Job struct {
 	// Step to execute regardless of whether the job succeeds, fails, errors, or aborts.
 	Ensure interface{} `pulumi:"ensure"`
@@ -662,6 +772,73 @@ func (o JobArrayOutput) Index(i pulumi.IntInput) JobOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) Job {
 		return vs[0].([]Job)[vs[1].(int)]
 	}).(JobOutput)
+}
+
+type PutStep struct {
+	Get_params map[string]string `pulumi:"get_params"`
+	Params     map[string]string `pulumi:"params"`
+	Put        string            `pulumi:"put"`
+	Resource   *string           `pulumi:"resource"`
+}
+
+// PutStepInput is an input type that accepts PutStepArgs and PutStepOutput values.
+// You can construct a concrete instance of `PutStepInput` via:
+//
+//          PutStepArgs{...}
+type PutStepInput interface {
+	pulumi.Input
+
+	ToPutStepOutput() PutStepOutput
+	ToPutStepOutputWithContext(context.Context) PutStepOutput
+}
+
+type PutStepArgs struct {
+	Get_params pulumi.StringMapInput `pulumi:"get_params"`
+	Params     pulumi.StringMapInput `pulumi:"params"`
+	Put        pulumi.StringInput    `pulumi:"put"`
+	Resource   pulumi.StringPtrInput `pulumi:"resource"`
+}
+
+func (PutStepArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*PutStep)(nil)).Elem()
+}
+
+func (i PutStepArgs) ToPutStepOutput() PutStepOutput {
+	return i.ToPutStepOutputWithContext(context.Background())
+}
+
+func (i PutStepArgs) ToPutStepOutputWithContext(ctx context.Context) PutStepOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(PutStepOutput)
+}
+
+type PutStepOutput struct{ *pulumi.OutputState }
+
+func (PutStepOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*PutStep)(nil)).Elem()
+}
+
+func (o PutStepOutput) ToPutStepOutput() PutStepOutput {
+	return o
+}
+
+func (o PutStepOutput) ToPutStepOutputWithContext(ctx context.Context) PutStepOutput {
+	return o
+}
+
+func (o PutStepOutput) Get_params() pulumi.StringMapOutput {
+	return o.ApplyT(func(v PutStep) map[string]string { return v.Get_params }).(pulumi.StringMapOutput)
+}
+
+func (o PutStepOutput) Params() pulumi.StringMapOutput {
+	return o.ApplyT(func(v PutStep) map[string]string { return v.Params }).(pulumi.StringMapOutput)
+}
+
+func (o PutStepOutput) Put() pulumi.StringOutput {
+	return o.ApplyT(func(v PutStep) string { return v.Put }).(pulumi.StringOutput)
+}
+
+func (o PutStepOutput) Resource() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v PutStep) *string { return v.Resource }).(pulumi.StringPtrOutput)
 }
 
 type Resource struct {
@@ -1385,8 +1562,11 @@ func init() {
 	pulumi.RegisterOutputType(GetStepOutput{})
 	pulumi.RegisterOutputType(GroupOutput{})
 	pulumi.RegisterOutputType(GroupArrayOutput{})
+	pulumi.RegisterOutputType(InParallelConfigOutput{})
+	pulumi.RegisterOutputType(InParallelStepOutput{})
 	pulumi.RegisterOutputType(JobOutput{})
 	pulumi.RegisterOutputType(JobArrayOutput{})
+	pulumi.RegisterOutputType(PutStepOutput{})
 	pulumi.RegisterOutputType(ResourceOutput{})
 	pulumi.RegisterOutputType(ResourceArrayOutput{})
 	pulumi.RegisterOutputType(ResourceTypeOutput{})

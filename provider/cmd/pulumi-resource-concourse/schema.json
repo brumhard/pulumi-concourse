@@ -177,6 +177,71 @@
                 "get"
             ]
         },
+        "concourse:index:PutStep": {
+            "type": "object",
+            "properties": {
+                "put": {
+                    "type": "string"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "params": {
+                    "type": "object"
+                },
+                "get_params": {
+                    "type": "object"
+                }
+            },
+            "required": [
+                "put"
+            ]
+        },
+        "concourse:index:InParallelStep": {
+            "type": "object",
+            "properties": {
+                "in_parallel": {
+                    "type": "object",
+                    "$ref": "#/types/concourse:index:InParallelConfig"
+                }
+            },
+            "required": [
+                "in_parallel"
+            ]
+        },
+        "concourse:index:InParallelConfig": {
+            "type": "object",
+            "properties": {
+                "steps": {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/types/concourse:index:TaskStep"
+                            },
+                            {
+                                "$ref": "#/types/concourse:index:GetStep"
+                            },
+                            {
+                                "$ref": "#/types/concourse:index:PutStep"
+                            },
+                            {
+                                "$ref": "#/types/concourse:index:InParallelStep"
+                            }
+                        ]
+                    }
+                },
+                "limit": {
+                    "type": "number"
+                },
+                "fail_fast": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "steps"
+            ]
+        },
         "concourse:index:Group": {
             "type": "object",
             "description": "",
@@ -297,6 +362,12 @@
                             },
                             {
                                 "$ref": "#/types/concourse:index:GetStep"
+                            },
+                            {
+                                "$ref": "#/types/concourse:index:PutStep"
+                            },
+                            {
+                                "$ref": "#/types/concourse:index:InParallelStep"
                             }
                         ]
                     }
@@ -321,6 +392,12 @@
                         },
                         {
                             "$ref": "#/types/concourse:index:GetStep"
+                        },
+                        {
+                            "$ref": "#/types/concourse:index:PutStep"
+                        },
+                        {
+                            "$ref": "#/types/concourse:index:InParallelStep"
                         }
                     ]
                 },
@@ -332,6 +409,12 @@
                         },
                         {
                             "$ref": "#/types/concourse:index:GetStep"
+                        },
+                        {
+                            "$ref": "#/types/concourse:index:PutStep"
+                        },
+                        {
+                            "$ref": "#/types/concourse:index:InParallelStep"
                         }
                     ]
                 },
@@ -343,6 +426,12 @@
                         },
                         {
                             "$ref": "#/types/concourse:index:GetStep"
+                        },
+                        {
+                            "$ref": "#/types/concourse:index:PutStep"
+                        },
+                        {
+                            "$ref": "#/types/concourse:index:InParallelStep"
                         }
                     ]
                 },
@@ -354,6 +443,12 @@
                         },
                         {
                             "$ref": "#/types/concourse:index:GetStep"
+                        },
+                        {
+                            "$ref": "#/types/concourse:index:PutStep"
+                        },
+                        {
+                            "$ref": "#/types/concourse:index:InParallelStep"
                         }
                     ]
                 },
@@ -365,6 +460,12 @@
                         },
                         {
                             "$ref": "#/types/concourse:index:GetStep"
+                        },
+                        {
+                            "$ref": "#/types/concourse:index:PutStep"
+                        },
+                        {
+                            "$ref": "#/types/concourse:index:InParallelStep"
                         }
                     ]
                 }
