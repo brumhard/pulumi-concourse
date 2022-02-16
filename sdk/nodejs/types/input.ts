@@ -166,10 +166,29 @@ export interface RunArgsArgs {
     user?: pulumi.Input<string>;
 }
 
+export interface TaskCacheArgs {
+    path: pulumi.Input<string>;
+}
+
 export interface TaskConfigArgs {
+    caches?: pulumi.Input<pulumi.Input<inputs.TaskCacheArgs>[]>;
     image_resource: pulumi.Input<inputs.AnonymousResourceArgs>;
+    inputs?: pulumi.Input<pulumi.Input<inputs.TaskInputArgs>[]>;
+    outputs?: pulumi.Input<pulumi.Input<inputs.TaskOutputArgs>[]>;
+    params?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     platform: pulumi.Input<string>;
     run: pulumi.Input<inputs.RunArgsArgs>;
+}
+
+export interface TaskInputArgs {
+    name: pulumi.Input<string>;
+    optional?: pulumi.Input<boolean>;
+    path?: pulumi.Input<string>;
+}
+
+export interface TaskOutputArgs {
+    name: pulumi.Input<string>;
+    path?: pulumi.Input<string>;
 }
 
 export interface TaskStepArgs {

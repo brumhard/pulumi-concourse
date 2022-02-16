@@ -12,8 +12,40 @@ namespace Pulumi.Concourse.Inputs
 
     public sealed class TaskConfigArgs : Pulumi.ResourceArgs
     {
+        [Input("caches")]
+        private InputList<Inputs.TaskCacheArgs>? _caches;
+        public InputList<Inputs.TaskCacheArgs> Caches
+        {
+            get => _caches ?? (_caches = new InputList<Inputs.TaskCacheArgs>());
+            set => _caches = value;
+        }
+
         [Input("image_resource", required: true)]
         public Input<Inputs.AnonymousResourceArgs> Image_resource { get; set; } = null!;
+
+        [Input("inputs")]
+        private InputList<Inputs.TaskInputArgs>? _inputs;
+        public InputList<Inputs.TaskInputArgs> Inputs
+        {
+            get => _inputs ?? (_inputs = new InputList<Inputs.TaskInputArgs>());
+            set => _inputs = value;
+        }
+
+        [Input("outputs")]
+        private InputList<Inputs.TaskOutputArgs>? _outputs;
+        public InputList<Inputs.TaskOutputArgs> Outputs
+        {
+            get => _outputs ?? (_outputs = new InputList<Inputs.TaskOutputArgs>());
+            set => _outputs = value;
+        }
+
+        [Input("params")]
+        private InputMap<string>? _params;
+        public InputMap<string> Params
+        {
+            get => _params ?? (_params = new InputMap<string>());
+            set => _params = value;
+        }
 
         [Input("platform", required: true)]
         public Input<string> Platform { get; set; } = null!;

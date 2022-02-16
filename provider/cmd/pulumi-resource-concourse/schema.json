@@ -122,6 +122,30 @@
                     "type": "object",
                     "$ref": "#/types/concourse:index:AnonymousResource"
                 },
+                "inputs": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "$ref": "#/types/concourse:index:TaskInput"
+                    }
+                },
+                "outputs": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "$ref": "#/types/concourse:index:TaskOutput"
+                    }
+                },
+                "caches": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "$ref": "#/types/concourse:index:TaskCache"
+                    }
+                },
+                "params": {
+                    "type": "object"
+                },
                 "run": {
                     "type": "object",
                     "$ref": "#/types/concourse:index:RunArgs"
@@ -131,6 +155,48 @@
                 "platform",
                 "image_resource",
                 "run"
+            ]
+        },
+        "concourse:index:TaskInput": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "path": {
+                    "type": "string"
+                },
+                "optional": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "name"
+            ]
+        },
+        "concourse:index:TaskOutput": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "path": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name"
+            ]
+        },
+        "concourse:index:TaskCache": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "path"
             ]
         },
         "concourse:index:TaskStep": {

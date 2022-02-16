@@ -20,7 +20,10 @@ __all__ = [
     'ResourceTypeArgs',
     'ResourceArgs',
     'RunArgsArgs',
+    'TaskCacheArgs',
     'TaskConfigArgs',
+    'TaskInputArgs',
+    'TaskOutputArgs',
     'TaskStepArgs',
 ]
 
@@ -761,14 +764,42 @@ class RunArgsArgs:
 
 
 @pulumi.input_type
+class TaskCacheArgs:
+    def __init__(__self__, *,
+                 path: pulumi.Input[str]):
+        pulumi.set(__self__, "path", path)
+
+    @property
+    @pulumi.getter
+    def path(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "path")
+
+    @path.setter
+    def path(self, value: pulumi.Input[str]):
+        pulumi.set(self, "path", value)
+
+
+@pulumi.input_type
 class TaskConfigArgs:
     def __init__(__self__, *,
                  image_resource: pulumi.Input['AnonymousResourceArgs'],
                  platform: pulumi.Input[str],
-                 run: pulumi.Input['RunArgsArgs']):
+                 run: pulumi.Input['RunArgsArgs'],
+                 caches: Optional[pulumi.Input[Sequence[pulumi.Input['TaskCacheArgs']]]] = None,
+                 inputs: Optional[pulumi.Input[Sequence[pulumi.Input['TaskInputArgs']]]] = None,
+                 outputs: Optional[pulumi.Input[Sequence[pulumi.Input['TaskOutputArgs']]]] = None,
+                 params: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None):
         pulumi.set(__self__, "image_resource", image_resource)
         pulumi.set(__self__, "platform", platform)
         pulumi.set(__self__, "run", run)
+        if caches is not None:
+            pulumi.set(__self__, "caches", caches)
+        if inputs is not None:
+            pulumi.set(__self__, "inputs", inputs)
+        if outputs is not None:
+            pulumi.set(__self__, "outputs", outputs)
+        if params is not None:
+            pulumi.set(__self__, "params", params)
 
     @property
     @pulumi.getter
@@ -796,6 +827,110 @@ class TaskConfigArgs:
     @run.setter
     def run(self, value: pulumi.Input['RunArgsArgs']):
         pulumi.set(self, "run", value)
+
+    @property
+    @pulumi.getter
+    def caches(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['TaskCacheArgs']]]]:
+        return pulumi.get(self, "caches")
+
+    @caches.setter
+    def caches(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['TaskCacheArgs']]]]):
+        pulumi.set(self, "caches", value)
+
+    @property
+    @pulumi.getter
+    def inputs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['TaskInputArgs']]]]:
+        return pulumi.get(self, "inputs")
+
+    @inputs.setter
+    def inputs(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['TaskInputArgs']]]]):
+        pulumi.set(self, "inputs", value)
+
+    @property
+    @pulumi.getter
+    def outputs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['TaskOutputArgs']]]]:
+        return pulumi.get(self, "outputs")
+
+    @outputs.setter
+    def outputs(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['TaskOutputArgs']]]]):
+        pulumi.set(self, "outputs", value)
+
+    @property
+    @pulumi.getter
+    def params(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
+        return pulumi.get(self, "params")
+
+    @params.setter
+    def params(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
+        pulumi.set(self, "params", value)
+
+
+@pulumi.input_type
+class TaskInputArgs:
+    def __init__(__self__, *,
+                 name: pulumi.Input[str],
+                 optional: Optional[pulumi.Input[bool]] = None,
+                 path: Optional[pulumi.Input[str]] = None):
+        pulumi.set(__self__, "name", name)
+        if optional is not None:
+            pulumi.set(__self__, "optional", optional)
+        if path is not None:
+            pulumi.set(__self__, "path", path)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def optional(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "optional")
+
+    @optional.setter
+    def optional(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "optional", value)
+
+    @property
+    @pulumi.getter
+    def path(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "path")
+
+    @path.setter
+    def path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "path", value)
+
+
+@pulumi.input_type
+class TaskOutputArgs:
+    def __init__(__self__, *,
+                 name: pulumi.Input[str],
+                 path: Optional[pulumi.Input[str]] = None):
+        pulumi.set(__self__, "name", name)
+        if path is not None:
+            pulumi.set(__self__, "path", path)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def path(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "path")
+
+    @path.setter
+    def path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "path", value)
 
 
 @pulumi.input_type

@@ -1330,8 +1330,106 @@ func (o RunArgsPtrOutput) User() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type TaskCache struct {
+	Path string `pulumi:"path"`
+}
+
+// TaskCacheInput is an input type that accepts TaskCacheArgs and TaskCacheOutput values.
+// You can construct a concrete instance of `TaskCacheInput` via:
+//
+//          TaskCacheArgs{...}
+type TaskCacheInput interface {
+	pulumi.Input
+
+	ToTaskCacheOutput() TaskCacheOutput
+	ToTaskCacheOutputWithContext(context.Context) TaskCacheOutput
+}
+
+type TaskCacheArgs struct {
+	Path pulumi.StringInput `pulumi:"path"`
+}
+
+func (TaskCacheArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TaskCache)(nil)).Elem()
+}
+
+func (i TaskCacheArgs) ToTaskCacheOutput() TaskCacheOutput {
+	return i.ToTaskCacheOutputWithContext(context.Background())
+}
+
+func (i TaskCacheArgs) ToTaskCacheOutputWithContext(ctx context.Context) TaskCacheOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TaskCacheOutput)
+}
+
+// TaskCacheArrayInput is an input type that accepts TaskCacheArray and TaskCacheArrayOutput values.
+// You can construct a concrete instance of `TaskCacheArrayInput` via:
+//
+//          TaskCacheArray{ TaskCacheArgs{...} }
+type TaskCacheArrayInput interface {
+	pulumi.Input
+
+	ToTaskCacheArrayOutput() TaskCacheArrayOutput
+	ToTaskCacheArrayOutputWithContext(context.Context) TaskCacheArrayOutput
+}
+
+type TaskCacheArray []TaskCacheInput
+
+func (TaskCacheArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TaskCache)(nil)).Elem()
+}
+
+func (i TaskCacheArray) ToTaskCacheArrayOutput() TaskCacheArrayOutput {
+	return i.ToTaskCacheArrayOutputWithContext(context.Background())
+}
+
+func (i TaskCacheArray) ToTaskCacheArrayOutputWithContext(ctx context.Context) TaskCacheArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TaskCacheArrayOutput)
+}
+
+type TaskCacheOutput struct{ *pulumi.OutputState }
+
+func (TaskCacheOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TaskCache)(nil)).Elem()
+}
+
+func (o TaskCacheOutput) ToTaskCacheOutput() TaskCacheOutput {
+	return o
+}
+
+func (o TaskCacheOutput) ToTaskCacheOutputWithContext(ctx context.Context) TaskCacheOutput {
+	return o
+}
+
+func (o TaskCacheOutput) Path() pulumi.StringOutput {
+	return o.ApplyT(func(v TaskCache) string { return v.Path }).(pulumi.StringOutput)
+}
+
+type TaskCacheArrayOutput struct{ *pulumi.OutputState }
+
+func (TaskCacheArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TaskCache)(nil)).Elem()
+}
+
+func (o TaskCacheArrayOutput) ToTaskCacheArrayOutput() TaskCacheArrayOutput {
+	return o
+}
+
+func (o TaskCacheArrayOutput) ToTaskCacheArrayOutputWithContext(ctx context.Context) TaskCacheArrayOutput {
+	return o
+}
+
+func (o TaskCacheArrayOutput) Index(i pulumi.IntInput) TaskCacheOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TaskCache {
+		return vs[0].([]TaskCache)[vs[1].(int)]
+	}).(TaskCacheOutput)
+}
+
 type TaskConfig struct {
+	Caches         []TaskCache       `pulumi:"caches"`
 	Image_resource AnonymousResource `pulumi:"image_resource"`
+	Inputs         []TaskInput       `pulumi:"inputs"`
+	Outputs        []TaskOutput      `pulumi:"outputs"`
+	Params         map[string]string `pulumi:"params"`
 	Platform       string            `pulumi:"platform"`
 	Run            RunArgs           `pulumi:"run"`
 }
@@ -1348,7 +1446,11 @@ type TaskConfigInput interface {
 }
 
 type TaskConfigArgs struct {
+	Caches         TaskCacheArrayInput    `pulumi:"caches"`
 	Image_resource AnonymousResourceInput `pulumi:"image_resource"`
+	Inputs         TaskInputArrayInput    `pulumi:"inputs"`
+	Outputs        TaskOutputArrayInput   `pulumi:"outputs"`
+	Params         pulumi.StringMapInput  `pulumi:"params"`
 	Platform       pulumi.StringInput     `pulumi:"platform"`
 	Run            RunArgsInput           `pulumi:"run"`
 }
@@ -1430,8 +1532,24 @@ func (o TaskConfigOutput) ToTaskConfigPtrOutputWithContext(ctx context.Context) 
 	}).(TaskConfigPtrOutput)
 }
 
+func (o TaskConfigOutput) Caches() TaskCacheArrayOutput {
+	return o.ApplyT(func(v TaskConfig) []TaskCache { return v.Caches }).(TaskCacheArrayOutput)
+}
+
 func (o TaskConfigOutput) Image_resource() AnonymousResourceOutput {
 	return o.ApplyT(func(v TaskConfig) AnonymousResource { return v.Image_resource }).(AnonymousResourceOutput)
+}
+
+func (o TaskConfigOutput) Inputs() TaskInputArrayOutput {
+	return o.ApplyT(func(v TaskConfig) []TaskInput { return v.Inputs }).(TaskInputArrayOutput)
+}
+
+func (o TaskConfigOutput) Outputs() TaskOutputArrayOutput {
+	return o.ApplyT(func(v TaskConfig) []TaskOutput { return v.Outputs }).(TaskOutputArrayOutput)
+}
+
+func (o TaskConfigOutput) Params() pulumi.StringMapOutput {
+	return o.ApplyT(func(v TaskConfig) map[string]string { return v.Params }).(pulumi.StringMapOutput)
 }
 
 func (o TaskConfigOutput) Platform() pulumi.StringOutput {
@@ -1466,6 +1584,15 @@ func (o TaskConfigPtrOutput) Elem() TaskConfigOutput {
 	}).(TaskConfigOutput)
 }
 
+func (o TaskConfigPtrOutput) Caches() TaskCacheArrayOutput {
+	return o.ApplyT(func(v *TaskConfig) []TaskCache {
+		if v == nil {
+			return nil
+		}
+		return v.Caches
+	}).(TaskCacheArrayOutput)
+}
+
 func (o TaskConfigPtrOutput) Image_resource() AnonymousResourcePtrOutput {
 	return o.ApplyT(func(v *TaskConfig) *AnonymousResource {
 		if v == nil {
@@ -1473,6 +1600,33 @@ func (o TaskConfigPtrOutput) Image_resource() AnonymousResourcePtrOutput {
 		}
 		return &v.Image_resource
 	}).(AnonymousResourcePtrOutput)
+}
+
+func (o TaskConfigPtrOutput) Inputs() TaskInputArrayOutput {
+	return o.ApplyT(func(v *TaskConfig) []TaskInput {
+		if v == nil {
+			return nil
+		}
+		return v.Inputs
+	}).(TaskInputArrayOutput)
+}
+
+func (o TaskConfigPtrOutput) Outputs() TaskOutputArrayOutput {
+	return o.ApplyT(func(v *TaskConfig) []TaskOutput {
+		if v == nil {
+			return nil
+		}
+		return v.Outputs
+	}).(TaskOutputArrayOutput)
+}
+
+func (o TaskConfigPtrOutput) Params() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *TaskConfig) map[string]string {
+		if v == nil {
+			return nil
+		}
+		return v.Params
+	}).(pulumi.StringMapOutput)
 }
 
 func (o TaskConfigPtrOutput) Platform() pulumi.StringPtrOutput {
@@ -1491,6 +1645,212 @@ func (o TaskConfigPtrOutput) Run() RunArgsPtrOutput {
 		}
 		return &v.Run
 	}).(RunArgsPtrOutput)
+}
+
+type TaskInput struct {
+	Name     string  `pulumi:"name"`
+	Optional *bool   `pulumi:"optional"`
+	Path     *string `pulumi:"path"`
+}
+
+// TaskInputInput is an input type that accepts TaskInputArgs and TaskInputOutput values.
+// You can construct a concrete instance of `TaskInputInput` via:
+//
+//          TaskInputArgs{...}
+type TaskInputInput interface {
+	pulumi.Input
+
+	ToTaskInputOutput() TaskInputOutput
+	ToTaskInputOutputWithContext(context.Context) TaskInputOutput
+}
+
+type TaskInputArgs struct {
+	Name     pulumi.StringInput    `pulumi:"name"`
+	Optional pulumi.BoolPtrInput   `pulumi:"optional"`
+	Path     pulumi.StringPtrInput `pulumi:"path"`
+}
+
+func (TaskInputArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TaskInput)(nil)).Elem()
+}
+
+func (i TaskInputArgs) ToTaskInputOutput() TaskInputOutput {
+	return i.ToTaskInputOutputWithContext(context.Background())
+}
+
+func (i TaskInputArgs) ToTaskInputOutputWithContext(ctx context.Context) TaskInputOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TaskInputOutput)
+}
+
+// TaskInputArrayInput is an input type that accepts TaskInputArray and TaskInputArrayOutput values.
+// You can construct a concrete instance of `TaskInputArrayInput` via:
+//
+//          TaskInputArray{ TaskInputArgs{...} }
+type TaskInputArrayInput interface {
+	pulumi.Input
+
+	ToTaskInputArrayOutput() TaskInputArrayOutput
+	ToTaskInputArrayOutputWithContext(context.Context) TaskInputArrayOutput
+}
+
+type TaskInputArray []TaskInputInput
+
+func (TaskInputArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TaskInput)(nil)).Elem()
+}
+
+func (i TaskInputArray) ToTaskInputArrayOutput() TaskInputArrayOutput {
+	return i.ToTaskInputArrayOutputWithContext(context.Background())
+}
+
+func (i TaskInputArray) ToTaskInputArrayOutputWithContext(ctx context.Context) TaskInputArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TaskInputArrayOutput)
+}
+
+type TaskInputOutput struct{ *pulumi.OutputState }
+
+func (TaskInputOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TaskInput)(nil)).Elem()
+}
+
+func (o TaskInputOutput) ToTaskInputOutput() TaskInputOutput {
+	return o
+}
+
+func (o TaskInputOutput) ToTaskInputOutputWithContext(ctx context.Context) TaskInputOutput {
+	return o
+}
+
+func (o TaskInputOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v TaskInput) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o TaskInputOutput) Optional() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v TaskInput) *bool { return v.Optional }).(pulumi.BoolPtrOutput)
+}
+
+func (o TaskInputOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TaskInput) *string { return v.Path }).(pulumi.StringPtrOutput)
+}
+
+type TaskInputArrayOutput struct{ *pulumi.OutputState }
+
+func (TaskInputArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TaskInput)(nil)).Elem()
+}
+
+func (o TaskInputArrayOutput) ToTaskInputArrayOutput() TaskInputArrayOutput {
+	return o
+}
+
+func (o TaskInputArrayOutput) ToTaskInputArrayOutputWithContext(ctx context.Context) TaskInputArrayOutput {
+	return o
+}
+
+func (o TaskInputArrayOutput) Index(i pulumi.IntInput) TaskInputOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TaskInput {
+		return vs[0].([]TaskInput)[vs[1].(int)]
+	}).(TaskInputOutput)
+}
+
+type TaskOutput struct {
+	Name string  `pulumi:"name"`
+	Path *string `pulumi:"path"`
+}
+
+// TaskOutputInput is an input type that accepts TaskOutputArgs and TaskOutputOutput values.
+// You can construct a concrete instance of `TaskOutputInput` via:
+//
+//          TaskOutputArgs{...}
+type TaskOutputInput interface {
+	pulumi.Input
+
+	ToTaskOutputOutput() TaskOutputOutput
+	ToTaskOutputOutputWithContext(context.Context) TaskOutputOutput
+}
+
+type TaskOutputArgs struct {
+	Name pulumi.StringInput    `pulumi:"name"`
+	Path pulumi.StringPtrInput `pulumi:"path"`
+}
+
+func (TaskOutputArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TaskOutput)(nil)).Elem()
+}
+
+func (i TaskOutputArgs) ToTaskOutputOutput() TaskOutputOutput {
+	return i.ToTaskOutputOutputWithContext(context.Background())
+}
+
+func (i TaskOutputArgs) ToTaskOutputOutputWithContext(ctx context.Context) TaskOutputOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TaskOutputOutput)
+}
+
+// TaskOutputArrayInput is an input type that accepts TaskOutputArray and TaskOutputArrayOutput values.
+// You can construct a concrete instance of `TaskOutputArrayInput` via:
+//
+//          TaskOutputArray{ TaskOutputArgs{...} }
+type TaskOutputArrayInput interface {
+	pulumi.Input
+
+	ToTaskOutputArrayOutput() TaskOutputArrayOutput
+	ToTaskOutputArrayOutputWithContext(context.Context) TaskOutputArrayOutput
+}
+
+type TaskOutputArray []TaskOutputInput
+
+func (TaskOutputArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TaskOutput)(nil)).Elem()
+}
+
+func (i TaskOutputArray) ToTaskOutputArrayOutput() TaskOutputArrayOutput {
+	return i.ToTaskOutputArrayOutputWithContext(context.Background())
+}
+
+func (i TaskOutputArray) ToTaskOutputArrayOutputWithContext(ctx context.Context) TaskOutputArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TaskOutputArrayOutput)
+}
+
+type TaskOutputOutput struct{ *pulumi.OutputState }
+
+func (TaskOutputOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TaskOutput)(nil)).Elem()
+}
+
+func (o TaskOutputOutput) ToTaskOutputOutput() TaskOutputOutput {
+	return o
+}
+
+func (o TaskOutputOutput) ToTaskOutputOutputWithContext(ctx context.Context) TaskOutputOutput {
+	return o
+}
+
+func (o TaskOutputOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v TaskOutput) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o TaskOutputOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TaskOutput) *string { return v.Path }).(pulumi.StringPtrOutput)
+}
+
+type TaskOutputArrayOutput struct{ *pulumi.OutputState }
+
+func (TaskOutputArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TaskOutput)(nil)).Elem()
+}
+
+func (o TaskOutputArrayOutput) ToTaskOutputArrayOutput() TaskOutputArrayOutput {
+	return o
+}
+
+func (o TaskOutputArrayOutput) ToTaskOutputArrayOutputWithContext(ctx context.Context) TaskOutputArrayOutput {
+	return o
+}
+
+func (o TaskOutputArrayOutput) Index(i pulumi.IntInput) TaskOutputOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TaskOutput {
+		return vs[0].([]TaskOutput)[vs[1].(int)]
+	}).(TaskOutputOutput)
 }
 
 type TaskStep struct {
@@ -1573,7 +1933,13 @@ func init() {
 	pulumi.RegisterOutputType(ResourceTypeArrayOutput{})
 	pulumi.RegisterOutputType(RunArgsOutput{})
 	pulumi.RegisterOutputType(RunArgsPtrOutput{})
+	pulumi.RegisterOutputType(TaskCacheOutput{})
+	pulumi.RegisterOutputType(TaskCacheArrayOutput{})
 	pulumi.RegisterOutputType(TaskConfigOutput{})
 	pulumi.RegisterOutputType(TaskConfigPtrOutput{})
+	pulumi.RegisterOutputType(TaskInputOutput{})
+	pulumi.RegisterOutputType(TaskInputArrayOutput{})
+	pulumi.RegisterOutputType(TaskOutputOutput{})
+	pulumi.RegisterOutputType(TaskOutputArrayOutput{})
 	pulumi.RegisterOutputType(TaskStepOutput{})
 }
